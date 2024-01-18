@@ -1,6 +1,8 @@
 import Header from "../components/Header";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate()
   return (
     <>
       <div
@@ -19,7 +21,7 @@ const Home = () => {
               Click the button below to discover and get tickets to events near
               you.
             </p>
-            <button className="btn btn-primary"><a href="/categories"></a>Get Started</button>
+            <button className="btn btn-primary" onClick={() => navigate("/categories")}>Browse Categories</button>
           </div>
         </div>
       </div>

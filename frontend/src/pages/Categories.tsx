@@ -1,8 +1,13 @@
-import React from 'react'
+import Header from '../components/Header';
 
-const Categories = () => {
+
+function Categories() {
   return (
-    <div>Categories</div>
+    
+    <div>
+      <Header/>
+      Hello, this is the categories page
+    </div>
   )
 }
 

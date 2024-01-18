@@ -1,6 +1,6 @@
 import "./App.css";
 import Home from "./pages/Home";
-import Categories from "./pages/Home";
+import Categories from "./pages/Categories";
 import NoPage from "./pages/NoPage";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
