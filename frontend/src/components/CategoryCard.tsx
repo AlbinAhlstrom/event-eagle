@@ -14,7 +14,7 @@ const CategoryCard: React.FC<CategoryCardProps> = (props) => {
     <h2 className="card-title">{props.category}</h2>
     <p>{props.description}</p>
     <div className="card-actions justify-end">
-      <button className="btn btn-primary">Buy Now</button>
+      <button className="btn btn-primary">Browse</button>
     </div>
   </div>
 </div>
