@@ -9,10 +9,10 @@ import familyImage from '../images/family-events.jpg'
 
 function Categories() {
   const eventCategories = [
-    {name: "Music", description: "", image:musicImage}, 
-    {name: "Sports", description: "", image:sportsImage},
-    {name: "Arts & Theatre", description: "", image:theatreImage}, 
-    {name: "Family", description: "", image:familyImage}
+    {name: "Music", image:musicImage}, 
+    {name: "Sports", image:sportsImage},
+    {name: "Arts", image:theatreImage}, 
+    {name: "Family",  image:familyImage}
   ]
   const navigate = useNavigate()
 
@@ -22,7 +22,7 @@ function Categories() {
       <div className='flex flex-col gap-10 items-center justify-center mt-10'>
       <section className='grid grid-cols-2 grid-rows-2 gap-4 align-middle'>
         {eventCategories.map( category => {
-      return <CategoryCard category={category.name} description={category.description} image={category.image}/>
+      return <CategoryCard category={category.name}  image={category.image}/>
         })}
       </section>
       <button className="btn btn-primary" onClick={() => navigate("/events")}>Show all Categories</button>
