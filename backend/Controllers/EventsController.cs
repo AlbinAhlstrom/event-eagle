@@ -6,16 +6,16 @@ namespace EventFider.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class EventController : ControllerBase
+    public class EventsController : ControllerBase
     {
         private readonly EventContext _context;
 
-        public EventController(EventContext context)
+        public EventsController(EventContext context)
         {
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet()]
         public async Task<ActionResult<IEnumerable<Event>>> GetEvents()
         {
             var events = await _context.Events.ToListAsync();
