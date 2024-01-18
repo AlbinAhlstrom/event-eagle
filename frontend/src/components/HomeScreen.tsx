@@ -1,5 +1,3 @@
-import PageHeader from './PageHeader'
-
 const HomeScreen = () => {
   return (
     <div>
