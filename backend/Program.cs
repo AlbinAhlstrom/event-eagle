@@ -1,9 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<eventContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("eventContext") ?? throw new InvalidOperationException("Connection string 'eventContext' not found.")));
 
+var builder = WebApplication.CreateBuilder(args);
+
+// Fetch environment variable first
+var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
+
+// Get and update connection string
+var connectionString = builder.Configuration.GetConnectionString("eventContext") ?? throw new InvalidOperationException("Connection string 'eventContext' not found.");
+connectionString = connectionString.Replace("{DB_PASSWORD}", password);
+
+builder.Services.AddDbContext<EventContext>(options =>
+    options.UseSqlServer(connectionString));
 // Add services to the container.
 
 builder.Services.AddControllers();

@@ -1,9 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace EventFinder.Models;
-
-public class Event {
-    [Key]
-    public int Id { get; set; }
-    public string? Name { get; set; }
+namespace EventFider.Models
+{
+    public class Event
+    {
+        public int Id { get; set; }
+        public string? Title { get; set; }
+    }
 }

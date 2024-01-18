@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using EventFinder.Models;
+using EventFider.Models;
 
-    public class eventContext : DbContext
+    public class EventContext : DbContext
     {
-        public eventContext (DbContextOptions<eventContext> options)
+        public EventContext (DbContextOptions<EventContext> options)
             : base(options)
         {
         }
 
-        public DbSet<EventFinder.Models.Event> Event { get; set; } = default!;
+        public DbSet<EventFider.Models.Event> Events { get; set; } = default!;
     }
