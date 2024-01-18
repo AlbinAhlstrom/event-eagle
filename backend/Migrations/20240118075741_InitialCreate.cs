@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
+//To undo this action, use 'ef migrations remove'
 
 namespace backend.Migrations
 {

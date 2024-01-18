@@ -40,7 +40,7 @@ namespace EventFider.Controllers
         public async Task<ActionResult<Event>> PostCd(Event newEvent)
         {
             _context.Events.Add(newEvent);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetEvent", new { id = newEvent.Id }, newEvent);
         }

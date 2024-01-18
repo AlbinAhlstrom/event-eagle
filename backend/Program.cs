@@ -3,12 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Fetch environment variable first
-var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
-
 // Get and update connection string
 var connectionString = builder.Configuration.GetConnectionString("eventContext") ?? throw new InvalidOperationException("Connection string 'eventContext' not found.");
-connectionString = connectionString.Replace("{DB_PASSWORD}", password);
 
 builder.Services.AddDbContext<EventContext>(options =>
     options.UseSqlServer(connectionString));
