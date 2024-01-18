@@ -29,14 +29,13 @@ const Events = () => {
     .then(data => setEvents(data))
     .catch(err => console.log(err))
 
-    console.log(events)
   }, []);
 
   return (
     <>
       <Header />
-      {events.map(category => (
-        <EventCard key={category.id} category="Title" description="event description"/>
+      {events.map(event => (
+        <EventCard id={event.id} title={event.title} description={event.description} startTime={event.startTime} venue={event.venue} price={event.price}/>
       ))}
     </>
   );
