@@ -3,7 +3,7 @@ import PageHeader from './PageHeader'
 const HomeScreen = () => {
   return (
     <div>
-      <header>Event Eagle</header>
+      <header className="bg-red-500">Event Eagle</header>
     </div>
   )
 }
