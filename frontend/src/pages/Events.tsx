@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"; // Import useParams
+import { useNavigate } from "react-router-dom"; // Import useParams
 import Header from "../components/Header";
 import EventCard from "../components/EventCard";
 
@@ -36,6 +37,8 @@ const Events = () => {
       .catch((err) => console.log(err));
   }, [type]);
 
+  const navigate = useNavigate()
+
   return (
     <>
       <Header />
@@ -53,6 +56,10 @@ const Events = () => {
           />
         ))}
       </div>
+      <div className="flex justify-center">
+      <button className="btn btn-primary mt-10" onClick={() => navigate("/categories")}>Back to Categories</button>
+
+        </div>
     </>
   );
 };
