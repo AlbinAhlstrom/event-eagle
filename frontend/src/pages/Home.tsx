@@ -19,7 +19,7 @@ const Home = () => {
               Click the button below to discover and get tickets to events near
               you.
             </p>
-            <button className="btn btn-primary"><a href=""></a>Get Started</button>
+            <button className="btn btn-primary"><a href="/categories"></a>Get Started</button>
           </div>
         </div>
       </div>
