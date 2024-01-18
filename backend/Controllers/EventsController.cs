@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using EventFider.Models;
+using Models;
 
 namespace EventFider.Controllers
 {

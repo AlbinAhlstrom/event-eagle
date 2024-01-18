@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace EventFinder.Models;
+namespace Models;
 
 public class Event
 {
