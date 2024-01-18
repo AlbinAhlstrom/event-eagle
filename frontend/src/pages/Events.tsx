@@ -8,8 +8,8 @@ type EventListing = {
   id: number;
   title: string;
   description: string;
-  startTime: string;
-  endTime: string;
+  startTime: Date;
+  endTime: Date;
   venue: string;
   address: string;
   latitude: string;

@@ -5,8 +5,8 @@ type EventListing = {
     title: string,
     description: string,
     startTime: string,
-    endTime: string,
-    venue: string,
+    endTime: Date,
+    venue: Date,
     address: string,
     latitude: string,
     longitude: string,
@@ -14,8 +14,3 @@ type EventListing = {
     category: string,
 };
 
-export const getEvents = async (): Promise<EventListing[]> => {
-    const response = await fetch(BASE_URL + "Events")
-    const events = await response.json() 
-    return events
-}
