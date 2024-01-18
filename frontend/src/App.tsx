@@ -14,6 +14,7 @@ function App() {
         <Route path="/home" element={<Home/>}/>
         <Route path="/categories" element={<Categories/>}/>
         <Route path="/events" element={<Events/>}/>
+        <Route path="/events/:type" element={<Events/>}/>
         <Route path="*" element={<NoPage/>}/>
       </Routes>
     </BrowserRouter>
