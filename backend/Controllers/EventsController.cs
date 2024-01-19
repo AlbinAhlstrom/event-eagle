@@ -58,6 +58,40 @@ namespace EventFider.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-        } 
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutEvent(int id, Event updatedEvent)
+        {
+            if (id != updatedEvent.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(updatedEvent).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EventExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        private bool EventExists(int id)
+        {
+            return _context.Events.Any(e => e.Id == id);
+        }
     }
 }
