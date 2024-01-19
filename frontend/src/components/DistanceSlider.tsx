@@ -14,6 +14,7 @@ const DistanceSlider = ({
         type="range"
         min={0}
         max={10}
+        step={0.1}
         value={value}
         className="range range-secondary px-7"
         onChange={onChange}

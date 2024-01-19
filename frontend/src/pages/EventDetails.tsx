@@ -1,24 +1,12 @@
-import React from 'react'
-import EventListing from '../helpers/types'
+import { useParams } from 'react-router-dom'
 
 
-const EventDetails = ({
-    id,
-    title,
-    description,
-    startTime,
-    endTime,
-    venue,
-    address,
-    latitude,
-    longitude,
-    price,
-    category
-}: EventListing) => {
+const EventDetails = () => {
+    const { id } = useParams<'id'>();
   return (
     <div>
-        <h1>{title}</h1>
-        <p>{description}</p>
+        <h1>Event with id</h1>
+        <p>{id}</p>
     </div>
   )
 }
