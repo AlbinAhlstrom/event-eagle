@@ -14,12 +14,11 @@ const Home = () => {
         }}
       >
         <Header/>
-
         <div className="hero-overlay bg-opacity-60"></div>
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-md">
             <h1 className="mb-5 text-5xl font-bold">Welcome</h1>
-            <p className="mb-5">
+            <p className="mb-5 text-xl">
               Find and grab tickets to today's nearby events. Tap below and start your next adventure!
             </p>
             <button className="btn btn-primary" onClick={() => navigate("/categories")}>Browse Categories</button>

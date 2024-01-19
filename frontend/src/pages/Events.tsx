@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from 'react';
+import useSWR from 'swr';
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import EventCard from "../components/EventCard";
@@ -16,41 +17,42 @@ type EventListing = {
   price: number;
   category: "Music" | "Sports" | "Arts" | "Family";
 };
+// Function to calculate the distance between two coordinates in kilometers
+const getDistanceFromLatLonInKm = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
+  // Radius of the earth in km
+  const R = 6371; 
+  const dLat = deg2rad(lat2 - lat1);
+  const dLon = deg2rad(lon2 - lon1);
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  // Distance in km
+  const d = R * c; 
+  return d;
+};
 
-const BASE_URL = 'http://localhost:5004/'
+const deg2rad = (deg: number): number => {
+  return deg * (Math.PI / 180);
+};
+
+const BASE_URL = 'http://localhost:5004/';
+const EVENTS_ENDPOINT = `${BASE_URL}Events`;
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const Events = () => {
-  const [events, setEvents] = useState<EventListing[]>([]);
-  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
-  const { type } = useParams<"type">();
+  const [userLocation, setUserLocation] = React.useState<{ lat: number; lng: number } | null>(null);
+  const { type } = useParams<'type'>();
   const navigate = useNavigate();
 
-  // Function to calculate the distance between two coordinates in kilometers
-  const getDistanceFromLatLonInKm = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
-    // Radius of the earth in km
-    const R = 6371; 
-    const dLat = deg2rad(lat2 - lat1);
-    const dLon = deg2rad(lon2 - lon1);
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-      Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    // Distance in km
-    const d = R * c; 
-    return d;
-  };
-
-  const deg2rad = (deg: number): number => {
-    return deg * (Math.PI / 180);
-  };
-
-  useEffect(() => {
+  React.useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setUserLocation({
           lat: position.coords.latitude,
-          lng: position.coords.longitude
+          lng: position.coords.longitude,
         });
       },
       (error) => {
@@ -59,32 +61,40 @@ const Events = () => {
     );
   }, []);
 
-  useEffect(() => {
-    if (userLocation) {
-      fetch(BASE_URL + "Events")
-        .then((response) => response.json())
-        .then((data: EventListing[]) => {
-          const nearbyEvents = data.filter((event) => {
-            const eventLat = parseFloat(event.latitude);
-            const eventLng = parseFloat(event.longitude);
-            const distance = getDistanceFromLatLonInKm(userLocation!.lat, userLocation!.lng, eventLat, eventLng);
-            return distance <= 20000;
-          });
-          
-          const filteredEvents = type
-            ? nearbyEvents.filter((event) => event.category === type)
-            : nearbyEvents;
-          setEvents(filteredEvents);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [type, userLocation]);
+  const { data: events, error } = useSWR<EventListing[]>(EVENTS_ENDPOINT, fetcher);
+
+  // Filter events by distance
+  const eventsNearby = React.useMemo(() => {
+    return (
+      events?.filter((event) => {
+        if (!userLocation) return false;
+        const eventLat = parseFloat(event.latitude);
+        const eventLng = parseFloat(event.longitude);
+        const distance = getDistanceFromLatLonInKm(
+          userLocation.lat,
+          userLocation.lng,
+          eventLat,
+          eventLng
+        );
+        return 1000000000;
+      }) || []
+    );
+  }, [events, userLocation]);
+
+  const filteredEvents = React.useMemo(() => {
+    return (
+      eventsNearby.filter((event) => (!type || event.category === type)) || []
+    );
+  }, [eventsNearby, type]);
+
+  if (error) return <div>Failed to load</div>;
+  if (!events) return <div>Loading...</div>;
 
   return (
     <>
-      <Header />
       <div className="flex justify-center content-center flex-wrap gap-10 mt-20">
-        {events.map((event) => (
+        
+        {filteredEvents.map((event) => (
           <EventCard
             key={event.id}
             id={event.id}
@@ -98,7 +108,9 @@ const Events = () => {
         ))}
       </div>
       <div className="flex justify-center">
-        <button className="btn btn-primary mt-10" onClick={() => navigate("/categories")}>Back to Categories</button>
+        <button className="btn btn-primary mt-10" onClick={() => navigate('/categories')}>
+          Back to Categories
+        </button>
       </div>
     </>
   );
