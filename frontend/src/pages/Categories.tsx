@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import Header from '../components/Header';
 import CategoryCard from '../components/CategoryCard';
-import musicImage from '../images/music-events.jpg'
-import sportsImage from '../images/sport-events.jpg'
-import theatreImage from '../images/theatre-events.jpg'
-import familyImage from '../images/family-events.jpg'
+import musicImage from '../images/music-events.webp'
+import sportsImage from '../images/sport-events.webp'
+import theatreImage from '../images/theatre-events.webp'
+import familyImage from '../images/family-events.webp'
 
 
 function Categories() {
