@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import useSWR from 'swr';
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
@@ -8,14 +8,18 @@ import DistanceSlider from '../components/DistanceSlider';
 
 const BASE_URL = 'http://localhost:5004/';
 const EVENTS_ENDPOINT = `${BASE_URL}Events`;
-const distanceInKmFilter = 1000000000;
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const Events = () => {
   const [userLocation, setUserLocation] = React.useState<{ lat: number; lng: number } | null>(null);
+  const [distanceFilter, setDistanceFilter] = useState(10);
   const { type } = useParams<'type'>();
   const navigate = useNavigate();
+
+  const handleSliderChange = (event) => {
+    setDistanceFilter(event.target.value);
+  };
 
   React.useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -46,10 +50,10 @@ const Events = () => {
           eventLat,
           eventLng
         );
-        return distance <= distanceInKmFilter;
+        return distance <= distanceFilter; 
       }) || []
     );
-  }, [events, userLocation]);
+  }, [events, userLocation, distanceFilter]);
 
   const filteredEvents = React.useMemo(() => {
     return (
@@ -63,7 +67,7 @@ const Events = () => {
   return (
     <>
     <Header/>
-    <DistanceSlider/>
+    <DistanceSlider value={distanceFilter} onChange={handleSliderChange} />
       <div className="flex justify-center content-center flex-wrap gap-10 mt-20">
         {filteredEvents.map((event) => (
           <EventCard
