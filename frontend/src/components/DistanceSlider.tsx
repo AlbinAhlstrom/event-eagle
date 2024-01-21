@@ -27,7 +27,7 @@ const DistanceSlider = ({
         <span>8 km</span>
         <span>10 km</span>
       </div>
-      <div className="card shadow-md bg-ghost text-primary w-1/3 flex-auto">
+      <div className="card shadow-md bg-ghost text-base-400 w-1/3 flex-auto">
     <div className="card-body ">
       <h2 className="card-title">
         Events less than {value} km away:
