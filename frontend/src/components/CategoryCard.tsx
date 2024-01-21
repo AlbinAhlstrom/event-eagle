@@ -10,7 +10,7 @@ const CategoryCard: React.FC<CategoryCardProps> = (props) => {
   const navigate = useNavigate()
 
   return (
-    <div className="card w-96 bg-base-100 shadow-xl image-full">
+    <div className="card w-96 bg-primary shadow-xl image-full">
   <figure><img src={props.image} alt={props.category}/></figure>
   <div className="card-body flex justify-between">
     <h2 className="card-title">{props.category}</h2>

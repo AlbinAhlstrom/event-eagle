@@ -14,9 +14,9 @@ const DistanceSlider = ({
         type="range"
         min={0}
         max={10}
-        step={0.1}
+        step={0.5}
         value={value}
-        className="range range-secondary px-7"
+        className="range range-primary px-7"
         onChange={onChange}
       />
       <div className="w-full flex justify-between text-xs px-4">
@@ -27,7 +27,7 @@ const DistanceSlider = ({
         <span>8 km</span>
         <span>10 km</span>
       </div>
-      <div className="card shadow-md bg-ghost text-white w-1/3 flex-auto">
+      <div className="card shadow-md bg-ghost text-primary w-1/3 flex-auto">
     <div className="card-body ">
       <h2 className="card-title">
         Events less than {value} km away:
