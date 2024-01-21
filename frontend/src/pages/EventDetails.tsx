@@ -49,7 +49,7 @@ const EventDetails = () => {
                 const data = await response.json() as EventListing;
 
                 setEvent(data);
-                setStartTime(event.startTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }))
+                setStartTime(event.startTime.toTimeString())
             } catch (error) {
                 console.error(error);
             }
@@ -74,11 +74,12 @@ const EventDetails = () => {
                 }}
             >
                 <div className="hero-overlay bg-opacity-60"></div>
-                <div className="hero-content text-center text-neutral-content glass">
+                <div className="hero-content text-center text-neutral-content glass rounded-md">
                     <div className="max-w-md">
                         <h1 className="mb-5 text-5xl font-bold">{event.title}</h1>
                         
                         <p className="mb-5 text-xl">{event.description}</p>
+                        <p>{event.startTime.toString()}</p>
                         <p>{startTime}</p>
 
                         <h2 className='my-6 text-xl'>Price: {event.price} SEK</h2>

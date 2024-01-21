@@ -37,10 +37,6 @@ function CountdownTimer({ targetDate: targetDateString }: CountdownTimerProps) {
     return () => clearInterval(timer);
   }, [targetDateString]); 
 
-  if (!timeLeft.hours && !timeLeft.minutes && !timeLeft.seconds) {
-    return <div>Countdown finished!</div>;
-  }
-
   return (
     <div className="grid grid-flow-col gap-5 text-center justify-center auto-cols-max">
       <div className="flex flex-col p-2 bg-neutral rounded-box text-neutral-content">
