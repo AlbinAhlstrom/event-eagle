@@ -40,7 +40,7 @@ const EventCard: React.FC<EventCardProps> = (props) => {
       <div className="card-body">
         <h2 className="card-title">{props.title}</h2>
         <p>{props.description}</p>
-    <CountdownTimer targetDate={new Date("2024-01-19T14:00:00")}/>
+    <CountdownTimer targetDate={props.startTime}/>
 
         <div className="card-actions justify-end">
           <button className="btn btn-primary" onClick={() => navigate("/event/" + props.id)}>
