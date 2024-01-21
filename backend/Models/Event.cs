@@ -9,7 +9,7 @@ public class Event
     public string Title { get; set; } = default!;
     public string Description { get; set; } = default!;
     public DateTime StartTime { get; set; }
-    public int Duration { get; set; }
+    public DateTime EndTime { get; set; }
     public string Venue { get; set; } = default!;
     public string Address { get; set; } = default!;
     public double Latitude { get; set; }
