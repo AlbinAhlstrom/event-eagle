@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import EventListing from '../helpers/api';
+import EventListing from '../helpers/types';
 import useSWR from 'swr';
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
