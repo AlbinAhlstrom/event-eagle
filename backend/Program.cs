@@ -1,10 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Get and update connection string
-var connectionString = builder.Configuration.GetConnectionString("eventContext") ?? throw new InvalidOperationException("Connection string 'eventContext' not found.");
+var connectionString = builder.Configuration.GetConnectionString("DBConnectionString") ?? throw new InvalidOperationException("Connection string 'eventContext' not found.");
 
 builder.Services.AddDbContext<EventContext>(options =>
     options.UseSqlServer(connectionString));
@@ -15,26 +16,27 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowSpecificOrigin", policy =>
-    {
-        policy.WithOrigins("http://localhost:5173")
-              .AllowAnyHeader()
-              .AllowAnyMethod();
-     });
-});
+builder.Services.AddCors();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
+using (var scope = app.Services.CreateScope())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    var services = scope.ServiceProvider;
+
+    SeedData.Initialize(services);
 }
 
-app.UseCors("AllowSpecificOrigin");
+app.UseCors(policy =>
+{
+    policy.AllowAnyOrigin()
+          .AllowAnyMethod()
+          .AllowAnyHeader();
+});
 
 app.UseHttpsRedirection();
 

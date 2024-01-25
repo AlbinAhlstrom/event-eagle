@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Models;
-
-    public class EventContext : DbContext
+namespace Data{
+public class EventContext : DbContext
     {
         public EventContext (DbContextOptions<EventContext> options)
             : base(options)
@@ -13,9 +13,12 @@ using Models;
         }
 
         public DbSet<Event> Events { get; set; } = default!;
+}
+}
+    
 
-protected override void OnModelCreating(ModelBuilder modelBuilder)
-{
+// protected override void OnModelCreating(ModelBuilder modelBuilder)
+// {
     // var event1 = new Event
     // {
     //     Id = 1,
@@ -78,6 +81,6 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
     // modelBuilder.Entity<Event>().HasData(event1, event2, event3, event4);
 
-    base.OnModelCreating(modelBuilder);
-}
-}
+//     base.OnModelCreating(modelBuilder);
+// }
+// }
