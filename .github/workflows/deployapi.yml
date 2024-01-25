@@ -9,6 +9,9 @@ name: Deploy Event Eagle API
 on: 
   workflow_dispatch:
 
+env:
+  AZURE_WEBAPP_NAME: "event-eagle"
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,7 +28,18 @@ jobs:
       - name: Build
         run: dotnet build ./backend/backend.csproj --configuration Release --no-restore
 
+      # publish
+      - name: Publish
+        run: dotnet publish ./backend/backend.csproj --configuration Release --output ./publish
       
+      # deploy to azure
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.API_PUBLISH_SECRET }} 
+          package: ./publish
+
 
 
 
