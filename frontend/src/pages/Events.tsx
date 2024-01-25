@@ -7,7 +7,7 @@ import EventCard from "../components/EventCard";
 import getDistanceFromLatLonInKm from '../helpers/util';
 import DistanceSlider from '../components/DistanceSlider';
 
-const BASE_URL = 'http://localhost:5004/';
+const BASE_URL = 'https://event-eagle.azurewebsites.net/';
 const EVENTS_ENDPOINT = `${BASE_URL}Events`;
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
