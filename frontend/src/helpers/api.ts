@@ -6,11 +6,11 @@ type EventListing = {
     description: string,
     startTime: string,
     endTime: Date,
-    venue: Date,
+    venue: string,
     address: string,
     latitude: string,
     longitude: string,
     price: number,
-    category: string,
+    category: "Music" | "Sports" | "Arts" | "Family",
 };
 

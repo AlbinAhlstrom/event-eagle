@@ -9,13 +9,11 @@ var connectionString = builder.Configuration.GetConnectionString("DbConnectionSt
 
 builder.Services.AddDbContext<EventContext>(options =>
     options.UseSqlServer(connectionString));
-// Add services to the container.
 
+// Add services to the container.
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 builder.Services.AddCors();
 
 var app = builder.Build();
@@ -27,7 +25,6 @@ app.UseSwaggerUI();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-
     SeedData.Initialize(services);
 }
 
@@ -39,9 +36,13 @@ app.UseCors(policy =>
 });
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
 
+// Map routes for controllers
 app.MapControllers();
+
+// Configure fallback routing for SPA
+// This assumes that your React build output is in the 'wwwroot' directory and that 'index.html' is the entry point
+app.MapFallbackToFile("index.html");
 
 app.Run();

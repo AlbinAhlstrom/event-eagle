@@ -1,11 +1,9 @@
-import React from "react";
-
 const DistanceSlider = ({
   value,
   onChange,
 }: {
   value: number;
-  onChange: () => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
   return (
     <>

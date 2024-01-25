@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import image from '../images/nature.jpg'
 
@@ -32,7 +32,6 @@ const defaultEventListing: EventListing = {
 };
 
 const EventDetails = () => {
-    const navigate = useNavigate();
     const { id } = useParams<'id'>(); 
     const [event, setEvent] = useState<EventListing>(defaultEventListing);
     const [startTime, setStartTime] = useState("");

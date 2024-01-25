@@ -17,8 +17,9 @@ const Events = () => {
   const { type } = useParams<'type'>();
   const navigate = useNavigate();
 
-  const handleSliderChange = (event) => {
-    setDistanceFilter(event.target.value);
+  const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const sliderValue = Number(event.target.value);
+    setDistanceFilter(sliderValue); 
   };
 
   React.useEffect(() => {
@@ -75,7 +76,7 @@ const Events = () => {
             id={event.id}
             title={event.title}
             description={event.description}
-            startTime={event.startTime}
+            startTime={new Date(event.startTime)}
             venue={event.venue}
             price={event.price}
             category={event.category}
