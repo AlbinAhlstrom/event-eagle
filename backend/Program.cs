@@ -5,7 +5,7 @@ using Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Get and update connection string
-var connectionString = builder.Configuration.GetConnectionString("DBConnectionString") ?? throw new InvalidOperationException("Connection string 'eventContext' not found.");
+var connectionString = builder.Configuration.GetConnectionString("SQLServerDBConnectionString") ?? throw new InvalidOperationException("Connection string 'eventContext' not found.");
 
 builder.Services.AddDbContext<EventContext>(options =>
     options.UseSqlServer(connectionString));
