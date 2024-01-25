@@ -20,7 +20,7 @@ function Categories() {
     <>
       <Header/>
       <div className='flex flex-col gap-10 items-center justify-center mt-10'>
-      <section className='grid grid-cols-2 grid-rows-2 gap-4 align-middle'>
+      <section className='grid grid-cols-1 grid-rows-4 gap-4 align-middle'>
         {eventCategories.map( category => {
       return <CategoryCard category={category.name}  image={category.image}/>
         })}
