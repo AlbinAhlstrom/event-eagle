@@ -15,8 +15,8 @@ const Home = () => {
       >
         <Header/>
         <div className="hero-overlay bg-opacity-10"></div>
-        <div className="hero-content text-center text-neutral-content">
-          <div className="max-w-md">
+        <div className="hero-content text-center text-neutral-content glass rounded-md">
+          <div className="max-w-md p-16">
             <h1 className="mb-5 text-5xl font-bold">Welcome</h1>
             <p className="mb-5 text-xl">
               Find and grab tickets to today's nearby events. Tap below and start your next adventure!
