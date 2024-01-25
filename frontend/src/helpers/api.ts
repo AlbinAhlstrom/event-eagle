@@ -1,5 +1,3 @@
-const BASE_URL = 'http://localhost:5173/'
-
 type EventListing = {
     id: number,
     title: string,
@@ -14,3 +12,4 @@ type EventListing = {
     category: "Music" | "Sports" | "Arts" | "Family",
 };
 
+export default EventListing
