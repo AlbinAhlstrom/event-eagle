@@ -14,7 +14,7 @@ const Home = () => {
         }}
       >
         <Header/>
-        <div className="hero-overlay bg-opacity-10"></div>
+        <div className="hero-overlay bg-opacity-40"></div>
         <div className="hero-content text-center text-neutral-content glass rounded-md">
           <div className="max-w-md p-16">
             <h1 className="mb-5 text-5xl font-bold">Welcome</h1>
