@@ -54,4 +54,4 @@ jobs:
           app-name: 'event-eagle'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D4863E4DD2A2407E91A66D8D848874B3 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_00954E18752844998F86369271FA0078 }}
