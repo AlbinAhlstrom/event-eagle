@@ -18,8 +18,11 @@ function Categories() {
   return (
     <>
       <Header />
-      <div className="flex flex-col gap-10 items-center justify-center mt-10">
-        <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 align-middle">
+      <div className="flex flex-col justify-between items-center" style={{ height: "90vh" }}>
+        <section
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4"
+
+        >
           {eventCategories.map((category, index) => {
             return (
               <CategoryCard
@@ -30,7 +33,10 @@ function Categories() {
             );
           })}
         </section>
-        <button className="btn btn-primary" onClick={() => navigate("/events")}>
+        <button
+          className="btn btn-primary w-1/2"
+          onClick={() => navigate("/events")}
+        >
           Show all Categories
         </button>
       </div>
