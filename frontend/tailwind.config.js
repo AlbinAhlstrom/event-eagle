@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      spacing: {
+        '40vh': '40vh',
+        
+      }
+    }
   },
 
     // daisyUI config (optional - here are the default values)
