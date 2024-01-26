@@ -7,9 +7,9 @@ export default {
   theme: {
     extend: {
       spacing: {
-        'nav': '10svh',
-        '40vh': '40svh',
-        '80vh': '80svh',
+        'nav': '10dvh',
+        '40vh': '40dvh',
+        '80vh': '80dvh',
       }
     }
   },
