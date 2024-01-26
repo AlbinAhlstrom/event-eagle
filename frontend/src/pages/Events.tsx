@@ -63,17 +63,15 @@ const Events = () => {
     );
   }, [eventsNearby, type]);
 
-  if (error) return <div>Failed to load</div>;
-  if (!events) return <div><span className="loading loading-spinner text-primary"></span>Loading...</div>;
+
 
   return (
     <>
     <Header/>
     <DistanceSlider value={distanceFilter} onChange={handleSliderChange} />
       <div className="flex justify-center items-center flex-wrap gap-10 mt-20">
-      {(!filteredEvents)
-        ? <>wrong</>
-        : <span className="loading loading-lg big-spinner w-16 h-16 text-primary text-xl"></span>}
+      {(error) && <h1>Failed to load</h1>}
+      {(!events) && <span className="loading loading-lg big-spinner w-16 h-16 text-primary text-xl"></span> }
         {filteredEvents.map((event) => (
           <EventCard
             key={event.id}
