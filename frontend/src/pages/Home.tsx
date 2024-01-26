@@ -7,8 +7,9 @@ const Home = () => {
     <>
       <Header />
       <div
-        className="hero min-h-screen"
+        className="hero"
         style={{
+          height: "90vh",
           backgroundImage:
             "url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)",
         }}
