@@ -93,7 +93,7 @@ const Events = () => {
           ))}
         </div>
         <button
-          className="btn btn-primary self-center sticky bottom-2 mt-auto w-40 z-50 max-sm:w-full"
+          className="btn btn-primary self-center sticky bottom-2 mt-auto w-40 z-50 max-sm:w-5/6"
           onClick={() => navigate("/categories")}
         >
           Back to Categories
