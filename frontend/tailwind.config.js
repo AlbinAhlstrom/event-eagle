@@ -7,11 +7,17 @@ export default {
   ],
   daisyui: {
     themes: [
-      "light", 
-      "dark", 
-      "cupcake",
-      "forest",
       {
+        customForest: {
+          "color-scheme": "dark",
+          "primary": "#1eb854",
+          "primary-content": "#000000",
+          "secondary": "#1DB88E",
+          "accent": "#1DB8AB",
+          "neutral": "#19362D",
+          "base-100": "#171212",
+          "--rounded-btn": "1.9rem",
+        },
         mytheme: {
         
 "primary": "#4ade80",
@@ -31,6 +37,9 @@ export default {
 "warning": "#831843",
         
 "error": "#9f1239",
+
+"--rounded-btn": "1.5rem",
+
         },
       },
     ],
