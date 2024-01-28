@@ -18,7 +18,7 @@ function Categories() {
   return (
     <div className="flex flex-col justify-between items-center h-screen">
       <Header />
-        <section className="grid max-sm:grid-cols-1 grid-cols-2 gap-3 lg:mx-10">
+        <section className="grid max-sm:grid-cols-1 grid-cols-2 gap-3 lg:mx-nav">
           {eventCategories.map((category, index) => {
             return (
               <CategoryCard
@@ -30,7 +30,7 @@ function Categories() {
           })}
         </section>
           <button
-            className="btn btn-primary my-2 w-1/3"
+            className="btn btn-primary my-2 w-1/3 max-sm:w-full"
             onClick={() => navigate("/events")}
           >
             Show all Categories
