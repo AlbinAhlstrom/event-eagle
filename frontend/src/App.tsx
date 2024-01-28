@@ -5,6 +5,7 @@ import Events from "./pages/Events";
 import NoPage from "./pages/NoPage";
 import EventDetails from "./pages/EventDetails";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import 'animate.css';
 
 function App() {
   return (
