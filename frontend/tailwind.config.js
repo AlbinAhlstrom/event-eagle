@@ -1,29 +1,59 @@
-/** @type {import('tailwindcss').Config} */
+import daisyui from 'daisyui';
+
 export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  daisyui: {
+    themes: [
+      {
+        customForest: {
+          "color-scheme": "dark",
+          "primary": "#1eb854",
+          "primary-content": "#000000",
+          "secondary": "#1DB88E",
+          "accent": "#1DB8AB",
+          "neutral": "#19362D",
+          "base-100": "#171212",
+          "--rounded-btn": "1.9rem",
+        },
+        mytheme: {
+        
+"primary": "#4ade80",
+        
+"secondary": "#86efac",
+        
+"accent": "#16a34a",
+        
+"neutral": "#1f2937",
+        
+"base-100": "#1f2937",
+        
+"info": "#facc15",
+        
+"success": "#0f766e",
+        
+"warning": "#831843",
+        
+"error": "#9f1239",
+
+"--rounded-btn": "1.5rem",
+
+        },
+      },
+    ],
+  },
+  plugins: [daisyui],
   theme: {
     extend: {
       spacing: {
         'nav': '10dvh',
+        '10vh': '10dvh',
         '40vh': '40dvh',
         '80vh': '80dvh',
       }
     }
   },
-
-    // daisyUI config (optional - here are the default values)
-    daisyui: {
-      themes: false, // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
-      darkTheme: "dark", // name of one of the included themes for dark mode
-      base: true, // applies background color and foreground color for root element by default
-      styled: true, // include daisyUI colors and design decisions for all components
-      utils: true, // adds responsive and modifier utility classes
-      prefix: "", // prefix for daisyUI classnames (components, modifiers and responsive class names. Not colors)
-      logs: true, // Shows info about daisyUI version and used config in the console when building your CSS
-      themeRoot: ":root", // The element that receives theme color CSS variables
-    },
 }
 

@@ -85,11 +85,9 @@ const Events = () => {
           />
         ))}
       </div>
-      <div className="flex justify-center">
-        <button className="btn btn-primary mt-10" onClick={() => navigate('/categories')}>
+        <button className="btn btn-primary self-center sticky bottom-0 mt-auto w-1/2 z-50 max-sm:w-full" onClick={() => navigate('/categories')}>
           Back to Categories
         </button>
-      </div>
     </>
   );
 };
