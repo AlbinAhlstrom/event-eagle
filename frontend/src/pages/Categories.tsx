@@ -30,7 +30,7 @@ function Categories() {
           })}
         </section>
           <button
-            className="btn btn-primary my-2"
+            className="btn btn-primary my-2 w-1/3"
             onClick={() => navigate("/events")}
           >
             Show all Categories
