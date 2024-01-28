@@ -7,29 +7,37 @@ const DistanceSlider = ({
 }) => {
   return (
     <>
-    <div className="flex flex-col justify-center px-20">
-    <input
-        type="range"
-        min={0}
-        max={10}
-        step={0.5}
-        value={value}
-        className="range range-primary px-7"
-        onChange={onChange}
-      />
-      <div className="w-full flex justify-between text-xs px-4">
-        <span>0 km</span>
-        <span>2 km</span>
-        <span>4 km</span>
-        <span>6 km</span>
-        <span>8 km</span>
-        <span>10 km</span>
+      <div className="mx-10">
+        <input
+          type="range"
+          min={0}
+          max={10}
+          step={0.5}
+          value={value}
+          className="range range-primary"
+          onChange={onChange}
+        />
+        <div className=" flex justify-between text-xs">
+          <span className="slider-marking" id="0">
+            0
+          </span>
+          <span className="slider-marking" id="2">
+            2
+          </span>
+          <span className="slider-marking" id="4">
+            4
+          </span>
+          <span className="slider-marking" id="6">
+            6
+          </span>
+          <span className="slider-marking" id="8">
+            8
+          </span>
+          <span className="slider-marking" id="10">
+            10
+          </span>
+        </div>
       </div>
-      <div className="card shadow-md bg-ghost text-base-400 w-1/3 flex-auto">
-  </div> 
-
-    </div>
-      
     </>
   );
 };
