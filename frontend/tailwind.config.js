@@ -39,7 +39,8 @@ export default {
         '10vh': '10svh',
         '40vh': '40svh',
         '80vh': '80svh',
-        'screenH': '90svh'
+        'screenH': '90svh',
+        'svh': '100svh',
       }
     }
   },
