@@ -7,12 +7,9 @@ const Home = () => {
     <>
       <Header />
       <div
-        className="hero"
-        style={{
-          height: "90vh",
-          backgroundImage:
-            "url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)",
-        }}
+        className="hero h-full"
+
+        style={{backgroundImage: 'url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)'}}
       >
         {" "}
         <div className="hero-overlay bg-opacity-60"></div>
