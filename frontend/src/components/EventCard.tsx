@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import sports from '../images/football.png';
-import family from '../images/family.png';
-import arts from '../images/theater.png';
-import music from '../images/musical-note.png';
+import sports from '../images/sports-icon.webp';
+import family from '../images/family-icon.webp';
+import arts from '../images/arts-icon.webp';
+import music from '../images/music-icon.webp';
 import CountdownTimer from './CountDown';
 
 type EventCardProps = {
@@ -33,7 +33,7 @@ const EventCard: React.FC<EventCardProps> = (props) => {
 
   const iconSrc = getIcon[props.category] || '';
   return (
-    <div className="card w-96 bg-base-100 shadow-xl image-full">
+    <div className="card w-96 bg-base-100 shadow-xl image-full animate__animated animate__bounceInDown">
       <figure>
         <img src={iconSrc} alt={props.category} />
       </figure>

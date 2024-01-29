@@ -19,7 +19,7 @@ const DistanceSlider = ({
         />
         <div className=" flex justify-between text-xs">
           <span className="slider-marking" id="0">
-            0
+            0 km
           </span>
           <span className="slider-marking" id="2">
             2
@@ -34,7 +34,7 @@ const DistanceSlider = ({
             8
           </span>
           <span className="slider-marking" id="10">
-            10
+            10 km
           </span>
         </div>
       </div>

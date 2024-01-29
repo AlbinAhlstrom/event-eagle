@@ -26,14 +26,17 @@ function Categories() {
               />
             );
           })}
+          
         </section>
-          <button
-            className="btn btn-primary my-2 max-sm:w-full"
+        <button
+            className="btn btn-primary my-2 max-sm:w-48 "
             onClick={() => navigate("/events")}
           >
             Show all Categories
           </button>
       </div>
+
+      </>
   );
 }
 

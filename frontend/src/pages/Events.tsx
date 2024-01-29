@@ -90,14 +90,14 @@ const Events = () => {
             />
           ))}
         </div>
-        <button
-          className="btn btn-primary self-center sticky bottom-2 mt-auto w-40 z-50 max-sm:w-full"
-          onClick={() => navigate("/categories")}
-        >
-          Back to Categories
-        </button>
       </div>
-    </>
+      <button
+        className="btn btn-primary self-center fixed bottom-2 mt-auto w-40 z-50 max-md:w-5/6"
+        onClick={() => navigate("/categories")}
+      >
+        Back to Categories
+      </button>
+    </div>
   );
 };
 
