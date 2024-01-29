@@ -1,4 +1,5 @@
 import { EventListing } from "../util";
+import EditEventCard from "./EditEventCard";
 
 interface EventsOverviewProps {
     events: EventListing[];
@@ -9,13 +10,10 @@ const EventsOverview = ({events, deleteEvent}: EventsOverviewProps) => {
   return (
     <>
       <h1>Events</h1>
-      <ul>
+      <ul className="flex flex-wrap gap-4">
         {events.map((event) => (
           <li key={event.id}>
-            {event.title}
-            <button className="btn" onClick={() => deleteEvent(event.id)}>
-              Delete
-            </button>
+            <EditEventCard event={event} onDelete={deleteEvent}/>
           </li>
         ))}
       </ul>
