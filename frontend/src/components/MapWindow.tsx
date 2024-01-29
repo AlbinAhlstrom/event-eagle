@@ -10,7 +10,13 @@ const MapWindow = () => {
   return (
     <APIProvider apiKey={apiUrl}>
       <div className="h-40vh w-40vh">
-        <Map zoom={9} center={position}></Map>
+        <Map 
+        zoom={9} 
+        center={position}
+        mapId={mapId}
+        >
+
+        </Map>
       </div>
     </APIProvider>
   )
