@@ -3,7 +3,7 @@ import useSWR from "swr";
 import { useParams, useNavigate } from "react-router-dom";
 import EventCard from "../components/EventCard";
 import DistanceSlider from "../components/DistanceSlider";
-import { EventListing, getDistanceFromLatLonInKm } from "../helpers/util";
+import { EventListing, getDistanceFromLatLonInKm } from "../util";
 
 const BASE_URL = "https://event-eagle.azurewebsites.net/";
 const EVENTS_ENDPOINT = `${BASE_URL}Events`;

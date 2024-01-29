@@ -5,7 +5,7 @@ import family from '../images/family-icon.webp';
 import arts from '../images/arts-icon.webp';
 import music from '../images/music-icon.webp';
 import CountdownTimer from './CountDown';
-import { EventCardProps, IconMap } from '../helpers/util';
+import { EventCardProps, IconMap } from '../util';
 
 const getIcon: IconMap = {
   "Music": music,

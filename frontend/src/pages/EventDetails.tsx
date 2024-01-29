@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import image from '../images/nature.jpg'
-import { EventListing, defaultEventListing } from '../helpers/util';
+import { EventListing, defaultEventListing } from '../util';
 
 const EventDetails = () => {
     const { id } = useParams<'id'>(); 
