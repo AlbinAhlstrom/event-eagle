@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { EventListing, defaultEventListing } from "../util";
-import PrimaryButton from "./BottomButton";
+import PrimaryButton from "./PrimaryButton";
 
 interface EventFormProps {
   postEvent: (event: EventListing) => Promise<void>;
@@ -121,8 +121,9 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
           />{" "}
         </label>
       </div>
-      <PrimaryButton text="Add new event" onClick={() => handleSubmit} />
       <div>
+      <PrimaryButton text="Submit" onClick={() => handleSubmit} />
+
       </div>
     </form>
   );

@@ -54,8 +54,8 @@ export const AdminDashboard = () => {
   if (isCreating) {
     return (
       <div className="flex flex-col items-center">
-        <AddEventForm postEvent={postEvent} />
-        <PrimaryButton onClick={goBack} text="Back to events" />
+        <AddEventForm postEvent={postEvent}/>
+        <BottomButton onClick={goBack} text="Back to events" />
       </div>
     );
   }
