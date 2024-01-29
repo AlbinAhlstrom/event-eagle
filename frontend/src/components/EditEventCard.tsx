@@ -4,7 +4,6 @@ import sports from '../images/sports-icon.webp';
 import family from '../images/family-icon.webp';
 import arts from '../images/arts-icon.webp';
 import music from '../images/music-icon.webp';
-import CountdownTimer from './CountDown';
 import { IconMap } from '../util';
 import { EventListing } from '../util';
 
