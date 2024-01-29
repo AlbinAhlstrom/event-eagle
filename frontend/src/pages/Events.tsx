@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import EventListing from "../helpers/types";
 import useSWR from "swr";
 import { useParams, useNavigate } from "react-router-dom";
-import Header from "../components/Header";
 import EventCard from "../components/EventCard";
 import getDistanceFromLatLonInKm from "../helpers/util";
 import DistanceSlider from "../components/DistanceSlider";
@@ -71,7 +70,6 @@ const Events = () => {
 
   return (
     <>
-      <Header />
       <div className="flex flex-col">
         <DistanceSlider value={distanceFilter} onChange={handleSliderChange} />
         <div className="flex justify-center items-center flex-wrap gap-10 mt-10">
