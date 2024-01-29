@@ -4,12 +4,11 @@ import Categories from "./pages/Categories";
 import Events from "./pages/Events";
 import NoPage from "./pages/NoPage";
 import EventDetails from "./pages/EventDetails";
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
   return (
     <>
-    <BrowserRouter>
       <Routes>
         <Route index element={<Home/>}/>
         <Route path="/home" element={<Home/>}/>
@@ -20,7 +19,6 @@ function App() {
         <Route path="/event/:id" element={<EventDetails/>}/>
         <Route path="*" element={<NoPage/>}/>
       </Routes>
-    </BrowserRouter>
     </>
   );
 }
