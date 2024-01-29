@@ -1,11 +1,9 @@
-import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const navigate = useNavigate();
   return (
     <>
-      <Header />
       <div
         className="hero h-screenH"
 
