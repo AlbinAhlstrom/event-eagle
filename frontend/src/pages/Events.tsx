@@ -69,7 +69,6 @@ const Events = () => {
   }, [eventsNearby, type]);
 
   return (
-    <>
       <div className="flex flex-col">
         <DistanceSlider value={distanceFilter} onChange={handleSliderChange} />
         <div className="flex justify-center items-center flex-wrap gap-10 mt-10">
@@ -90,14 +89,14 @@ const Events = () => {
             />
           ))}
         </div>
-      </div>
       <button
         className="btn btn-primary self-center fixed bottom-2 mt-auto w-40 z-50 max-md:w-5/6"
         onClick={() => navigate("/categories")}
       >
         Back to Categories
       </button>
-    </>
+      </div>
+
   );
 };
 
