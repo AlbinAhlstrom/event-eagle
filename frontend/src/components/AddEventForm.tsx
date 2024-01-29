@@ -31,6 +31,7 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col items-center">
+      <section className="flex">
       <h1>Create new event:</h1>
       <div>
         <label>
@@ -124,6 +125,10 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
       <div>
         <PrimaryButton text="Submit" onClick={() => handleSubmit} />
       </div>
+      </section>
+      <section>
+        <Map/>
+      </section>
     </form>
   );
 };
