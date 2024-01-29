@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { EventListing, defaultEventListing } from "../util";
+import PrimaryButton from "./BottomButton";
 
 interface EventFormProps {
   postEvent: (event: EventListing) => Promise<void>;
@@ -29,10 +30,13 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="flex flex-col items-center">
+      <h1>Create new event:</h1>
       <div>
         <label>
-          Title:
+          <div className="label">
+            <span className="label-text">Title:</span>
+          </div>
           <input
             type="text"
             name="title"
@@ -45,7 +49,7 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
       </div>
       <div>
         <label>
-        <div className="label">
+          <div className="label">
             <span className="label-text">Description:</span>
           </div>
           <textarea
@@ -59,7 +63,7 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
       </div>
       <div>
         <label>
-        <div className="label">
+          <div className="label">
             <span className="label-text">Venue:</span>
           </div>
           <input
@@ -74,7 +78,7 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
       </div>
       <div>
         <label>
-        <div className="label">
+          <div className="label">
             <span className="label-text">Address:</span>
           </div>
           <input
@@ -89,7 +93,7 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
       </div>
       <div>
         <label className="form-control w-full max-w-xs">
-        <div className="label">
+          <div className="label">
             <span className="label-text">Price:</span>
           </div>
           <input
@@ -118,10 +122,10 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
         </label>
       </div>
       <div>
-        <button type="submit">Create Event</button>
+        <PrimaryButton text="Add new event" onClick={() => handleSubmit} />
       </div>
     </form>
   );
 };
 
-export default AddEventForm
+export default AddEventForm;

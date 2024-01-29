@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { EventListing } from "../util";
 import AddEventForm from "../components/AddEventForm";
 import EventsOverview from "../components/EventsOverview";
-import PrimaryButton from "../components/PrimaryButton";
+import BottomButton from "../components/BottomButton";
 
 export const AdminDashboard = () => {
   const [events, setEvents] = useState<EventListing[]>([]);
@@ -48,21 +48,21 @@ export const AdminDashboard = () => {
     setIsCreating(true);
   };
 
-  const goBack = () => setIsCreating(false)
+  const goBack = () => setIsCreating(false);
 
   if (isCreating) {
     return (
       <div className="flex flex-col items-center">
-        <AddEventForm postEvent={postEvent}/>
-        <PrimaryButton onClick={goBack} text="Back"/>
+        <AddEventForm postEvent={postEvent} />
+        <BottomButton onClick={goBack} text="Back to events" />
       </div>
-    )
+    );
   }
 
   return (
     <div className="flex flex-col">
-        <EventsOverview events={events} deleteEvent={deleteEvent}/>
-        <PrimaryButton onClick={handleCreateEvent} text="Create new event"/>
+      <EventsOverview events={events} deleteEvent={deleteEvent} />
+      <BottomButton onClick={handleCreateEvent} text="Create new event" />
     </div>
   );
 };

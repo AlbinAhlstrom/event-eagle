@@ -5,7 +5,7 @@ interface ButtonProps {
     text: string
 }
 
-const PrimaryButton:React.FC<ButtonProps> = ({onClick, text}) => {
+const BottomButton:React.FC<ButtonProps> = ({onClick, text}) => {
   return (
     <button className="btn btn-primary fixed bottom-2 mt-auto self-center" onClick={onClick}>
     {text}
@@ -13,5 +13,5 @@ const PrimaryButton:React.FC<ButtonProps> = ({onClick, text}) => {
   )
 }
 
-export default PrimaryButton
+export default BottomButton
 
