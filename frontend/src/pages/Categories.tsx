@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import Header from "../components/Header";
 import CategoryCard from "../components/CategoryCard";
 import musicImage from "../images/music-events.jpg";
 import sportsImage from "../images/sport-events.jpg";
@@ -17,7 +16,6 @@ function Categories() {
 
   return (
     <div className="flex flex-col justify-between items-center h-screen">
-      <Header />
         <section className="grid max-sm:grid-cols-1 grid-cols-2 gap-3 lg:mx-nav">
           {eventCategories.map((category, index) => {
             return (
