@@ -118,12 +118,11 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
             value={EventListing.category}
             onChange={handleChange}
             required
-          />{" "}
+          />
         </label>
       </div>
       <div>
-      <PrimaryButton text="Submit" onClick={() => handleSubmit} />
-
+        <PrimaryButton text="Submit" onClick={() => handleSubmit} />
       </div>
     </form>
   );
