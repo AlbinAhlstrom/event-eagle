@@ -35,8 +35,6 @@ function Categories() {
             Show all Categories
           </button>
       </div>
-
-      </>
   );
 }
 
