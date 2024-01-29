@@ -1,34 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import image from '../images/nature.jpg'
-
-type EventListing = {
-    id: number;
-    title: string;
-    description: string;
-    startTime: Date;
-    endTime: Date;
-    venue: string;
-    address: string;
-    latitude: number;
-    longitude: number;
-    price: number;
-    category: "Music" | "Sports" | "Arts" | "Family";
-};
-
-const defaultEventListing: EventListing = {
-    id: 0,
-    title: "",
-    description: "",
-    startTime: new Date(),
-    endTime: new Date(),
-    venue: "",
-    address: "",
-    latitude: 0,
-    longitude: 0,
-    price: 0,
-    category: "Music"
-};
+import { EventListing, defaultEventListing } from '../helpers/util';
 
 const EventDetails = () => {
     const { id } = useParams<'id'>(); 
