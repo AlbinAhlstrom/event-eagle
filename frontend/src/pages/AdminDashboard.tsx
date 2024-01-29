@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { EventListing } from "../util";
 import AddEventForm from "../components/AddEventForm";
+import EventsOverview from "../components/EventsOverview";
 
 export const AdminDashboard = () => {
   const [events, setEvents] = useState<EventListing[]>([]);
@@ -48,17 +49,7 @@ export const AdminDashboard = () => {
 
   return (
     <div>
-      <h1>Events</h1>
-      <ul>
-        {events.map((event) => (
-          <li key={event.id}>
-            {event.title}
-            <button className="btn" onClick={() => deleteEvent(event.id)}>
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
+        <EventsOverview events={events} deleteEvent={deleteEvent}/>
       {isCreating ? (
         <AddEventForm postEvent={postEvent} />
       ) : (
