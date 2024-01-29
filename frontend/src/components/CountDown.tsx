@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
+import { CountdownTimerProps } from "../helpers/util";
 
-interface CountdownTimerProps {
-  targetDate: Date;
-}
 
 function CountdownTimer({ targetDate: targetDateString }: CountdownTimerProps) {
   const [timeLeft, setTimeLeft] = useState({
