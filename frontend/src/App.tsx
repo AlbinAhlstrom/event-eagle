@@ -4,6 +4,7 @@ import Categories from "./pages/Categories";
 import Events from "./pages/Events";
 import NoPage from "./pages/NoPage";
 import EventDetails from "./pages/EventDetails";
+import AdminDashboard from "./pages/AdminDashboard";
 import { Routes, Route } from 'react-router-dom'
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/events/:type" element={<Events/>}/>
         <Route path="/events/:type" element={<Events/>}/>
         <Route path="/event/:id" element={<EventDetails/>}/>
+        <Route path="/admin" element={<AdminDashboard/>}/>
         <Route path="*" element={<NoPage/>}/>
       </Routes>
     </>
