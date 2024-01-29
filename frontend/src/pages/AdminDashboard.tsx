@@ -3,7 +3,6 @@ import { EventListing } from "../util";
 import AddEventForm from "../components/AddEventForm";
 import EventsOverview from "../components/EventsOverview";
 import BottomButton from "../components/BottomButton";
-import PrimaryButton from "../components/PrimaryButton";
 
 export const AdminDashboard = () => {
   const [events, setEvents] = useState<EventListing[]>([]);
