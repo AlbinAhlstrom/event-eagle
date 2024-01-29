@@ -15,7 +15,7 @@ const MapWindow = () => {
         center={position}
         mapId={mapId}
         >
-
+          <AdvancedMarker position={position}></AdvancedMarker>
         </Map>
       </div>
     </APIProvider>
