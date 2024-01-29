@@ -97,7 +97,7 @@ const Events = () => {
       >
         Back to Categories
       </button>
-    </div>
+    </>
   );
 };
 
