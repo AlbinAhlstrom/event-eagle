@@ -46,17 +46,18 @@ export const AdminDashboard = () => {
   const handleCreateEvent = () => {
     setIsCreating(true);
   };
+  if (isCreating) {
+    return (
+        <AddEventForm postEvent={postEvent} />
+    )
+  }
 
   return (
     <div>
         <EventsOverview events={events} deleteEvent={deleteEvent}/>
-      {isCreating ? (
-        <AddEventForm postEvent={postEvent} />
-      ) : (
         <button className="btn" onClick={handleCreateEvent}>
           Create New Event
         </button>
-      )}
     </div>
   );
 };

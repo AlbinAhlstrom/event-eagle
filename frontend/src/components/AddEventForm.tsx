@@ -45,7 +45,9 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
       </div>
       <div>
         <label>
-          Description:
+        <div className="label">
+            <span className="label-text">Description:</span>
+          </div>
           <textarea
             name="description"
             className="textarea textarea-bordered"
@@ -57,7 +59,9 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
       </div>
       <div>
         <label>
-          Venue:
+        <div className="label">
+            <span className="label-text">Venue:</span>
+          </div>
           <input
             type="text"
             name="venue"
@@ -70,7 +74,9 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
       </div>
       <div>
         <label>
-          Address:
+        <div className="label">
+            <span className="label-text">Address:</span>
+          </div>
           <input
             type="text"
             name="address"
@@ -82,8 +88,10 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
         </label>
       </div>
       <div>
-        <label>
-          Price:
+        <label className="form-control w-full max-w-xs">
+        <div className="label">
+            <span className="label-text">Price:</span>
+          </div>
           <input
             type="number"
             name="price"
@@ -102,7 +110,7 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
           <input
             type="text"
             name="category"
-            className="input"
+            className="input input-bordered"
             value={EventListing.category}
             onChange={handleChange}
             required
