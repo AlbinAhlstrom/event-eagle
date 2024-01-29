@@ -24,7 +24,6 @@ const Home = () => {
             >
               Browse Categories
             </button>
-            <Map/>
           </div>
         </div>
       </div>
