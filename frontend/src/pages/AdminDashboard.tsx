@@ -3,6 +3,7 @@ import { EventListing } from "../util";
 import AddEventForm from "../components/AddEventForm";
 import EventsOverview from "../components/EventsOverview";
 import BottomButton from "../components/BottomButton";
+import PrimaryButton from "../components/PrimaryButton";
 
 export const AdminDashboard = () => {
   const [events, setEvents] = useState<EventListing[]>([]);
@@ -54,7 +55,7 @@ export const AdminDashboard = () => {
     return (
       <div className="flex flex-col items-center">
         <AddEventForm postEvent={postEvent} />
-        <BottomButton onClick={goBack} text="Back to events" />
+        <PrimaryButton onClick={goBack} text="Back to events" />
       </div>
     );
   }

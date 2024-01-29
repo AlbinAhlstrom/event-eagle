@@ -121,8 +121,8 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
           />{" "}
         </label>
       </div>
+      <PrimaryButton text="Add new event" onClick={() => handleSubmit} />
       <div>
-        <PrimaryButton text="Add new event" onClick={() => handleSubmit} />
       </div>
     </form>
   );
