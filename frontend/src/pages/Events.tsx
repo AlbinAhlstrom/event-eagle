@@ -70,7 +70,7 @@ const Events = () => {
   return (
       <div className="flex flex-col">
         <DistanceSlider value={distanceFilter} onChange={handleSliderChange} />
-        <div className="flex justify-center items-center flex-wrap gap-10 mt-10">
+        <div className="flex justify-center items-center flex-wrap gap-10 mt-10 mb-32">
           {error && <h1>Failed to load</h1>}
           {!events && (
             <span className="loading loading-lg big-spinner h-16 text-primary text-xl"></span>
