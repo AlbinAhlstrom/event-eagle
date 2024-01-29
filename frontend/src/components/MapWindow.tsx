@@ -6,10 +6,11 @@ const MapWindow = () => {
 
   const position = {lat: 59.34676644462517, lng: 18.055573862709853}
   const apiUrl = import.meta.env.VITE_GMAPS_KEY;
+  const mapId = import.meta.env.VITE_GMAPS_MAPID;
   return (
     <APIProvider apiKey={apiUrl}>
       <div className="h-40vh w-40vh">
-
+        <Map zoom={9} center={position}></Map>
       </div>
     </APIProvider>
   )
