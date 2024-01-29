@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import EventListing from "../helpers/types";
 import useSWR from "swr";
 import { useParams, useNavigate } from "react-router-dom";
 import EventCard from "../components/EventCard";
-import getDistanceFromLatLonInKm from "../helpers/util";
 import DistanceSlider from "../components/DistanceSlider";
+import { EventListing, getDistanceFromLatLonInKm } from "../helpers/util";
 
 const BASE_URL = "https://event-eagle.azurewebsites.net/";
 const EVENTS_ENDPOINT = `${BASE_URL}Events`;
@@ -49,8 +48,8 @@ const Events = () => {
     return (
       events?.filter((event) => {
         if (!userLocation) return false;
-        const eventLat = parseFloat(event.latitude);
-        const eventLng = parseFloat(event.longitude);
+        const eventLat = event.latitude;
+        const eventLng = event.longitude;
         const distance = getDistanceFromLatLonInKm(
           userLocation.lat,
           userLocation.lng,
