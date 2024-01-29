@@ -26,16 +26,13 @@ const EditEventCard: React.FC<EditEvenCardProps> = ({event, onDelete}) => {
 
   const iconSrc = getIcon[event.category] || '';
   return (
-    <div className="card w-96 bg-base-100 shadow-xl image-full">
+    <div className="card bg-base-100 shadow-xl image-full w-56">
       <figure>
         <img src={iconSrc} alt={event.category} />
       </figure>
-      <div className="card-body">
+      <div className="card-body w-full h-full">
         <h2 className="card-title">{event.title}</h2>
-        <p>{event.description}</p>
-        <h1>{event.startTime}</h1>
-
-        <div className="card-actions justify-center mt-10">
+        <div className="card-actions justify-center">
           <button className="btn btn-primary" onClick={() => navigate("/event/" + event.id)}>
             View details
         </button>

@@ -53,11 +53,12 @@ export const AdminDashboard = () => {
   }
 
   return (
-    <div>
+    <div className="flex flex-col">
         <EventsOverview events={events} deleteEvent={deleteEvent}/>
-        <button className="btn" onClick={handleCreateEvent}>
+        <button className="btn btn-primary fixed bottom-2 mt-auto self-center" onClick={handleCreateEvent}>
           Create New Event
         </button>
+        
     </div>
   );
 };

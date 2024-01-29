@@ -10,7 +10,7 @@ const EventsOverview = ({events, deleteEvent}: EventsOverviewProps) => {
   return (
     <>
       <h1>Events</h1>
-      <ul className="flex flex-wrap gap-4">
+      <ul className="flex flex-wrap gap-10">
         {events.map((event) => (
           <li key={event.id}>
             <EditEventCard event={event} onDelete={deleteEvent}/>
