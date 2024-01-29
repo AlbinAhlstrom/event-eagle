@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Header from '../components/Header';
 import image from '../images/nature.jpg'
 
 type EventListing = {
@@ -65,7 +64,6 @@ const EventDetails = () => {
 
     return (
         <>
-            <Header />
             <div
                 className="hero min-h-screen"
                 style={{
