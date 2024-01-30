@@ -11,8 +11,8 @@ type EventMiniMapProps = {
 };
 
 const EventMiniMap = ({ position }: EventMiniMapProps) => {
-  const apiUrl = import.meta.env.GMAPS_KEY;
-  const mapId = import.meta.env.GMAPS_MAPID;
+  const apiUrl = import.meta.env.VITE_GMAPS_KEY;
+  const mapId = import.meta.env.VITE_GMAPS_MAPID;
 
   return (
     <div className="h-full w-full">
