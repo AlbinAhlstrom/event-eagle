@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import image from '../images/nature.jpg'
 import { EventListing, defaultEventListing } from '../util';
-import MapWindow from '../components/MapWindow';
+import EventMiniMap from '../components/EventMiniMap';
 
 const EventDetails = () => {
     const { id } = useParams<'id'>(); 
     const [event, setEvent] = useState<EventListing>(defaultEventListing);
     const [startTime, setStartTime] = useState("");
-    const [position, setPosition] = useState({lat:event.latitude, lng:event.longitude})
+    const position = {lat:event.latitude, lng:event.longitude}
 
     useEffect(() => {
         const fetchEvent = async () => {
@@ -47,7 +47,7 @@ const EventDetails = () => {
                 }}
             >
                 <span className='h-2/6 w-2/6 absolute top-20'>
-                        <MapWindow position={position} setPosition={setPosition}/>
+                        <EventMiniMap position={position}/>
                         </span>
                 <div className="hero-overlay bg-opacity-60"></div>
                 <div className="hero-content text-center text-neutral-content glass rounded-md">
