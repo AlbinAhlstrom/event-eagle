@@ -4,13 +4,13 @@ import { Coordinate } from '../util';
 
 type MapWindowProps =  {
   position: Coordinate
-  setPosition: ({lat, lng}:Coordinate) => void
+  setPosition?: ({lat, lng}:Coordinate) => void
   pins?: AdvancedMarkerRef[]
 }
 const MapWindow: React.FC<MapWindowProps> = ({position, setPosition}: MapWindowProps) => {
   const apiUrl = import.meta.env.VITE_GMAPS_KEY;
   const mapId = import.meta.env.VITE_GMAPS_MAPID;
-
+  
   const handleDragEnd = (event: google.maps.MapMouseEvent) => {
     const newPos = event.latLng;
     if (newPos) {
@@ -26,7 +26,7 @@ const MapWindow: React.FC<MapWindowProps> = ({position, setPosition}: MapWindowP
           zoom={16}
           center={position}
           mapId={mapId}
-          gestureHandling={'none'}
+          gestureHandling={'greedy'}
           disableDefaultUI={true}>          
           <AdvancedMarker
             position={position}
