@@ -4,7 +4,7 @@ import { Coordinate } from '../util';
 
 type MapWindowProps =  {
   position: Coordinate
-  setPosition?: ({lat, lng}:Coordinate) => void
+  setPosition: ({lat, lng}:Coordinate) => void
   pins?: AdvancedMarkerRef[]
 }
 const MapWindow: React.FC<MapWindowProps> = ({position, setPosition}: MapWindowProps) => {

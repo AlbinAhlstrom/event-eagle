@@ -23,7 +23,7 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
     );
   }, []);
 
-  const [EventListing, setEventListing] =
+  const [eventListing, setEventListing] =
     useState<EventListing>(defaultEventListing);
 
     useEffect(() => {
@@ -41,13 +41,13 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
       | React.ChangeEvent<HTMLSelectElement>
   ) => {
     const { name, value } = event.target;
-    setEventListing({ ...EventListing, [name]: value });
+    setEventListing({ ...eventListing, [name]: value });
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     await postEvent({
-      ...EventListing,
+      ...eventListing,
     });
     // Reset form after submission
     setEventListing(defaultEventListing);
@@ -66,7 +66,7 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
             type="text"
             name="title"
             className="input input-bordered input-ghost"
-            value={EventListing.title}
+            value={eventListing.title}
             onChange={handleChange}
             required
           />
@@ -80,38 +80,33 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
           <textarea
             name="description"
             className="textarea textarea-bordered"
-            value={EventListing.description}
+            value={eventListing.description}
             onChange={handleChange}
           />
         </label>
       </div>
       <div>
-      <label>
-          <div className="label">
-            <span className="label-text">Start time:</span>
-          </div>
+            <h1>Start time:</h1>
+
           <input
-            type="text"
+            type="datetime-local"
             name="startTime"
             className="input input-bordered input-ghost"
-            value={EventListing.startTime.toDateString()}
+            value={eventListing.startTime.toString()}
             onChange={handleChange}
             required
           />
-          <label>
-      </label>
-          <div className="label">
-            <span className="label-text">End time:</span>
-          </div>
-          <input
-            type="text"
+
+            <h1>End time:</h1>
+
+            <input
+            type="datetime-local"
             name="endTime"
             className="input input-bordered input-ghost"
-            value={EventListing.endTime.toDateString()}
+            value={eventListing.endTime.toString()}
             onChange={handleChange}
             required
           />
-        </label>
         <label>
           <div className="label">
             <span className="label-text">Latitude:</span>
@@ -148,7 +143,7 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
             type="number"
             name="price"
             className="input input-bordered"
-            value={EventListing.price.toString()}
+            value={eventListing.price.toString()}
             onChange={handleChange}
           />
         </label>
@@ -162,7 +157,7 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
             type="text"
             name="category"
             className="input input-bordered"
-            value={EventListing.category}
+            value={eventListing.category}
             onChange={handleChange}
             required
           />

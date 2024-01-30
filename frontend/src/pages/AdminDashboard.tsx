@@ -7,7 +7,7 @@ import BottomButton from "../components/BottomButton";
 export const AdminDashboard = () => {
   const [events, setEvents] = useState<EventListing[]>([]);
   const [isCreating, setIsCreating] = useState<boolean>(false);
-  const BASE_URL = "https://event-eagle.azurewebsites.net";
+  const BASE_URL = "http://event-eagle.azurewebsites.net";
 
   // Get all events
   useEffect(() => {
