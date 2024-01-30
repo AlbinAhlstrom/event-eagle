@@ -1,34 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { APIProvider, Map, AdvancedMarker, Pin } from '@vis.gl/react-google-maps';
+import { APIProvider, Map, AdvancedMarker, AdvancedMarkerRef, Pin } from '@vis.gl/react-google-maps';
+import { Coordinate } from '../util';
 
-const MapWindow: React.FC = () => {
-  const [position, setPosition] = useState({lat: 59.34676644462517, lng: 18.055573862709853});
+
+type MapWindowProps =  {
+  position: Coordinate
+  setPosition: ({lat, lng}:Coordinate) => void
+  pins?: AdvancedMarkerRef[]
+}
+const MapWindow: React.FC<MapWindowProps> = ({position, setPosition}: MapWindowProps) => {
   const apiUrl = import.meta.env.VITE_GMAPS_KEY;
   const mapId = import.meta.env.VITE_GMAPS_MAPID;
 
   const handleDragEnd = (event: google.maps.MapMouseEvent) => {
     const newPos = event.latLng;
     if (newPos) {
-      setPosition({ lat: newPos.lat(), lng: newPos.lng() });
+      setPosition({lat: newPos.lat(), lng: newPos.lng()});
     }
   };
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setPosition({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }, []);
+  
 
   return (
-    <div className="flex justify-center items-center h-screen-h">
+    <div className="h-40vh">
       <APIProvider apiKey={apiUrl}>
         <Map
           zoom={16}
