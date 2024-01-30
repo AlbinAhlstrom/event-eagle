@@ -16,7 +16,7 @@ const SignInPage = () => {
             <p className="mb-5 text-xl">Sign in or sign up to continue</p>
             <div className="flex">
               <div className=" p-4 m-2 rounded-xl text-xl font-bold btn-primary bg-primary w-28 text-center hover:animate-pulse">
-                <SignInButton redirectUrl="/home" />
+                <SignInButton redirectUrl="/home" >Log in </SignInButton>
                 <br />
               </div>
               <div className=" p-4 m-2 rounded-xl text-xl font-bold btn-primary bg-primary w-28 text-center">
