@@ -9,11 +9,11 @@ const navigate = useNavigate()
 
   return (
     <div
-      className="navbar bg-base-100 shadow h-nav z-50 sticky top-0"
+      className="navbar bg-base-100 shadow h-nav-h z-50 sticky top-0"
     >
       
   <div className="flex-1">
-    <Link to="/home" className="btn btn-ghost text-xl h-nav">
+    <Link to="/home" className="btn btn-ghost text-xl h-nav-icon-h">
       <img src={logo} className="h-full"></img>
         <h1>Event Eagle</h1>
       </Link>

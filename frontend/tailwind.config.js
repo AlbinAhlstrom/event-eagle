@@ -35,12 +35,14 @@ export default {
   theme: {
     extend: {
       spacing: {
-        'nav': '10svh',
         '10vh': '10svh',
         '40vh': '40svh',
         '80vh': '80svh',
-        'screenH': '90svh',
+        '90vh': '90svh',
         'svh': '100svh',
+        'nav-h': '10svh',
+        'nav-icon-h': '8svh',
+        'screen-h': '90svh',
       }
     }
   },
