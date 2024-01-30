@@ -6,9 +6,9 @@ const MapWindow = () => {
   const position = {lat: 59.34676644462517, lng: 18.055573862709853}
   const apiUrl = import.meta.env.VITE_GMAPS_KEY;
   return (
-    <div>
+    <div className="flex justify-center items-center h-screen-h">
 <APIProvider apiKey={apiUrl}>
-      <div className="h-40vh w-40vh">
+      <div className="h-80vh w-80vh">
         <Map 
         zoom={12} 
         center={position}
