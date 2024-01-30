@@ -38,13 +38,15 @@ export default {
         '10vh': '10vh',
         '30vh': '30vh',
         '40vh': '40vh',
+        'max-card-h': '38vh',
         '80vh': '80vh',
         '90vh': '90vh',
         'vh': '100vh',
         'nav-h': '10vh',
         'nav-icon-h': '8vh',
         'screen-h': '90vh',
-        '40vw': '40vw'
+        '40vw': '40vw',
+        'max-card-w': '30vw',
       }
     }
   },
