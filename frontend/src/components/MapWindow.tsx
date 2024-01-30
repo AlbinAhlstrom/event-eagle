@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import { APIProvider, Map, AdvancedMarker, AdvancedMarkerRef, Pin } from '@vis.gl/react-google-maps';
 import { Coordinate } from '../util';
 
