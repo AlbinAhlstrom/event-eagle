@@ -26,6 +26,14 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
   const [EventListing, setEventListing] =
     useState<EventListing>(defaultEventListing);
 
+    useEffect(() => {
+      setEventListing(listing => ({
+        ...listing,
+        latitude: position.lat,
+        longitude: position.lng
+      }));
+    }, [position]);
+
   const handleChange = (
     event:
       | React.ChangeEvent<HTMLInputElement>
@@ -47,7 +55,7 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
 
   return (
     <form onSubmit={handleSubmit} className="flex items-center h-80vh">
-      <section className="flex flex-col items-center">
+      <section className="flex flex-col items-center h-full">
       <h1>Create new event:</h1>
       <div>
         <label>
@@ -74,35 +82,58 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
             className="textarea textarea-bordered"
             value={EventListing.description}
             onChange={handleChange}
-            required
           />
         </label>
       </div>
       <div>
-        <label>
+      <label>
           <div className="label">
-            <span className="label-text">Venue:</span>
+            <span className="label-text">Start time:</span>
           </div>
           <input
             type="text"
-            name="venue"
+            name="startTime"
             className="input input-bordered input-ghost"
-            value={EventListing.venue}
+            value={EventListing.startTime.toDateString()}
+            onChange={handleChange}
+            required
+          />
+          <label>
+      </label>
+          <div className="label">
+            <span className="label-text">End time:</span>
+          </div>
+          <input
+            type="text"
+            name="endTime"
+            className="input input-bordered input-ghost"
+            value={EventListing.endTime.toDateString()}
             onChange={handleChange}
             required
           />
         </label>
-      </div>
-      <div>
         <label>
           <div className="label">
-            <span className="label-text">Address:</span>
+            <span className="label-text">Latitude:</span>
           </div>
           <input
             type="text"
-            name="address"
+            name="latitude"
             className="input input-bordered input-ghost"
-            value={EventListing.address}
+            value={position.lat}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <label>
+          <div className="label">
+            <span className="label-text">Longitude:</span>
+          </div>
+          <input
+            type="text"
+            name="longitude"
+            className="input input-bordered input-ghost"
+            value={position.lng}
             onChange={handleChange}
             required
           />
@@ -119,7 +150,6 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
             className="input input-bordered"
             value={EventListing.price.toString()}
             onChange={handleChange}
-            required
           />
         </label>
       </div>
