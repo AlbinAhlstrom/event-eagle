@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { EventListing, defaultEventListing } from "../util";
 import PrimaryButton from "./PrimaryButton";
+import MapWindow from "./MapWindow";
 
 interface EventFormProps {
   postEvent: (event: EventListing) => Promise<void>;
@@ -127,7 +128,7 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
       </div>
       </section>
       <section>
-        <Map/>
+        <MapWindow/>
       </section>
     </form>
   );
