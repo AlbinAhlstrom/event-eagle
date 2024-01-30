@@ -36,6 +36,7 @@ export default {
     extend: {
       spacing: {
         '10vh': '10vh',
+        '30vh': '30vh',
         '40vh': '40vh',
         '80vh': '80vh',
         '90vh': '90vh',
