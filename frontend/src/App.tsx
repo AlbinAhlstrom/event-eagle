@@ -7,7 +7,6 @@ import Events from "./pages/Events";
 import NoPage from "./pages/NoPage";
 import EventDetails from "./pages/EventDetails";
 import AdminDashboard from "./pages/AdminDashboard";
-import MapWindow from "./components/MapWindow";
 import SignInPage from "./pages/SignInPage";
 
 function App() {
@@ -33,7 +32,6 @@ function App() {
                 <Route path="/events/:type" element={<Events />} />
                 <Route path="/event/:id" element={<EventDetails />} />
                 <Route path="/admin" element={<AdminDashboard />} />
-                <Route path="/map" element={<MapWindow />} />
                 <Route path="*" element={<NoPage />} />
               </Routes>
             </SignedIn>
