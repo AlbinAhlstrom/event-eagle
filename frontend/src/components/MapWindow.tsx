@@ -15,6 +15,7 @@ const MapWindow = () => {
         styles={mapStyle}
         scrollwheel = {false}
         gestureHandling = {'none'}
+        disableDefaultUI={true}
         >
           <AdvancedMarker position={position}>
             <Pin/>
