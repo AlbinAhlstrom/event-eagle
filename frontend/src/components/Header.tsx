@@ -10,7 +10,7 @@ const navigate = useNavigate()
 
   return (
     <div
-      className="navbar bg-base-100 shadow h-nav z-50 sticky top-0 h-nav-h"
+      className="navbar bg-ghost shadow-lg h-nav z-50 sticky top-0 h-nav-h"
     >
       
   <div className="flex-1">
