@@ -44,6 +44,7 @@ export default {
         'nav-h': '10vh',
         'nav-icon-h': '8vh',
         'screen-h': '90vh',
+        '40vw': '40vw'
       }
     }
   },
