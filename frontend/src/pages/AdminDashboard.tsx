@@ -3,11 +3,16 @@ import { EventListing } from "../util";
 import AddEventForm from "../components/AddEventForm";
 import EventsOverview from "../components/EventsOverview";
 import BottomButton from "../components/BottomButton";
+import { useClerk } from "@clerk/clerk-react";
+import { useNavigate } from 'react-router-dom';
 
 export const AdminDashboard = () => {
   const [events, setEvents] = useState<EventListing[]>([]);
   const [isCreating, setIsCreating] = useState<boolean>(false);
   const BASE_URL = "http://event-eagle.azurewebsites.net";
+
+
+const {user} = useClerk();
 
   // Get all events
   useEffect(() => {
@@ -50,20 +55,26 @@ export const AdminDashboard = () => {
 
   const goBack = () => setIsCreating(false);
 
+  const navigate = useNavigate();
+  
   if (isCreating) {
     return (
       <div className="flex flex-col items-center h-screen-h">
-        <AddEventForm postEvent={postEvent}/>
+        <AddEventForm postEvent={postEvent} />
         <BottomButton onClick={goBack} text="Back to events" />
       </div>
     );
   }
 
+  if(user?.publicMetadata.role !== "admin"){
+  navigate("/home");  
+  }
+
   return (
-    <div className="flex flex-col h-screen-h">
-      <EventsOverview events={events} deleteEvent={deleteEvent} />
-      <BottomButton onClick={handleCreateEvent} text="Create new event" />
-    </div>
+      <div className="flex flex-col h-screen-h">
+        <EventsOverview events={events} deleteEvent={deleteEvent} />
+        <BottomButton onClick={handleCreateEvent} text="Create new event" />
+      </div>
   );
 };
 
