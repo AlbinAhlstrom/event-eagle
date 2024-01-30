@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import CategoryCard from "../components/CategoryCard";
-import musicImage from "../images/music-events.jpg";
-import sportsImage from "../images/sport-events.jpg";
-import theatreImage from "../images/theatre-events.jpg";
-import familyImage from "../images/family-events.jpg";
+import musicImage from "../images/alt-images/music.jpg";
+import sportsImage from "../images/alt-images/sports.jpg";
+import theatreImage from "../images/alt-images/arts.jpg";
+import familyImage from "../images/alt-images/family.jpg";
 
 function Categories() {
   const eventCategories = [
