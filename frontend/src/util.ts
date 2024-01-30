@@ -70,6 +70,11 @@ export interface IconMap {
   [key: string]: string;
 }
 
+export type Coordinate = {
+    lat: number
+    lng: number
+}
+
 export const mapStyle = [
   {
       "featureType": "all",

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { EventListing, defaultEventListing } from "../util";
 import PrimaryButton from "./PrimaryButton";
 import MapWindow from "./MapWindow";
@@ -8,6 +8,21 @@ interface EventFormProps {
 }
 
 const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
+  const [position, setPosition] = useState({lat: 59.34676644462517, lng: 18.055573862709853});
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setPosition({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }, []);
+
   const [EventListing, setEventListing] =
     useState<EventListing>(defaultEventListing);
 
@@ -31,8 +46,8 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col items-center">
-      <section className="flex">
+    <form onSubmit={handleSubmit} className="flex items-center">
+      <section className="flex flex-col items-center">
       <h1>Create new event:</h1>
       <div>
         <label>
@@ -127,8 +142,8 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
         <PrimaryButton text="Submit" onClick={() => handleSubmit} />
       </div>
       </section>
-      <section>
-        <MapWindow/>
+      <section className="w-40vh h 40-vh">
+      <MapWindow position={position}/>
       </section>
     </form>
   );
