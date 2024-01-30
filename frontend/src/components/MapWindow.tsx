@@ -8,14 +8,13 @@ type MapWindowProps =  {
   pins?: AdvancedMarkerRef[]
 }
 const MapWindow: React.FC<MapWindowProps> = ({position, setPosition}: MapWindowProps) => {
-  const apiUrl = import.meta.env.GMAPS_KEY;
-  const mapId = import.meta.env.GMAPS_MAPID;
+  const apiUrl = import.meta.env.VITE_GMAPS_KEY;
+  const mapId = import.meta.env.VITE_GMAPS_MAPID;
   
   const handleDragEnd = (event: google.maps.MapMouseEvent) => {
     const newPos = event.latLng;
     if (newPos) {
       setPosition({lat: newPos.lat(), lng: newPos.lng()});
-      console.log(position)
     }
   };
 
