@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <>
       <div
-        className="hero h-screenH"
+        className="hero h-screen-h"
         style={{
           backgroundImage:
             "url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)",
