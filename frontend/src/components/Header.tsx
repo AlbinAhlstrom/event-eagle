@@ -14,7 +14,7 @@ const navigate = useNavigate()
     >
       
   <div className="flex-1">
-    <Link to="/home" className="btn btn-ghost text-xl h-nav">
+    <Link to="/home" className="btn btn-ghost text-xl h-nav-icon-h">
       <img src={logo} className="h-full"></img>
         <h1>Event Eagle</h1>
       </Link>
