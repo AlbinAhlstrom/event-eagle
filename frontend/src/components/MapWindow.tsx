@@ -16,13 +16,12 @@ const MapWindow: React.FC<MapWindowProps> = ({position, setPosition}: MapWindowP
     const newPos = event.latLng;
     if (newPos) {
       setPosition({lat: newPos.lat(), lng: newPos.lng()});
+      console.log(position)
     }
   };
 
-  
-
   return (
-    <div className="h-40vh">
+    <div className="h-full w-full">
       <APIProvider apiKey={apiUrl}>
         <Map
           zoom={16}

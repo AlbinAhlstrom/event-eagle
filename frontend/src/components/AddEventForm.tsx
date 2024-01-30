@@ -46,7 +46,7 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex items-center">
+    <form onSubmit={handleSubmit} className="flex items-center h-80vh">
       <section className="flex flex-col items-center">
       <h1>Create new event:</h1>
       <div>
@@ -142,7 +142,7 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
         <PrimaryButton text="Submit" onClick={() => handleSubmit} />
       </div>
       </section>
-      <section className="w-40vh h 40-vh">
+      <section className="w-40vh h-40vh">
       <MapWindow position={position} setPosition={setPosition}/>
       </section>
     </form>

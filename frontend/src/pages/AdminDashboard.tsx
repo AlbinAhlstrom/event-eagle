@@ -52,7 +52,7 @@ export const AdminDashboard = () => {
 
   if (isCreating) {
     return (
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center h-screen-h">
         <AddEventForm postEvent={postEvent}/>
         <BottomButton onClick={goBack} text="Back to events" />
       </div>
@@ -60,7 +60,7 @@ export const AdminDashboard = () => {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col h-screen-h">
       <EventsOverview events={events} deleteEvent={deleteEvent} />
       <BottomButton onClick={handleCreateEvent} text="Create new event" />
     </div>
