@@ -33,7 +33,7 @@ const EditEventCard: React.FC<EditEvenCardProps> = ({event, onDelete}) => {
         <h2 className="card-title">{event.title}</h2>
         <div className="card-actions justify-center">
           <button className="btn btn-primary" onClick={() => navigate(`/event/${event.id}/edit`)}>
-            View details
+            Update
         </button>
         <div className='flex gap-2'>
           <button className="btn btn-primary" onClick={() => onDelete(event.id)}>
