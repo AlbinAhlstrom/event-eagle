@@ -33,7 +33,6 @@ function App() {
                 <Route path="/events/:type" element={<Events />} />
                 <Route path="/event/:id" element={<EventDetails />} />
                 <Route path="/admin" element={<AdminDashboard />} />
-                <Route path="/map" element={<MapWindow />} />
                 <Route path="*" element={<NoPage />} />
               </Routes>
             </SignedIn>
