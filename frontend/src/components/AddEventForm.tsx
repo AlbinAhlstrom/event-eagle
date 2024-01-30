@@ -143,7 +143,7 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
       </div>
       </section>
       <section className="w-40vh h 40-vh">
-      <MapWindow position={position}/>
+      <MapWindow position={position} setPosition={setPosition}/>
       </section>
     </form>
   );
