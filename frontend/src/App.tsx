@@ -33,9 +33,9 @@ function App() {
                 <Route path="/categories" element={<Categories />} />
                 <Route path="/events" element={<Events />} />
                 <Route path="/events/create" element={<Create />} />
+                <Route path="/events/:id/edit" element={<EditEvent />} />
                 <Route path="/events/:type" element={<Events />} />
                 <Route path="/event/:id" element={<EventDetails />} />
-                <Route path="/event/:id/edit" element={<EditEvent />} />
                 <Route path="/event/:id/purchase" element={<Purchase />} />
                 <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="*" element={<NoPage />} />
