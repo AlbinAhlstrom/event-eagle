@@ -9,6 +9,7 @@ import EventDetails from "./pages/EventDetails";
 import AdminDashboard from "./pages/AdminDashboard";
 import SignInPage from "./pages/SignInPage";
 import EditEvent from "./components/EditEvent";
+import Purchase from "./pages/Purchase";
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
                 <Route path="/events/:type" element={<Events />} />
                 <Route path="/event/:id" element={<EventDetails />} />
                 <Route path="/event/:id/edit" element={<EditEvent />} />
+                <Route path="/event/:id/purchase" element={<Purchase />} />
                 <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="*" element={<NoPage />} />
               </Routes>
