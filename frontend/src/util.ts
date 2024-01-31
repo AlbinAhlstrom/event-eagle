@@ -20,6 +20,17 @@ export const getDistanceFromLatLonInKm = (
   return d;
 };
 
+const dateToString = (date: Date) => {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // getMonth() is zero-indexed, add 1
+    const day = date.getDate().toString().padStart(2, '0');
+    const hour = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+  
+    const localDateString = `${year}-${month}-${day}T${hour}:${minutes}`;
+    return localDateString;
+  };
+
 export const deg2rad = (deg: number): number => {
   return deg * (Math.PI / 180);
 };
@@ -28,8 +39,8 @@ export type EventListing = {
   id: number;
   title: string;
   description: string;
-  startTime: Date;
-  endTime: Date;
+  startTime: string;
+  endTime: string;
   venue: string;
   address: string;
   latitude: number;
@@ -42,8 +53,8 @@ export const defaultEventListing: EventListing = {
   id: 0,
   title: "default event title",
   description: "",
-  startTime: new Date(Date.now()),
-  endTime: new Date(Date.now()),
+  startTime: dateToString(new Date(Date.now())),
+  endTime: dateToString(new Date(Date.now())),
   venue: "",
   address: "",
   latitude: 0,
