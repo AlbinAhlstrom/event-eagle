@@ -50,11 +50,9 @@ const EventForm: React.FC<EventFormProps> = ({ event, onFormSubmit}) => {
     setEventState({ ...eventState, [name]: value });
   };
 
-  
-
   const handleSubmit = async (submitEvent: React.FormEvent) => {
     submitEvent.preventDefault();
-    await onFormSubmit({...eventState});
+    await onFormSubmit(eventState);
   };
 
   return (
@@ -66,52 +64,52 @@ const EventForm: React.FC<EventFormProps> = ({ event, onFormSubmit}) => {
             <TextInput
               title="Title:"
               name="title"
-              value={event.title}
+              value={eventState.title}
               onChange={handleChange}
             />
 
             <TextArea
               title="Description"
               name="description"
-              value={event.description}
+              value={eventState.description}
               onChange={handleChange}
             />
             <DateTimeInput
               title="Start time:"
               name="startTime"
-              value={event.startTime}
+              value={eventState.startTime}
               onChange={handleChange}
             />
             <DateTimeInput
               title="End time:"
               name="endTime"
-              value={event.endTime}
+              value={eventState.endTime}
               onChange={handleChange}
             />
             <TextInput
               title="Latitude:"
               name="latitude"
-              value={event.latitude}
+              value={eventState.latitude}
               onChange={handleChange}
               hidden={true}
             />
             <TextInput
               title="Longitude:"
               name="longitude"
-              value={event.longitude}
+              value={eventState.longitude}
               onChange={handleChange}
               hidden={true}
             />
             <TextInput
               title="Price:"
               name="price"
-              value={event.price}
+              value={eventState.price}
               onChange={handleChange}
             />
             <TextInput
               title="Category:"
               name="category"
-              value={event.category}
+              value={eventState.category}
               onChange={handleChange}
             />
             <div className="card-actions justify-end">
@@ -125,6 +123,7 @@ const EventForm: React.FC<EventFormProps> = ({ event, onFormSubmit}) => {
       <section className="w-40vh h-40vh">
         <MapWindow position={position} setPosition={setPosition} />
       </section>
+      <button onClick={() => console.log("eventState:", eventState)}>show event state</button>
     </form>
   );
 };
