@@ -18,12 +18,11 @@ const DateTimeInput: React.FC<dateTimeInputProps> = ({title, name, value, onChan
           type="datetime-local"
           name={name}
           className="input input-bordered input-ghost"
-          value={value.toString()}
+          value={value.toLocaleString()}
           onChange={onChange}
           required
         />
       </label>
-      ;
     </div>
   );
 };

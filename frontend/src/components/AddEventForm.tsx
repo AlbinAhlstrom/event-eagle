@@ -61,22 +61,67 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
   return (
     <form onSubmit={handleSubmit} className="flex items-center h-80vh">
       <section className="flex flex-col items-center h-full">
-      <div className="card w-96 bg-neutral text-neutral-content">
-  <div className="card-body">
-    <h2 className="card-title">Create new event:</h2>
-    <TextInput title="Title:" name="title" value={eventListing.title} onChange={handleChange}/>
-        <TextArea title="Desctiption" name="description" value={eventListing.description} onChange={handleChange}/>
-        <DateTimeInput title="Start time:" name="startTime" value={eventListing.startTime} onChange={handleChange}/>
-        <DateTimeInput title="End time:" name="endTime" value={eventListing.endTime} onChange={handleChange}/>
-        <TextInput title="Latitude:" name="latitude" value={eventListing.latitude} onChange={handleChange} hidden={true}/>
-        <TextInput title="Longitude:" name="longitude" value={eventListing.longitude} onChange={handleChange} hidden={true}/>
-        <TextInput title="Price:" name="price" value={eventListing.price} onChange={handleChange}/>
-        <TextInput title="Category:" name="category" value={eventListing.category} onChange={handleChange}/>
-    <div className="card-actions justify-end">
-        <button className="btn btn-primary" onClick={() => handleSubmit}>Submit</button> 
-    </div>
-  </div>
-</div>
+        <div className="card w-96 bg-neutral text-neutral-content">
+          <div className="card-body">
+            <h2 className="card-title">Create new event:</h2>
+            <TextInput
+              title="Title:"
+              name="title"
+              value={eventListing.title}
+              onChange={handleChange}
+            />
+
+            <TextArea
+              title="Description"
+              name="description"
+              value={eventListing.description}
+              onChange={handleChange}
+            />
+            <DateTimeInput
+              title="Start time:"
+              name="startTime"
+              value={eventListing.startTime}
+              onChange={handleChange}
+            />
+            <DateTimeInput
+              title="End time:"
+              name="endTime"
+              value={eventListing.endTime}
+              onChange={handleChange}
+            />
+            <TextInput
+              title="Latitude:"
+              name="latitude"
+              value={eventListing.latitude}
+              onChange={handleChange}
+              hidden={true}
+            />
+            <TextInput
+              title="Longitude:"
+              name="longitude"
+              value={eventListing.longitude}
+              onChange={handleChange}
+              hidden={true}
+            />
+            <TextInput
+              title="Price:"
+              name="price"
+              value={eventListing.price}
+              onChange={handleChange}
+            />
+            <TextInput
+              title="Category:"
+              name="category"
+              value={eventListing.category}
+              onChange={handleChange}
+            />
+            <div className="card-actions justify-end">
+              <button className="btn btn-primary" onClick={() => handleSubmit}>
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
       </section>
       <section className="w-40vh h-40vh">
         <MapWindow position={position} setPosition={setPosition} />
