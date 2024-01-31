@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import image from '../images/nature.jpg'
 import { EventListing, defaultEventListing } from '../util';
 import EventMiniMap from '../components/EventMiniMap';
 
 const EventDetails = () => {
     const { id } = useParams<'id'>(); 
+    const navigate = useNavigate();
     const [event, setEvent] = useState<EventListing>(defaultEventListing);
     const [startTime, setStartTime] = useState("");
     const position = {lat:event.latitude, lng:event.longitude}
@@ -64,8 +65,7 @@ const EventDetails = () => {
                         <h2 className='my-6 text-xl'>Price: {event.price} SEK</h2>
 
                         <p>{event.address}</p>
-                        
-
+                        <button className='btn btn-primary' onClick={() => navigate('purchase/')}>Purchase</button>
                     </div>
                 </div>
             </div>
