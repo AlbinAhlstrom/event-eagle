@@ -46,7 +46,7 @@ export type EventListing = {
   latitude: number;
   longitude: number;
   price: number;
-  category?: "Music" | "Sports" | "Arts" | "Family";
+  category: "Music" | "Sports" | "Arts" | "Family";
 };
 
 export const defaultEventListing: EventListing = {
