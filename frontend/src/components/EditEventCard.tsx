@@ -27,7 +27,7 @@ const EditEventCard: React.FC<EditEvenCardProps> = ({event, deleteEvent}) => {
 
 
 
-  const handleUpdateEvent = () => navigate(`/events/${event.id}/update`)
+  const handleUpdateEvent = () => navigate(`/events/${event.id}/edit`)
   const handleDeleteEvent = () => deleteEvent(event)
   return (
     <div className="card bg-base-100 shadow-xl image-full w-56">
