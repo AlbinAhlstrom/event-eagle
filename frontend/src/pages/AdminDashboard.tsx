@@ -20,6 +20,17 @@ const AdminDashboard = () => {
       .then((data: EventListing[]) => setEvents(data));
   }, []);
 
+  const deleteEvent = async (event: EventListing) => {
+    const BASE_URL = "http://event-eagle.azurewebsites.net"
+    const EVENTS_ENDPOINT = `${BASE_URL}/Events/${event.id}`;
+    const response = await fetch(EVENTS_ENDPOINT, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      setEvents(events.filter((ev) => event.id !== ev.id));
+    }
+  };
+
 
   const handleCreateEvent = () => {
     navigate("/events/create")
@@ -35,7 +46,7 @@ const AdminDashboard = () => {
       <ul className="flex flex-wrap gap-10">
         {events.map((event) => (
           <li key={event.id}>
-            <EditEventCard event={event}/>
+            <EditEventCard event={event} deleteEvent={deleteEvent}/>
           </li>
         ))}
       </ul>

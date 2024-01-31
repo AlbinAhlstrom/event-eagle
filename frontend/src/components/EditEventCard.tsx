@@ -16,21 +16,14 @@ const getIcon: IconMap = {
 
 interface EditEvenCardProps {
     event: EventListing
+    deleteEvent: (event: EventListing) => void
 }
 
 
-const EditEventCard: React.FC<EditEvenCardProps> = ({event}) => {
+const EditEventCard: React.FC<EditEvenCardProps> = ({event, deleteEvent}) => {
 
   const iconSrc = getIcon[event.category] || '';
   const navigate = useNavigate()
-
-  const deleteEvent = async (event: EventListing) => {
-    const BASE_URL = "http://event-eagle.azurewebsites.net"
-    const EVENTS_ENDPOINT = `${BASE_URL}/Events/${event.id}`;
-    await fetch(EVENTS_ENDPOINT, {
-      method: "DELETE",
-    });
-  };
 
 
 
