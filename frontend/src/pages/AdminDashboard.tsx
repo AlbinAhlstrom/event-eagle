@@ -6,7 +6,7 @@ import EditEventCard from "../components/EditEventCard";
 import { useNavigate } from "react-router-dom";
 
 
-export const AdminDashboard = () => {
+const AdminDashboard = () => {
   const [events, setEvents] = useState<EventListing[]>([]);
   const {user} = useClerk();
   const navigate = useNavigate();
