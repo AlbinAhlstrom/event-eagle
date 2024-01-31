@@ -5,7 +5,7 @@ import PrimaryButton from "./PrimaryButton";
 import MapWindow from "./MapWindow";
 
 const EditEvent = () => {
-  const { id } = useParams<"id">(); // Assuming that useParams is generic in TypeScript.
+  const { id } = useParams<"id">();
   const [event, setEvent] = useState<EventListing>(defaultEventListing);
   const [position, setPosition] = useState({ lat: 0, lng: 0 });
   const navigate = useNavigate();
