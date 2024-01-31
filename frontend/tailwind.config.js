@@ -46,7 +46,7 @@ export default {
         'nav-icon-h': '8vh',
         'screen-h': '90vh',
         '40vw': '40vw',
-        'max-card-w': '30vw',
+        'max-card-w': '38vh',
       }
     }
   },
