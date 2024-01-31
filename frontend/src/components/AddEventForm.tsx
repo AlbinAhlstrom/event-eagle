@@ -9,7 +9,7 @@ interface EventFormProps {
   postEvent: (event: EventListing) => Promise<void>;
 }
 
-const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
+const EventForm: React.FC<EventFormProps> = ({ postEvent }) => {
   const [position, setPosition] = useState({
     lat: 59.34676644462517,
     lng: 18.055573862709853,
@@ -130,4 +130,4 @@ const AddEventForm: React.FC<EventFormProps> = ({ postEvent }) => {
   );
 };
 
-export default AddEventForm;
+export default EventForm;
