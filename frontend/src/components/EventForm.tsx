@@ -6,15 +6,16 @@ import DateTimeInput from "./inputs/DateTimeInput";
 import TextArea from "./inputs/TextArea";
 
 interface EventFormProps {
-  postEvent: (event: EventListing) => Promise<void>
-  event?: EventListing
+  event: EventListing
+  updating: boolean
 }
 
-const EventForm: React.FC<EventFormProps> = ({ postEvent, event=defaultEventListing }) => {
+const EventForm: React.FC<EventFormProps> = ({ event}) => {
   const [position, setPosition] = useState({
     lat: event.latitude,
     lng: event.longitude
   });
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -29,34 +30,44 @@ const EventForm: React.FC<EventFormProps> = ({ postEvent, event=defaultEventList
     );
   }, []);
 
-  const [eventListing, setEventListing] =
-    useState<EventListing>(defaultEventListing);
+  const [eventState, setEventState] = useState<EventListing>(event);
 
   useEffect(() => {
-    setEventListing((listing) => ({
+    setEventState((listing) => ({
       ...listing,
       latitude: position.lat,
       longitude: position.lng,
-    }));
+    }))
+    console.log("position updated")
   }, [position]);
 
   const handleChange = (
-    event:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
-      | React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const { name, value } = event.target;
-    setEventListing({ ...eventListing, [name]: value });
+    changeEvent: 
+    | React.ChangeEvent<HTMLInputElement>
+    | React.ChangeEvent<HTMLTextAreaElement>
+    ) => {
+    const { name, value } = changeEvent.target;
+    setEventState({ ...eventState, [name]: value });
   };
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    await postEvent({
-      ...eventListing,
+  const postEvent = async (event: Omit<EventListing, "id">) => {
+    const BASE_URL = "http://event-eagle.azurewebsites.net"
+    const EVENTS_ENDPOINT = `${BASE_URL}/Events`;
+    const response = await fetch(EVENTS_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(event),
     });
-    // Reset form after submission
-    setEventListing(defaultEventListing);
+    const data: EventListing = await response.json();
+    console.log(data)
+  };
+
+  const handleSubmit = async (submitEvent: React.FormEvent) => {
+    submitEvent.preventDefault();
+    await postEvent({...eventState});
+    setEventState(defaultEventListing);
   };
 
   return (
@@ -68,52 +79,52 @@ const EventForm: React.FC<EventFormProps> = ({ postEvent, event=defaultEventList
             <TextInput
               title="Title:"
               name="title"
-              value={eventListing.title}
+              value={event.title}
               onChange={handleChange}
             />
 
             <TextArea
               title="Description"
               name="description"
-              value={eventListing.description}
+              value={event.description}
               onChange={handleChange}
             />
             <DateTimeInput
               title="Start time:"
               name="startTime"
-              value={eventListing.startTime}
+              value={event.startTime}
               onChange={handleChange}
             />
             <DateTimeInput
               title="End time:"
               name="endTime"
-              value={eventListing.endTime}
+              value={event.endTime}
               onChange={handleChange}
             />
             <TextInput
               title="Latitude:"
               name="latitude"
-              value={eventListing.latitude}
+              value={event.latitude}
               onChange={handleChange}
               hidden={true}
             />
             <TextInput
               title="Longitude:"
               name="longitude"
-              value={eventListing.longitude}
+              value={event.longitude}
               onChange={handleChange}
               hidden={true}
             />
             <TextInput
               title="Price:"
               name="price"
-              value={eventListing.price}
+              value={event.price}
               onChange={handleChange}
             />
             <TextInput
               title="Category:"
               name="category"
-              value={eventListing.category}
+              value={event.category}
               onChange={handleChange}
             />
             <div className="card-actions justify-end">
