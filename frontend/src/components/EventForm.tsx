@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { EventListing, defaultEventListing } from "../util";
+import { EventListing } from "../util";
 import MapWindow from "./MapWindow";
 import TextInput from "./inputs/TextInput";
 import DateTimeInput from "./inputs/DateTimeInput";
@@ -7,10 +7,10 @@ import TextArea from "./inputs/TextArea";
 
 interface EventFormProps {
   event: EventListing
-  updating: boolean
+  onFormSubmit: (event: EventListing) => void
 }
 
-const EventForm: React.FC<EventFormProps> = ({ event}) => {
+const EventForm: React.FC<EventFormProps> = ({ event, onFormSubmit}) => {
   const [position, setPosition] = useState({
     lat: event.latitude,
     lng: event.longitude
@@ -50,24 +50,11 @@ const EventForm: React.FC<EventFormProps> = ({ event}) => {
     setEventState({ ...eventState, [name]: value });
   };
 
-  const postEvent = async (event: Omit<EventListing, "id">) => {
-    const BASE_URL = "http://event-eagle.azurewebsites.net"
-    const EVENTS_ENDPOINT = `${BASE_URL}/Events`;
-    const response = await fetch(EVENTS_ENDPOINT, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(event),
-    });
-    const data: EventListing = await response.json();
-    console.log(data)
-  };
+  
 
   const handleSubmit = async (submitEvent: React.FormEvent) => {
     submitEvent.preventDefault();
-    await postEvent({...eventState});
-    setEventState(defaultEventListing);
+    await onFormSubmit({...eventState});
   };
 
   return (
