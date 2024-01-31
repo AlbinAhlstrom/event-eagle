@@ -19,13 +19,10 @@ interface EditEvenCardProps {
     deleteEvent: (event: EventListing) => void
 }
 
-
 const EditEventCard: React.FC<EditEvenCardProps> = ({event, deleteEvent}) => {
 
   const iconSrc = getIcon[event.category] || '';
   const navigate = useNavigate()
-
-
 
   const handleUpdateEvent = () => navigate(`/events/${event.id}/edit`)
   const handleDeleteEvent = () => deleteEvent(event)
