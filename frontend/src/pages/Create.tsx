@@ -8,7 +8,7 @@ const Create = () => {
     return (
         <div className="flex flex-col items-center h-screen-h">
           <EventForm event={defaultEventListing} updating={false} />
-          <button className='btn btn-primary fixed bottom-2 mt-auto self-center' onClick={() => navigate("/admin")} text="Back to dashboard" />
+          <button className='btn btn-primary fixed bottom-2 mt-auto self-center' onClick={() => navigate("/admin")}>Back to dashboard</button>
         </div>
       )
 }
