@@ -10,6 +10,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import SignInPage from "./pages/SignInPage";
 import EditEvent from "./components/EditEvent";
 import Purchase from "./pages/Purchase";
+import Create from "./pages/Create";
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/home" element={<Home />} />
                 <Route path="/categories" element={<Categories />} />
                 <Route path="/events" element={<Events />} />
+                <Route path="/events/create" element={<Create />} />
                 <Route path="/events/:type" element={<Events />} />
                 <Route path="/event/:id" element={<EventDetails />} />
                 <Route path="/event/:id/edit" element={<EditEvent />} />
