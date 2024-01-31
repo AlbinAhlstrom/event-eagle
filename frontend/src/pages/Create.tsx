@@ -17,6 +17,8 @@ const Create = () => {
     });
     const data: EventListing = await response.json();
     console.log(data)
+    navigate("/admin");
+
   };
 
     return (
