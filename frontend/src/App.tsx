@@ -8,13 +8,11 @@ import NoPage from "./pages/NoPage";
 import EventDetails from "./pages/EventDetails";
 import AdminDashboard from "./pages/AdminDashboard";
 import SignInPage from "./pages/SignInPage";
-import EditEvent from "./components/EditEvent";
+import EditEvent from "./pages/EditEvent";
 import Purchase from "./pages/Purchase";
 import Create from "./pages/Create";
 
 function App() {
-
-
   return (
     <Routes>
       <Route
@@ -23,7 +21,7 @@ function App() {
           <React.Fragment>
             <SignedOut>
               <Routes>
-                <Route path="/" element={<SignInPage/>}/>
+                <Route path="/" element={<SignInPage />} />
               </Routes>
             </SignedOut>
             <SignedIn>
