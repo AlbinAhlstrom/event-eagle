@@ -6,13 +6,14 @@ import DateTimeInput from "./inputs/DateTimeInput";
 import TextArea from "./inputs/TextArea";
 
 interface EventFormProps {
-  postEvent: (event: EventListing) => Promise<void>;
+  postEvent: (event: EventListing) => Promise<void>
+  event?: EventListing
 }
 
-const EventForm: React.FC<EventFormProps> = ({ postEvent }) => {
+const EventForm: React.FC<EventFormProps> = ({ postEvent, event=defaultEventListing }) => {
   const [position, setPosition] = useState({
-    lat: 59.34676644462517,
-    lng: 18.055573862709853,
+    lat: event.latitude,
+    lng: event.longitude
   });
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
