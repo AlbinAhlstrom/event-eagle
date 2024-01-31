@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import useSWR from "swr";
 import { useParams, useNavigate } from "react-router-dom";
 import EventCard from "../components/EventCard";
@@ -7,6 +7,7 @@ import { EventListing, getDistanceFromLatLonInKm } from "../util";
 
 const BASE_URL = "https://event-eagle.azurewebsites.net/";
 const EVENTS_ENDPOINT = `${BASE_URL}Events`;
+
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -18,13 +19,66 @@ const Events = () => {
   const [distanceFilter, setDistanceFilter] = useState(2);
   const { type } = useParams<"type">();
   const navigate = useNavigate();
+  
+  
+  const [data, setData] = useState();
+
+  const endTime = new Date();
+  endTime.setHours(23, 59, 59);
+  const endTimeISOString = endTime.toISOString().slice(0, -5) + "Z";
+  
+  const ticketMasterAPI = `https://app.ticketmaster.com/discovery/v2/events.json?size=50&unit=km&geoPoint=u6scd&radius=10&endDateTime=${endTimeISOString}&sort=date,asc&apikey=va6F5GmTa5GuKAGKbcUuGWdLAjCWOdec`;
+
+useEffect(()=>{
+  const fetchData = async () => {
+    try {
+      const res = await fetch(ticketMasterAPI);
+      const result = await res.json();
+
+      if (result._embedded && result._embedded.events) {
+        setData(result._embedded.events);
+        console.log(data);
+      } else {
+        console.error("No TicketMaster events today.");
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  fetchData();
+}, []);
+
+const ticketEvents = [];
+
+if (data) {
+  data.map(event => {
+    ticketEvents.push({
+      id: event.id,
+      title: event.name,
+      description: "Ticketmaster event",
+      startTime: event.dates.start.dateTime,
+      address: event._embedded.venues[0]?.address.line1 || "No address available",
+      latitude: parseFloat(event._embedded.venues[0]?.location.latitude) || "No address available",
+      longitude: parseFloat(event._embedded.venues[0]?.location.longitude) || "No address available",
+      price: event.priceRanges[0]?.min || 0,
+      venue: "",
+      endTime: null
+    });
+  });
+}
+
+
+
+
+
 
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const sliderValue = Number(event.target.value);
     setDistanceFilter(sliderValue);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setUserLocation({
@@ -38,13 +92,15 @@ const Events = () => {
     );
   }, []);
 
-  const { data: events, error } = useSWR<EventListing[]>(
+  let { data: events, error } = useSWR<EventListing[]>(
     EVENTS_ENDPOINT,
     fetcher
   );
+console.log(events);
 
-  // Filter events by distance
-  const eventsNearby = React.useMemo(() => {
+events = Array.isArray(events) ? [...events, ...ticketEvents] : ticketEvents;
+
+  const eventsNearby = useMemo(() => {
     return (
       events?.filter((event) => {
         if (!userLocation) return false;
@@ -61,11 +117,15 @@ const Events = () => {
     );
   }, [events, userLocation, distanceFilter]);
 
-  const filteredEvents = React.useMemo(() => {
+  const filteredEvents = useMemo(() => {
     return (
       eventsNearby.filter((event) => !type || event.category === type) || []
     );
   }, [eventsNearby, type]);
+
+  console.log(filteredEvents);
+
+  
 
   return (
       <div className="flex flex-col">

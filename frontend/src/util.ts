@@ -25,18 +25,18 @@ export const deg2rad = (deg: number): number => {
 };
 
 export type EventListing = {
-  id: number;
-  title: string;
-  description: string;
-  startTime: Date;
-  endTime: Date;
-  venue: string;
-  address: string;
-  latitude: number;
-  longitude: number;
-  price: number;
-  category: "Music" | "Sports" | "Arts" | "Family";
-};
+    id: number;
+    title: string;
+    description: string;
+    startTime: Date;
+    endTime?: Date;
+    venue?: string;
+    address: string;
+    latitude: number;
+    longitude: number;
+    price: number;
+    category?: "Music" | "Sports" | "Arts" | "Family";
+  };
 
 export const defaultEventListing: EventListing = {
   id: 0,
@@ -212,3 +212,5 @@ export const mapStyle = [
       ]
   }
 ]
+
+
