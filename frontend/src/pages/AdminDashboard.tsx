@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { EventListing } from "../util";
-import AddEventForm from "../components/AddEventForm";
-import EventsOverview from "../components/EventsOverview";
+import AddEventForm from "../components/EventForm";
 import BottomButton from "../components/BottomButton";
 import { useClerk } from "@clerk/clerk-react";
 import { useNavigate } from 'react-router-dom';
+import EditEventCard from "../components/EditEventCard";
+
 
 export const AdminDashboard = () => {
   const [events, setEvents] = useState<EventListing[]>([]);
@@ -49,6 +50,11 @@ const {user} = useClerk();
     }
   };
 
+  const updateEvent = (event: EventListing) => {
+    setIsCreating(true);
+    event
+  }
+
   const handleCreateEvent = () => {
     setIsCreating(true);
   };
@@ -72,7 +78,14 @@ const {user} = useClerk();
 
   return (
       <div className="flex flex-col h-screen-h">
-        <EventsOverview events={events} deleteEvent={deleteEvent} />
+        <h1>Events</h1>
+      <ul className="flex flex-wrap gap-10">
+        {events.map((event) => (
+          <li key={event.id}>
+            <EditEventCard event={event} onDelete={deleteEvent} onUpdate={handleCreateEvent}/>
+          </li>
+        ))}
+      </ul>
         <BottomButton onClick={handleCreateEvent} text="Create new event" />
       </div>
   );
