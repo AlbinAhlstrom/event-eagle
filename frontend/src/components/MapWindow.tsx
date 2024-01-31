@@ -26,7 +26,7 @@ const MapWindow: React.FC<MapWindowProps> = ({position, setPosition}: MapWindowP
           center={position}
           mapId={mapId}
           gestureHandling={'greedy'}
-          disableDefaultUI={true}>          
+          disableDefaultUI={false}>          
           <AdvancedMarker
             position={position}
             draggable={true}
