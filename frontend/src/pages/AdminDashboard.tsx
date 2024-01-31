@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { EventListing, defaultEventListing } from "../util";
-import EventForm from "../components/EventForm";
+import { EventListing } from "../util";
 import BottomButton from "../components/BottomButton";
 import { useClerk } from "@clerk/clerk-react";
 import EditEventCard from "../components/EditEventCard";
@@ -25,15 +24,6 @@ export const AdminDashboard = () => {
   const handleCreateEvent = () => {
     navigate("/events/create")
   };
-  
-  if (isCreating) {
-    return (
-      <div className="flex flex-col items-center h-screen-h">
-        <EventForm event={defaultEventListing} updating={false} />
-        <BottomButton onClick={() => console.log()} text="Back to events" />
-      </div>
-    );
-  }
 
   if(user?.publicMetadata.role !== "admin"){
   navigate("/home");  
