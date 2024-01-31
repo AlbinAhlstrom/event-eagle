@@ -12,6 +12,7 @@ export default {
           "color-scheme": "dark",
           "primary": "#1eb854",
           "primary-content": "#000000",
+          "neutral-content": "#FFFFFF",
           "secondary": "#25C13A",
           "accent": "#1DB8AB",
           "neutral": "#19362D",
