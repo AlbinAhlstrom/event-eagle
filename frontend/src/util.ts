@@ -31,6 +31,8 @@ export const categories = {
     family: "Family",
 } as const
 
+export type categoryType = (typeof categories)[keyof typeof categories];
+
 export type EventListing = {
   id: number;
   title: string;
