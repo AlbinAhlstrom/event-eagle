@@ -36,11 +36,39 @@ const EventForm = ({ onSave, defaultEvent = defaultEventListing }: props) => {
             <p>Description</p>
             <textarea {...register("description")} />
           </div>
-        
+
           <div className="card-actions justify-end">
             <button className="btn btn-primary" type="submit">
               Submit
             </button>
+          </div>
+          <div>
+            <p>Start Time</p>
+            <input type="datetime-local" {...register("startTime")} />
+          </div>
+          <div>
+            <p>End Time</p>
+            <input type="datetime-local" {...register("endTime")} />
+          </div>
+          <div>
+            <p>Venue</p>
+            <input {...register("venue")} />
+          </div>
+          <div>
+            <p>Address</p>
+            <input {...register("address")} />
+          </div>
+          <div>
+            <p>Latitude</p>
+            <input type="number" {...register("latitude")} />
+          </div>
+          <div>
+            <p>Longitude</p>
+            <input type="number" {...register("longitude")} />
+          </div>
+          <div>
+            <p>Price</p>
+            <input type="number" {...register("price")} />
           </div>
         </div>
       </div>
