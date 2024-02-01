@@ -3,7 +3,7 @@ import useSWR from "swr";
 import { useParams, useNavigate } from "react-router-dom";
 import EventCard from "../components/EventCard";
 import DistanceSlider from "../components/DistanceSlider";
-import { EventListing, getDistanceFromLatLonInKm } from "../util";
+import { EventDetailsListing, EventListing, getDistanceFromLatLonInKm } from "../util";
 
 const BASE_URL = "https://event-eagle.azurewebsites.net/";
 const EVENTS_ENDPOINT = `${BASE_URL}Events`;
@@ -47,7 +47,7 @@ const Events: React.FC = () => {
     fetchData();
   }, [ticketMasterAPI]);
 
-  const ticketEvents: EventListing[] = [];
+  const ticketEvents: EventDetailsListing[] = [];
 
   if (data) {
     data.forEach((event) => {
@@ -98,7 +98,6 @@ const Events: React.FC = () => {
           endTime: null,
         });
       } else {
-        // This is a regular EventListing
         ticketEvents.push(event);
       }
     });
@@ -126,7 +125,7 @@ const Events: React.FC = () => {
   }, []);
 
   // eslint-disable-next-line prefer-const
-  let { data: events, error } = useSWR<EventListing[]>(
+  let { data: events, error } = useSWR<EventDetailsListing[]>(
     EVENTS_ENDPOINT,
     fetcher
   );
@@ -160,6 +159,7 @@ const Events: React.FC = () => {
     );
   }, [eventsNearby, type]);
 
+
   return (
     <div className="flex flex-col">
       <DistanceSlider
@@ -180,7 +180,7 @@ const Events: React.FC = () => {
             startTime={new Date(event.startTime)}
             venue={event.venue}
             price={event.price}
-            category={event.category}
+            category={event.category ?? "Arts"}
           />
         ))}
       </div>
