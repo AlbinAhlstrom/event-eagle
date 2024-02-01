@@ -1,4 +1,3 @@
-import React from 'react';
 import { useLocation } from 'react-router-dom';
 import image from '../images/nature.jpg';
 import EventDetailsCard from '../components/EventDetailsCard';
