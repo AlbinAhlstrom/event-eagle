@@ -25,11 +25,11 @@ export const deg2rad = (deg: number): number => {
 };
 
 export type EventListing = {
-    id: number;
+    id: number | string;
     title: string;
     description: string;
     startTime: Date;
-    endTime?: Date;
+    endTime?: Date | null;
     venue?: string;
     address: string;
     latitude: number;
@@ -53,13 +53,13 @@ export const defaultEventListing: EventListing = {
 };
 
 export type EventCardProps = {
-  id: number;
+  id: number | string;
   title: string;
   description: string;
   startTime: Date;
-  venue: string;
+  venue: string | undefined;
   price: number;
-  category: "Music" | "Sports" | "Arts" | "Family";
+  category: "Music" | "Sports" | "Arts" | "Family" | undefined;
 };
 
 export interface CountdownTimerProps {
@@ -75,6 +75,30 @@ export type Coordinate = {
     lng: number
 }
 
+export type TicketmasterEvent = {
+    id: string;
+    name: string;
+    dates: {
+      start: {
+        dateTime: string;
+      };
+    };
+    _embedded: {
+      venues: {
+        address: {
+          line1: string;
+        };
+        location: {
+          latitude: string;
+          longitude: string;
+        };
+      }[];
+    };
+    priceRanges: {
+      min: number;
+    }[];
+  }
+  
 export const mapStyle = [
   {
       "featureType": "all",
