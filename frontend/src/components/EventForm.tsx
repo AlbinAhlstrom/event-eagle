@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {useForm, useController} from "react-hook-form"
+import { defaultEventListing } from "../util";
 import { EventListing } from "../util";
 import MapWindow from "./MapWindow";
 import TextInput from "./inputs/TextInput";
@@ -7,8 +8,8 @@ import DateTimeInput from "./inputs/DateTimeInput";
 import TextArea from "./inputs/TextArea";
 
 interface EventFormProps {
+  onSave: (event: EventListing) => void
   event: EventListing
-  onFormSubmit: (event: EventListing) => void
 }
 
 const categoryOptions = [
@@ -18,10 +19,10 @@ const categoryOptions = [
   { value: "family", label: "Family" },
 ];
 
-const EventForm: React.FC<EventFormProps> = ({ event, onFormSubmit}) => {
+const EventForm: React.FC<EventFormProps> = ({ onSave, defaultEvent = {defaultEventListing}}) => {
   const [position, setPosition] = useState({
-    lat: event.latitude,
-    lng: event.longitude
+    lat: defaultEvent.latitude,
+    lng: defaultEvent.longitude
   });
 
   useEffect(() => {
