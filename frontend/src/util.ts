@@ -25,11 +25,25 @@ export const deg2rad = (deg: number): number => {
 };
 
 export type EventListing = {
+    id: number;
+    title: string;
+    description: string;
+    startTime: Date;
+    endTime: Date;
+    venue: string;
+    address: string;
+    latitude: number;
+    longitude: number;
+    price: number;
+    category: "Music" | "Sports" | "Arts" | "Family";
+  };
+
+  export type EventDetailsListing = {
     id: number | string;
     title: string;
     description: string;
     startTime: Date;
-    endTime?: Date | null;
+    endTime?: Date | null | undefined;
     venue?: string;
     address: string;
     latitude: number;
@@ -59,7 +73,7 @@ export type EventCardProps = {
   startTime: Date;
   venue: string | undefined;
   price: number;
-  category: "Music" | "Sports" | "Arts" | "Family" | undefined;
+  category: "Music" | "Sports" | "Arts" | "Family" ;
 };
 
 export interface CountdownTimerProps {
