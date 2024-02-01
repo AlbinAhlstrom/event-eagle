@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Models;
 using Data;
+using Microsoft.Identity.Client;
 
 namespace EventFider.Controllers
 {
@@ -17,15 +18,27 @@ namespace EventFider.Controllers
         }
 
         [HttpGet()]
-        public async Task<ActionResult<IEnumerable<Event>>> GetEvents()
+        public async Task<ActionResult<IEnumerable<EventResponse>>> GetEvents()
         {
             var events = await _context.Events.ToListAsync();
-
-            return events.ToArray();
+            var eventResponseList = events.Select(ev => new EventResponse { 
+                Id = ev.Id,
+                Title = ev.Title,
+                Description = ev.Description,
+                StartTime = ev.StartTime,
+                EndTime = ev.EndTime,
+                Venue = ev.Venue,
+                Address = ev.Address,
+                Latitude = ev.Latitude,
+                Longitude = ev.Longitude,
+                Price = ev.Price,
+                Category = ev.Category
+                 }).ToList(); ;
+            return eventResponseList;
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Event>> GetEvent(int id)
+        public async Task<ActionResult<EventResponse>> GetEvent(int id)
         {
             var cd = await _context.Events.FindAsync(id);
 
@@ -34,13 +47,41 @@ namespace EventFider.Controllers
                 return NotFound();
             }
 
-            return cd;
+            var eventResponse = new EventResponse{
+                Id = cd.Id,
+                Title = cd.Title,
+                Description = cd.Description,
+                StartTime = cd.StartTime,
+                EndTime = cd.EndTime,
+                Venue = cd.Venue,
+                Address = cd.Address,
+                Latitude = cd.Latitude,
+                Longitude = cd.Longitude,
+                Price = cd.Price,
+                Category = cd.Category
+            };
+
+            return eventResponse;
         }
 
         [HttpPost]
-        public async Task<ActionResult<Event>> PostCd(Event newEvent)
+        public async Task<ActionResult<EventRequest>> PostCd(EventRequest newEvent)
         {
-            _context.Events.Add(newEvent);
+            var eventToAdd = new Event{
+                Id =  newEvent.Id,
+                Title =  newEvent.Title,
+                Description =  newEvent.Description,
+                StartTime =  newEvent.StartTime,
+                EndTime =  newEvent.EndTime,
+                Venue =  newEvent.Venue,
+                Address =  newEvent.Address,
+                Latitude =  newEvent.Latitude,
+                Longitude =  newEvent.Longitude,
+                Price =  newEvent.Price,
+                Category =  newEvent.Category
+            };
+
+            _context.Events.Add(eventToAdd);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetEvent", new { id = newEvent.Id }, newEvent);
