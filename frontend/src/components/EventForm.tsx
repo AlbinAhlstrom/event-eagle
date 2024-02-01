@@ -8,7 +8,7 @@ export interface FormFields {
 
 type props = {
   onSave: (formData: EventListing) => void;
-  defaultEvent: EventListing;
+  defaultEvent?: EventListing;
 };
 
 const EventForm = ({ onSave, defaultEvent = defaultEventListing }: props) => {
