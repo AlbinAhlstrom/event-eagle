@@ -9,7 +9,7 @@ const SignInPage = () => {
           "url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)",
       }}
     >
-      <SignedOut>
+      <SignedOut >
         <div className="hero-overlay bg-opacity-60 flex items-center justify-center">
           <div className="flex flex-col w-2/3 items-center justify-center">
             <h1 className="text-5xl font-bold mb-5 ">Welcome!</h1>
