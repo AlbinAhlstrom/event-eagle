@@ -1,10 +1,7 @@
-import { useForm } from "react-hook-form";
+import { useForm, useController } from "react-hook-form";
 import { EventListing } from "../util";
 import { defaultEventListing } from "../util";
 import MapWindow from "./MapWindow";
-export interface FormFields {
-  title: string;
-}
 
 type props = {
   onSave: (formData: EventListing) => void;
@@ -15,6 +12,8 @@ const EventForm = ({ onSave, defaultEvent = defaultEventListing }: props) => {
   const { register, control, handleSubmit } = useForm({
     defaultValues: defaultEvent,
   });
+
+  const { categoryField } = useController({name: "category", control})
 
   const handleSave = async (formValues: EventListing) => {
     await onSave(formValues);
