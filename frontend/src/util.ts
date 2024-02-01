@@ -24,6 +24,13 @@ export const deg2rad = (deg: number): number => {
   return deg * (Math.PI / 180);
 };
 
+export const categories = {
+    music: "Music",
+    sports: "Sports",
+    arts: "Arts & Theatre",
+    family: "Family",
+} as const
+
 export type EventListing = {
   id: number;
   title: string;
@@ -51,6 +58,8 @@ export const defaultEventListing: EventListing = {
   price: 0,
   category: "Music",
 };
+
+
 
 export type EventCardProps = {
   id: number;
