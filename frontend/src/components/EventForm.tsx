@@ -1,6 +1,7 @@
 import { useForm, useController } from "react-hook-form";
 import { EventListing } from "../util";
 import { defaultEventListing } from "../util";
+import Select from "react-select"
 import MapWindow from "./MapWindow";
 
 const categoryOptions = [
@@ -20,7 +21,12 @@ const EventForm = ({ onSave, defaultEvent = defaultEventListing }: props) => {
     defaultValues: defaultEvent,
   });
 
-  const { categoryField } = useController({name: "category", control})
+  const { field } = useController({name: "category", control})
+
+  const handleFieldChange = (option: {value: string, label: string}) => {
+    console.log(option.value)
+    field.onChange(option.value)
+  }
 
   const handleSave = async (formValues: EventListing) => {
     await onSave(formValues);
@@ -42,7 +48,14 @@ const EventForm = ({ onSave, defaultEvent = defaultEventListing }: props) => {
             <p>Description</p>
             <textarea {...register("description")} />
           </div>
-
+          <div>
+            <p>Category</p>
+            <Select 
+              value={field.value}
+              onChange={handleFieldChange}
+              options={categoryOptions}
+            />
+          </div>
           <div className="card-actions justify-end">
             <button className="btn btn-primary" type="submit">
               Submit
