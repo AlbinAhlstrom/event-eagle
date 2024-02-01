@@ -1,11 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { useUser } from '@clerk/clerk-react';
-
 
 const Home = () => {
   const navigate = useNavigate();
-const {user} = useUser();
-  console.log(user?.publicMetadata)
   return (
     <>
       <div
