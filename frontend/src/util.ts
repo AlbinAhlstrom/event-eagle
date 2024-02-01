@@ -40,7 +40,7 @@ export type EventListing = {
 
 export const defaultEventListing: EventListing = {
   id: 0,
-  title: "default event title",
+  title: "",
   description: "",
   startTime: new Date,
   endTime: new Date,
