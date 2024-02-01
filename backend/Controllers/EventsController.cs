@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Models;
 using Data;
 using Microsoft.Identity.Client;
+using System.Threading.Tasks;
 
 namespace EventFider.Controllers
 {
@@ -11,110 +12,59 @@ namespace EventFider.Controllers
     public class EventsController : ControllerBase
     {
         private readonly EventContext _context;
+        private readonly IEventRepo _repo; 
 
-        public EventsController(EventContext context)
+        public EventsController(EventContext context, IEventRepo repo)
         {
             _context = context;
+            _repo = repo;
         }
 
-        [HttpGet()]
-        public async Task<ActionResult<IEnumerable<EventResponse>>> GetEvents()
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<EventResponse>>> GetEvents() 
         {
-            var events = await _context.Events.ToListAsync();
-            var eventResponseList = events.Select(ev => new EventResponse { 
-                Id = ev.Id,
-                Title = ev.Title,
-                Description = ev.Description,
-                StartTime = ev.StartTime,
-                EndTime = ev.EndTime,
-                Venue = ev.Venue,
-                Address = ev.Address,
-                Latitude = ev.Latitude,
-                Longitude = ev.Longitude,
-                Price = ev.Price,
-                Category = ev.Category
-                 }).ToList(); ;
-            return eventResponseList;
+            var eventResponseList = await _repo.GetAllEvents(); 
+
+            return Ok(eventResponseList);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<EventResponse>> GetEvent(int id)
         {
-            var cd = await _context.Events.FindAsync(id);
+            var ev = await _context.Events.FindAsync(id);
 
-            if (cd == null)
-            {
-                return NotFound();
-            }
+            if (ev == null) return NotFound();
 
-            var eventResponse = new EventResponse{
-                Id = cd.Id,
-                Title = cd.Title,
-                Description = cd.Description,
-                StartTime = cd.StartTime,
-                EndTime = cd.EndTime,
-                Venue = cd.Venue,
-                Address = cd.Address,
-                Latitude = cd.Latitude,
-                Longitude = cd.Longitude,
-                Price = cd.Price,
-                Category = cd.Category
-            };
+            var eventResponse = await _repo.GetEventById(id); 
 
-            return eventResponse;
+            return Ok(eventResponse);
         }
 
         [HttpPost]
-        public async Task<ActionResult<EventRequest>> PostCd(EventRequest newEvent)
+        public async Task<ActionResult<EventRequest>> PostEvent(EventRequest newEvent)
         {
-            var eventToAdd = new Event{
-                Id =  newEvent.Id,
-                Title =  newEvent.Title,
-                Description =  newEvent.Description,
-                StartTime =  newEvent.StartTime,
-                EndTime =  newEvent.EndTime,
-                Venue =  newEvent.Venue,
-                Address =  newEvent.Address,
-                Latitude =  newEvent.Latitude,
-                Longitude =  newEvent.Longitude,
-                Price =  newEvent.Price,
-                Category =  newEvent.Category
-            };
+            var response = await _repo.CreateEvent(newEvent); 
 
-            _context.Events.Add(eventToAdd);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetEvent", new { id = newEvent.Id }, newEvent);
+            return CreatedAtAction("PostEvent", new { id = response.Id }, response);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCd(int id)
+        public async Task<IActionResult> DeleteEvent(int id)
         {
-            var cd = await _context.Events.FindAsync(id);
-            if (cd == null)
-            {
-                return NotFound();
-            }
-
-            _context.Events.Remove(cd);
-            await _context.SaveChangesAsync();
-
+             await _repo.DeleteEventById(id); 
             return NoContent();
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEvent(int id, Event updatedEvent)
+        public IActionResult PutEvent(int id, EventRequest updatedEvent)
         {
-            if (id != updatedEvent.Id)
-            {
-                return BadRequest();
-            }
+            if (id != updatedEvent.Id) return BadRequest();
 
-            _context.Entry(updatedEvent).State = EntityState.Modified;
+             _repo.UpdateEventById(id, updatedEvent);
 
             try
             {
-                await _context.SaveChangesAsync();
+                _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
