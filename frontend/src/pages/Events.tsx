@@ -7,6 +7,7 @@ import { EventListing, getDistanceFromLatLonInKm } from "../util";
 
 const BASE_URL = "https://event-eagle.azurewebsites.net/";
 const EVENTS_ENDPOINT = `${BASE_URL}Events`;
+const ticketmasterKey = import.meta.env.VITE_TICKETMASTER_API_KEY;
 
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
@@ -26,8 +27,7 @@ const Events = () => {
   const endTime = new Date();
   endTime.setHours(23, 59, 59);
   const endTimeISOString = endTime.toISOString().slice(0, -5) + "Z";
-  
-  const ticketMasterAPI = `https://app.ticketmaster.com/discovery/v2/events.json?size=50&unit=km&geoPoint=u6scd&radius=10&endDateTime=${endTimeISOString}&sort=date,asc&apikey=va6F5GmTa5GuKAGKbcUuGWdLAjCWOdec`;
+  const ticketMasterAPI = `https://app.ticketmaster.com/discovery/v2/events.json?size=50&unit=km&geoPoint=u6scd&radius=10&endDateTime=${endTimeISOString}&sort=date,asc&apikey=${ticketmasterKey}`;
 
 useEffect(()=>{
   const fetchData = async () => {
