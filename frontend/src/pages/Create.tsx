@@ -5,20 +5,20 @@ import { useNavigate } from 'react-router-dom';
 const Create = () => {
   const navigate = useNavigate()
 
-  const postEvent = (event: EventListing) => {
+  const postEvent = async (event: EventListing) => {
     console.log(event)
-    // const BASE_URL = "http://event-eagle.azurewebsites.net"
-    // const EVENTS_ENDPOINT = `${BASE_URL}/Events`;
-    // const response = await fetch(EVENTS_ENDPOINT, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(event),
-    // });
-    // const data: EventListing = await response.json();
-    // console.log(data)
-    // navigate("/admin");
+    const BASE_URL = "http://event-eagle.azurewebsites.net"
+    const EVENTS_ENDPOINT = `${BASE_URL}/Events`;
+    const response = await fetch(EVENTS_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(event),
+    });
+    const data: EventListing = await response.json();
+    console.log(data)
+    navigate("/admin");
 
   };
 
