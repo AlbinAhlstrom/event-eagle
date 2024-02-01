@@ -1,15 +1,21 @@
 import { useForm, useController } from "react-hook-form";
 import { EventListing } from "../util";
 import { defaultEventListing } from "../util";
+import { categoryType, categories } from "../util";
 import Select from "react-select"
 import MapWindow from "./MapWindow";
 
 const categoryOptions = [
-  { value: "music", label: "Music" },
-  { value: "sports", label: "Sports" },
-  { value: "arts", label: "Arts & Theatre" },
-  { value: "family", label: "Family" },
-];
+  { value: categories.music, label: categories.music },
+  { value: categories.sports, label: categories.sports },
+  { value: categories.arts, label: categories.arts },
+  { value: categories.family, label: categories.family },
+] as const
+
+type categoryOption = {
+  value: categoryType
+  label: categoryType
+}
 
 type props = {
   onSave: (formData: EventListing) => void;
@@ -23,10 +29,9 @@ const EventForm = ({ onSave, defaultEvent = defaultEventListing }: props) => {
 
   const { field } = useController({name: "category", control})
 
-  const handleFieldChange = (option: {value: string, label: string}) => {
-    console.log(option.value)
-    field.onChange(option.value)
-  }
+  const handleFieldChange = (newValue?: categoryOption ) => {
+      field.onChange(newValue? newValue.value : categoryOptions[0]);
+    }
 
   const handleSave = async (formValues: EventListing) => {
     await onSave(formValues);
@@ -51,7 +56,7 @@ const EventForm = ({ onSave, defaultEvent = defaultEventListing }: props) => {
           <div>
             <p>Category</p>
             <Select 
-              value={field.value}
+              value={categoryOptions.find((option) => option.value === field.value)}
               onChange={handleFieldChange}
               options={categoryOptions}
             />
