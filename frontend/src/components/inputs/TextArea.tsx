@@ -4,7 +4,7 @@ type textAreaProps = {
     title: string,
     name: string,
     value: string,
-    onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void
+    onChange: (formEvent: React.ChangeEvent<HTMLTextAreaElement>) => void
 }
 
 const TextArea: React.FC<textAreaProps> = ({title, name, value, onChange}) => {
