@@ -113,7 +113,7 @@ const EventForm: React.FC<EventFormProps> = ({ event, onFormSubmit}) => {
               onChange={handleChange}
             />
             <div className="card-actions justify-end">
-              <button className="btn btn-primary" onClick={() => handleSubmit}>
+              <button className="btn btn-primary" type="submit">
                 Submit
               </button>
             </div>
