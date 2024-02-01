@@ -26,6 +26,7 @@ const Purchase = () => {
       <div>Purchase</div>
       <div>{event.id}</div>
       <div>{event.title}</div>
+      <div>{event.price}</div>
     </div>
   );
 };
