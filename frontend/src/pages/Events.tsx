@@ -49,7 +49,7 @@ useEffect(()=>{
   fetchData();
 }, []);
 
-const ticketEvents = [];
+const ticketEvents: EventListing[] = [];
 
 if (data) {
   data.map(event => {
