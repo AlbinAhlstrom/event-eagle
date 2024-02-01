@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {useForm, useController} from "react-hook-form"
 import { EventListing } from "../util";
 import MapWindow from "./MapWindow";
 import TextInput from "./inputs/TextInput";
@@ -9,6 +10,13 @@ interface EventFormProps {
   event: EventListing
   onFormSubmit: (event: EventListing) => void
 }
+
+const categoryOptions = [
+  { value: "music", label: "Music" },
+  { value: "sports", label: "Sports" },
+  { value: "arts", label: "Arts & Theatre" },
+  { value: "family", label: "Family" },
+];
 
 const EventForm: React.FC<EventFormProps> = ({ event, onFormSubmit}) => {
   const [position, setPosition] = useState({
@@ -123,7 +131,6 @@ const EventForm: React.FC<EventFormProps> = ({ event, onFormSubmit}) => {
       <section className="w-40vh h-40vh">
         <MapWindow position={position} setPosition={setPosition} />
       </section>
-      <button onClick={() => console.log("eventState:", eventState)}>show event state</button>
     </form>
   );
 };
