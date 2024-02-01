@@ -23,7 +23,7 @@ const Create = () => {
 
     return (
         <div className="flex flex-col items-center h-screen-h">
-          <EventForm event={defaultEventListing} onFormSubmit={postEvent} />
+          <EventForm defaultEvent={defaultEventListing} onSave={postEvent} />
           <button className='btn btn-primary fixed bottom-2 mt-auto self-center' onClick={() => navigate("/admin")}>Back to dashboard</button>
         </div>
       )
