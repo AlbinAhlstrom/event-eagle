@@ -3,6 +3,13 @@ import { EventListing } from "../util";
 import { defaultEventListing } from "../util";
 import MapWindow from "./MapWindow";
 
+const categoryOptions = [
+  { value: "music", label: "Music" },
+  { value: "sports", label: "Sports" },
+  { value: "arts", label: "Arts & Theatre" },
+  { value: "family", label: "Family" },
+];
+
 type props = {
   onSave: (formData: EventListing) => void;
   defaultEvent?: EventListing;
