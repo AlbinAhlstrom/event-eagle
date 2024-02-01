@@ -46,7 +46,7 @@ export type EventListing = {
   latitude: number;
   longitude: number;
   price: number;
-  category?: "Music" | "Sports" | "Arts" | "Family";
+  category: "Music" | "Sports" | "Arts" | "Family";
 };
 
 export const defaultEventListing: EventListing = {
@@ -67,14 +67,14 @@ export type EventCardProps = {
   id: number;
   title: string;
   description: string;
-  startTime: Date;
+  startTime: string;
   venue: string;
   price: number;
   category: "Music" | "Sports" | "Arts" | "Family";
 };
 
 export interface CountdownTimerProps {
-  targetDate: Date;
+  targetDate: string;
 }
 
 export interface IconMap {
