@@ -13,5 +13,6 @@ namespace Data
         Task<EventRequest> CreateEvent(EventRequest request);
 
         Task<IEnumerable<EventResponseDTO>> GetAllEventsDTO();
+        Task<EventResponseDTO> GetEventDTOById(int id);
     }
 }
