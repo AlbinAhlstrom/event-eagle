@@ -4,20 +4,19 @@ using Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Get and update connection string
+
 var connectionString = builder.Configuration.GetConnectionString("DbConnectionString") ?? throw new InvalidOperationException("Connection string 'eventContext' not found.");
 
 builder.Services.AddDbContext<EventContext>(options =>
     options.UseSqlServer(connectionString));
 
-// Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
+builder.Services.AddScoped<IEventRepo, EventRepo>();
 
 var app = builder.Build();
-
 
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -38,11 +37,8 @@ app.UseCors(policy =>
 app.UseHttpsRedirection();
 app.UseAuthorization();
 
-// Map routes for controllers
 app.MapControllers();
 
-// Configure fallback routing for SPA
-// This assumes that your React build output is in the 'wwwroot' directory and that 'index.html' is the entry point
 app.MapFallbackToFile("index.html");
 
 app.Run();

@@ -62,7 +62,7 @@ export const defaultEventListing: EventListing = {
 };
 
 export type EventCardProps = {
-  id: number;
+  id: number | string;
   title: string;
   description: string;
   startTime: string;
@@ -84,3 +84,26 @@ export type Coordinate = {
     lng: number
 }
 
+export type TicketmasterEvent = {
+    id: string;
+    name: string;
+    dates: {
+      start: {
+        dateTime: string;
+      };
+    };
+    _embedded: {
+      venues: {
+        address: {
+          line1: string;
+        };
+        location: {
+          latitude: string;
+          longitude: string;
+        };
+      }[];
+    };
+    priceRanges: {
+      min: number;
+    }[];
+}

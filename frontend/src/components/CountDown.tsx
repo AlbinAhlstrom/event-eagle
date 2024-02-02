@@ -32,8 +32,6 @@ function CountdownTimer({ targetDate: targetDateString }: CountdownTimerProps) {
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
-    console.log(targetDateString);
-
     return () => clearInterval(timer);
   }, [targetDateString]);
 
