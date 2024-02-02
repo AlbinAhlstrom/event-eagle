@@ -20,6 +20,21 @@ export const getDistanceFromLatLonInKm = (
   return d;
 };
 
+export type EventDetailsListing = {
+  id: number | string;
+  title: string;
+  description: string;
+  startTime: Date;
+  endTime?: Date | null | undefined;
+  venue?: string;
+  address: string;
+  latitude: number;
+  longitude: number;
+  price: number;
+  category?: "Music" | "Sports" | "Arts & Theatre" | "Family";
+};
+
+
 export const deg2rad = (deg: number): number => {
   return deg * (Math.PI / 180);
 };
@@ -65,8 +80,8 @@ export type EventCardProps = {
   id: number | string;
   title: string;
   description: string;
-  startTime: string;
-  venue: string;
+  startTime: string | Date;
+  venue: string | undefined;
   price: number;
   category: categoryType;
 };
