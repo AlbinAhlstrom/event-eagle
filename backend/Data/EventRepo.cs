@@ -1,7 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Models;
 
 namespace Data
@@ -115,6 +112,50 @@ namespace Data
 
             var finished = _context.Events.Update(eventToUpdate);
             await _context.SaveChangesAsync();
+        }
+
+
+
+
+         public async Task<IEnumerable<EventResponseDTO>> GetAllEventsDTO()
+        {
+            var events = await _context.Events.ToListAsync();
+            var eventResponseList = events.Select(ev => new EventResponseDTO
+        {
+            Id = ev.Id,
+            Title = ev.Title,
+            Description = ev.Description,
+            Details = new Details
+            {
+                StartTime = ev.StartTime,
+                EndTime = ev.EndTime,
+                Price = ev.Price
+            },
+            Location = new Location
+            {
+                Latitude = ev.Latitude,
+                Longitude = ev.Longitude,
+                Venue = ev.Venue,
+                Address = ev.Address,
+            },
+            ActionOptions =
+                [
+                    new ActionOption
+                    {
+                        Name = "Option 1",
+                        Uri = "/option1",
+                        Method = "GET"
+                    },
+                    new ActionOption
+                    {
+                        Name = "Option 2",
+                        Uri = "/option2",
+                        Method = "POST"
+                    }
+                ]
+        }).ToList();
+
+            return eventResponseList;
         }
     }
 }

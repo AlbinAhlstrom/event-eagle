@@ -27,6 +27,13 @@ namespace EventFider.Controllers
 
             return Ok(eventResponseList);
         }
+        [HttpGet("dto")]
+        public async Task<ActionResult<IEnumerable<EventResponseDTO>>> GetEventsDTO() 
+        {
+            var eventResponseList = await _repo.GetAllEventsDTO(); 
+
+            return Ok(eventResponseList);
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<EventResponse>> GetEvent(int id)
