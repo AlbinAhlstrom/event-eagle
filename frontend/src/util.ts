@@ -31,7 +31,7 @@ export type EventDetailsListing = {
   latitude: number;
   longitude: number;
   price: number;
-  category?: "Music" | "Sports" | "Arts & Theatre" | "Family";
+  category?: categoryType;
 };
 
 

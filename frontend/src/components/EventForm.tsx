@@ -1,15 +1,8 @@
 import { useForm, useController } from "react-hook-form";
 import { EventListing } from "../util";
 import { defaultEventListing } from "../util";
-import { categoryType, categories } from "../util";
+import { categories } from "../util";
 import MapWindow from "./MapWindow";
-
-
-
-type categoryOption = {
-  value: categoryType;
-  label: categoryType;
-};
 
 type props = {
   onSave: (formData: EventListing) => void;
