@@ -1,30 +1,28 @@
-import React from "react";
-import { useForm, Controller } from "react-hook-form";
-import Select from "react-select";
-import flatpickr from "flatpickr";
-import "flatpickr/dist/themes/material_green.css";
-
-import {
-  EventListing,
-  defaultEventListing,
-  categoryType,
-  categories,
-} from "../util";
+import { useForm, useController } from "react-hook-form";
+import { EventListing } from "../util";
+import { defaultEventListing } from "../util";
+import { categoryType, categories } from "../util";
+import MapWindow from "./MapWindow";
 
 const categoryOptions = [
   { value: categories.music, label: categories.music },
   { value: categories.sports, label: categories.sports },
   { value: categories.arts, label: categories.arts },
   { value: categories.family, label: categories.family },
-];
+] as const;
 
-type Props = {
+type categoryOption = {
+  value: categoryType;
+  label: categoryType;
+};
+
+type props = {
   onSave: (formData: EventListing) => void;
   defaultEvent?: EventListing;
 };
 
-const EventForm = ({ onSave, defaultEvent = defaultEventListing }: Props) => {
-  const { control, handleSubmit } = useForm<EventListing>({
+const EventForm = ({ onSave, defaultEvent = defaultEventListing }: props) => {
+  const { register, control, handleSubmit } = useForm({
     defaultValues: defaultEvent,
   });
 
@@ -32,127 +30,59 @@ const EventForm = ({ onSave, defaultEvent = defaultEventListing }: Props) => {
     await onSave(formValues);
   };
 
+  const { field } = useController({ name: "category", control });
+
+  const handleFieldChange = (newValue?: categoryOption) => {
+    field.onChange(newValue ? newValue.value : categoryOptions[0]);
+  };
+
   return (
     <form
       onSubmit={handleSubmit(handleSave)}
-      className="flex items-center h-[80vh]"
+      className="flex items-center h-80vh"
     >
       <div className="card w-96 bg-neutral text-neutral-content">
         <div className="card-body">
           <label>
-            <div className="label">
-              <span className="label-text">Title</span>
-            </div>
-            <Controller
-              name="title"
-              control={control}
-              render={({ field }) => (
-                <input className="input input-bordered" {...field} />
-              )}
-            />
+            <p className="label-text">{"title"}</p>
+            <input className="input input-bordered" {...register("title")} />
           </label>
-
           <label>
-            <div className="label">
-              <span className="label-text">Description</span>
-            </div>
-            <Controller
-              name="description"
-              control={control}
-              render={({ field }) => (
-                <textarea className="textarea textarea-bordered" {...field} />
-              )}
+            <p className="label-text">{"description"}</p>
+            <input
+              className="input input-bordered"
+              {...register("description")}
             />
           </label>
-
-          <div>
-            <span>Start Time</span>
-            <Controller
-              name="startTime"
-              control={control}
-              render={({ field: { onChange, onBlur, name, value } }) => (
-                <input
-                  type="text"
-                  className="input input-bordered"
-                  name={name}
-                  value={value}
-                  onBlur={onBlur}
-                  ref={(input) => {
-                    if (input) {
-                      flatpickr(input, {
-                        enableTime: true,
-                        dateFormat: "Y-m-d H:i",
-                        minDate: "today",
-                        time_24hr: true,
-                        onChange: (selectedDates) => {
-                          onChange(selectedDates[0].toISOString());
-                        },
-                      });
-                    }
-                  }}
-                />
-              )}
+          <label>
+          <p className="label-text">{"start time"}</p>
+            <input
+              type="datetime-local"
+              className="input input-bordered"
+              {...register("startTime")}
             />
-          </div>
-
-          <div>
-            <span>Venue</span>
-            <Controller
-              name="venue"
-              control={control}
-              render={({ field }) => (
-                <input className="input input-bordered" {...field} />
-              )}
-            />
-          </div>
-
-          <div>
-            <span>Address</span>
-            <Controller
-              name="address"
-              control={control}
-              render={({ field }) => (
-                <input className="input input-bordered" {...field} />
-              )}
-            />
-          </div>
-
-          <div>
-            <span>Price</span>
-            <Controller
-              name="price"
-              control={control}
-              render={({ field }) => (
-                <input
-                  type="number"
-                  className="input input-bordered"
-                  {...field}
-                />
-              )}
-            />
-          </div>
-
-          <div>
-            <span>Category</span>
-            <Controller
-              name="category"
-              control={control}
-              render={({ field }) => (
-                <Select
-                  value={categoryOptions.find(
-                    (option) => option.value === field.value
-                  )}
-                  onChange={(option) => field.onChange(option.value)}
-                  options={categoryOptions}
-                  className="basic-single"
-                  classNamePrefix="select"
-                />
-              )}
-            />
-          </div>
-
-          <div className="card-actions justify-end mt-4">
-            <button type="submit" className="btn btn-primary">
+          </label>
+          <label>
+          <p className="label-text">{"price"}</p>
+            <input className="input input-bordered" {...register("price")} />
+          </label>
+          <label>
+          <p className="label-text">{"category"}</p>
+          <select
+            className="select select-bordered"
+            value={field.value}
+            onChange={handleFieldChange}
+          >
+            <option disabled selected>
+            </option>
+            <option value={categories.music}>{categories.music}</option>
+            <option value={categories.sports}>{categories.sports}</option>
+            <option value={categories.arts}>{categories.arts}</option>
+            <option value={categories.family}>{categories.family}</option>
+          </select>
+          </label>
+          <div className="card-actions justify-end">
+            <button className="btn btn-primary" type="submit">
               Submit
             </button>
           </div>
