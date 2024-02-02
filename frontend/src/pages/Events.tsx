@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import useSWR from "swr";
 import { useParams, useNavigate } from "react-router-dom";
 import EventCard from "../components/EventCard";
@@ -110,7 +110,7 @@ const Events: React.FC = () => {
     setDistanceFilter(sliderValue);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setUserLocation({
@@ -129,6 +129,9 @@ const Events: React.FC = () => {
     EVENTS_ENDPOINT,
     fetcher
   );
+
+  console.log(events);
+
 
   events = Array.isArray(events)
     ? [...events, ...ticketEvents]
@@ -151,7 +154,9 @@ const Events: React.FC = () => {
     );
   }, [events, userLocation, distanceFilter]);
 
-  const filteredEvents = React.useMemo(() => {
+console.log(eventsNearby)
+
+  const filteredEvents = useMemo(() => {
     return (
       eventsNearby.filter(
         (event) => !type || event.category === type
@@ -159,6 +164,7 @@ const Events: React.FC = () => {
     );
   }, [eventsNearby, type]);
 
+  console.log(filteredEvents);
 
   return (
     <div className="flex flex-col">
@@ -180,7 +186,7 @@ const Events: React.FC = () => {
             startTime={new Date(event.startTime)}
             venue={event.venue}
             price={event.price}
-            category={event.category ?? "Arts"}
+            category={event.category ?? "Arts & Theatre"}
           />
         ))}
       </div>
