@@ -3,13 +3,16 @@ import { EventListing } from "../util";
 import { defaultEventListing } from "../util";
 import { categories } from "../util";
 import MapWindow from "./MapWindow";
+import { useEffect, useState } from "react";
 
 type props = {
   onSave: (formData: EventListing) => void;
   defaultEvent?: EventListing;
+  title?: string;
 };
 
-const EventForm = ({ onSave, defaultEvent = defaultEventListing }: props) => {
+const EventForm = ({ onSave, defaultEvent = defaultEventListing, title }: props) => {
+  // Form
   const { register, control, handleSubmit } = useForm({
     defaultValues: defaultEvent,
   });
@@ -20,17 +23,46 @@ const EventForm = ({ onSave, defaultEvent = defaultEventListing }: props) => {
 
   const { field } = useController({ name: "category", control });
 
-  const handleFieldChange = (newValue: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleFieldChange = (
+    newValue: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     field.onChange(newValue.currentTarget.value);
   };
+
+  // Map
+  const [position, setPosition] = useState({
+    lat: defaultEvent.latitude,
+    lng: defaultEvent.longitude,
+  });
+
+  //
+  useEffect(() => {
+    if (
+      position.lat != defaultEventListing.latitude &&
+      position.lng != defaultEventListing.longitude
+    )
+      return;
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setPosition({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }, []);
 
   return (
     <form
       onSubmit={handleSubmit(handleSave)}
       className="flex items-center h-80vh"
     >
-      <div className="card w-96 bg-neutral text-neutral-content">
+      <div className="card w-96 h-80vh bg-neutral text-neutral-content">
         <div className="card-body">
+          <h1 className="text-xl">{title ? title: "Create new event:"}</h1>
           <label>
             <p className="label-text">{"title"}</p>
             <input className="input input-bordered" {...register("title")} />
@@ -43,7 +75,7 @@ const EventForm = ({ onSave, defaultEvent = defaultEventListing }: props) => {
             />
           </label>
           <label>
-          <p className="label-text">{"start time"}</p>
+            <p className="label-text">{"start time"}</p>
             <input
               type="datetime-local"
               className="input input-bordered"
@@ -51,24 +83,23 @@ const EventForm = ({ onSave, defaultEvent = defaultEventListing }: props) => {
             />
           </label>
           <label>
-          <p className="label-text">{"price"}</p>
+            <p className="label-text">{"price"}</p>
             <input className="input input-bordered" {...register("price")} />
           </label>
           <label>
-          <p className="label-text">{"category"}</p>
-          <select
-            className="select select-bordered"
-            value={field.value}
-            defaultValue={defaultEvent.category}
-            onChange={handleFieldChange}
-          >
-            <option disabled selected>
-            </option>
-            <option value={categories.music}>{categories.music}</option>
-            <option value={categories.sports}>{categories.sports}</option>
-            <option value={categories.arts}>{categories.arts}</option>
-            <option value={categories.family}>{categories.family}</option>
-          </select>
+            <p className="label-text">{"category"}</p>
+            <select
+              className="select select-bordered"
+              value={field.value}
+              defaultValue={defaultEvent.category}
+              onChange={handleFieldChange}
+            >
+              <option disabled selected></option>
+              <option value={categories.music}>{categories.music}</option>
+              <option value={categories.sports}>{categories.sports}</option>
+              <option value={categories.arts}>{categories.arts}</option>
+              <option value={categories.family}>{categories.family}</option>
+            </select>
           </label>
           <div className="card-actions justify-end">
             <button className="btn btn-primary" type="submit">
@@ -77,8 +108,149 @@ const EventForm = ({ onSave, defaultEvent = defaultEventListing }: props) => {
           </div>
         </div>
       </div>
+      <div className="card w-96 bg-neutral text-neutral-content">
+  <div className="card-body w-full h-80vh rounded">
+    <input className="hidden" {...register("latitude")} />
+    <input className="hidden" {...register("longitude")} />
+    <div className="h-full w-full">
+      <MapWindow position={position} setPosition={setPosition} />
+    </div>
+  </div>
+</div>
     </form>
   );
 };
 
 export default EventForm;
+
+// import React, { useState, useEffect } from "react";
+// import { EventListing } from "../util";
+// import MapWindow from "./MapWindow";
+// import TextInput from "./inputs/TextInput";
+// import DateTimeInput from "./inputs/DateTimeInput";
+// import TextArea from "./inputs/TextArea";
+
+// interface EventFormProps {
+//   event: EventListing
+//   onFormSubmit: (event: EventListing) => void
+// }
+
+// const EventForm: React.FC<EventFormProps> = ({ event, onFormSubmit}) => {
+//   const [position, setPosition] = useState({
+//     lat: event.latitude,
+//     lng: event.longitude
+//   });
+
+//   useEffect(() => {
+//     navigator.geolocation.getCurrentPosition(
+//       (position) => {
+//         setPosition({
+//           lat: position.coords.latitude,
+//           lng: position.coords.longitude,
+//         });
+//       },
+//       (error) => {
+//         console.error(error);
+//       }
+//     );
+//   }, []);
+
+//   const [eventState, setEventState] = useState<EventListing>(event);
+
+//   useEffect(() => {
+//     setEventState((listing) => ({
+//       ...listing,
+//       latitude: position.lat,
+//       longitude: position.lng,
+//     }))
+//     console.log("position updated")
+//   }, [position]);
+
+//   const handleChange = (
+//     changeEvent:
+//     | React.ChangeEvent<HTMLInputElement>
+//     | React.ChangeEvent<HTMLTextAreaElement>
+//     ) => {
+//     const { name, value } = changeEvent.target;
+//     setEventState({ ...eventState, [name]: value });
+//   };
+
+//   const handleSubmit = async (submitEvent: React.FormEvent) => {
+//     submitEvent.preventDefault();
+//     await onFormSubmit(eventState);
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit} className="flex items-center h-80vh">
+//       <section className="flex flex-col items-center h-full">
+//         <div className="card w-96 bg-neutral text-neutral-content">
+//           <div className="card-body">
+//             <h2 className="card-title">Create new event:</h2>
+//             <TextInput
+//               title="Title:"
+//               name="title"
+//               value={eventState.title}
+//               onChange={handleChange}
+//             />
+
+//             <TextArea
+//               title="Description"
+//               name="description"
+//               value={eventState.description}
+//               onChange={handleChange}
+//             />
+//             <DateTimeInput
+//               title="Start time:"
+//               name="startTime"
+//               value={eventState.startTime}
+//               onChange={handleChange}
+//             />
+//             <DateTimeInput
+//               title="End time:"
+//               name="endTime"
+//               value={eventState.endTime}
+//               onChange={handleChange}
+//             />
+//             <TextInput
+//               title="Latitude:"
+//               name="latitude"
+//               value={eventState.latitude}
+//               onChange={handleChange}
+//               hidden={true}
+//             />
+//             <TextInput
+//               title="Longitude:"
+//               name="longitude"
+//               value={eventState.longitude}
+//               onChange={handleChange}
+//               hidden={true}
+//             />
+//             <TextInput
+//               title="Price:"
+//               name="price"
+//               value={eventState.price}
+//               onChange={handleChange}
+//             />
+//             <TextInput
+//               title="Category:"
+//               name="category"
+//               value={eventState.category}
+//               onChange={handleChange}
+//             />
+//             <div className="card-actions justify-end">
+//               <button className="btn btn-primary" onClick={() => handleSubmit}>
+//                 Submit
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+//       <section className="w-40vh h-40vh">
+//         <MapWindow position={position} setPosition={setPosition} />
+//       </section>
+//       <button onClick={() => console.log("eventState:", eventState)}>show event state</button>
+//     </form>
+//   );
+// };
+
+// export default EventForm;
