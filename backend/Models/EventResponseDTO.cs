@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 namespace Models;
 public class EventResponseDTO
 {
+    public EventId eventId {get; set;}
     public int Id { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
