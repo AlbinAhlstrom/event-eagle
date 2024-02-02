@@ -27,8 +27,8 @@ const EventForm = ({ onSave, defaultEvent = defaultEventListing }: props) => {
 
   const { field } = useController({ name: "category", control });
 
-  const handleFieldChange = (newValue?: categoryOption) => {
-    field.onChange(newValue.value);
+  const handleFieldChange = (newValue: React.ChangeEvent<HTMLSelectElement>) => {
+    field.onChange(newValue.currentTarget.value);
   };
 
   return (
