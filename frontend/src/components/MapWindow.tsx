@@ -19,9 +19,10 @@ const MapWindow: React.FC<MapWindowProps> = ({position, setPosition}: MapWindowP
   };
 
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full rounded">
       <APIProvider apiKey={apiUrl}>
         <Map
+        className="h-full w-full rounded-xl"
           zoom={16}
           center={position}
           mapId={mapId}
