@@ -117,11 +117,13 @@ namespace Data
 
 
 
+
          public async Task<IEnumerable<EventResponseDTO>> GetAllEventsDTO()
         {
             var events = await _context.Events.ToListAsync();
             var eventResponseList = events.Select(ev => new EventResponseDTO
         {
+            eventId = ev.eventId,
             Id = ev.Id,
             Title = ev.Title,
             Description = ev.Description,
@@ -142,20 +144,80 @@ namespace Data
                 [
                     new ActionOption
                     {
-                        Name = "Option 1",
-                        Uri = "/option1",
+                        Name = "Get event by ID",
+                        Uri = $"/Events/{ev.Id}",
                         Method = "GET"
                     },
                     new ActionOption
                     {
-                        Name = "Option 2",
-                        Uri = "/option2",
-                        Method = "POST"
+                        Name = "Delete event by ID",
+                        Uri = $"/Events/{ev.Id}",
+                        Method = "DELETE"
+                    },
+                    new ActionOption
+                    {
+                        Name = "Update event by ID",
+                        Uri = $"/Events/{ev.Id}",
+                        Method = "PUT"
                     }
                 ]
         }).ToList();
 
             return eventResponseList;
+        }
+
+        public async Task<EventResponseDTO> GetEventDTOById(int id)
+        {
+            var eventToReturn = await _context.Events.FindAsync(id);
+
+            if (eventToReturn != null)
+            {
+                var eventResponse = new EventResponseDTO
+        {
+            eventId = eventToReturn.eventId,
+            Id = eventToReturn.Id,
+            Title = eventToReturn.Title,
+            Description = eventToReturn.Description,
+            Details = new Details
+            {
+                StartTime = eventToReturn.StartTime,
+                EndTime = eventToReturn.EndTime,
+                Price = eventToReturn.Price
+            },
+            Location = new Location
+            {
+                Latitude = eventToReturn.Latitude,
+                Longitude = eventToReturn.Longitude,
+                Venue = eventToReturn.Venue,
+                Address = eventToReturn.Address,
+            },
+            ActionOptions =
+                [
+                    new ActionOption
+                    {
+                        Name = "Get event by ID",
+                        Uri = $"/Events/{eventToReturn.Id}",
+                        Method = "GET"
+                    },
+                    new ActionOption
+                    {
+                        Name = "Delete event by ID",
+                        Uri = $"/Events/{eventToReturn.Id}",
+                        Method = "DELETE"
+                    },
+                    new ActionOption
+                    {
+                        Name = "Update event by ID",
+                        Uri = $"/Events/{eventToReturn.Id}",
+                        Method = "PUT"
+                    }
+                ]
+        };
+
+                return eventResponse;
+            }
+
+            return null;
         }
     }
 }
