@@ -1,14 +1,10 @@
 import React from "react";
 
 type textInputProps = {
-    title: string,
-    name: string,
-    value: string | number,
-    hidden?: boolean,
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+    register: ()
 }
 
-const TextInput: React.FC<textInputProps> = ({title, name, value, onChange, hidden}) => {
+const TextInput: React.FC<textInputProps> = ({register, name}) => {
   if (hidden) return(<></>)
   
   return (

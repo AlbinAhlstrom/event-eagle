@@ -7,7 +7,7 @@ type textAreaProps = {
     onChange: (formEvent: React.ChangeEvent<HTMLTextAreaElement>) => void
 }
 
-const TextArea: React.FC<textAreaProps> = ({title, name, value, onChange}) => {
+const TextArea: React.FC<textAreaProps> = ({name onChange}) => {
   return (
     <div>
       <label>

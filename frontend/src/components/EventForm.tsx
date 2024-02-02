@@ -33,7 +33,7 @@ const EventForm = ({ onSave, defaultEvent = defaultEventListing }: props) => {
   const { field } = useController({ name: "category", control });
 
   const handleFieldChange = (newValue?: categoryOption) => {
-    field.onChange(newValue ? newValue.value : categoryOptions[0]);
+    field.onChange(newValue.value);
   };
 
   return (
@@ -71,6 +71,7 @@ const EventForm = ({ onSave, defaultEvent = defaultEventListing }: props) => {
           <select
             className="select select-bordered"
             value={field.value}
+            defaultValue={defaultEvent.category}
             onChange={handleFieldChange}
           >
             <option disabled selected>
