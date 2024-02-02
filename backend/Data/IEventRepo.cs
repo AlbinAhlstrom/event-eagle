@@ -11,5 +11,7 @@ namespace Data
         Task UpdateEventById(int id, EventRequest updatedEvent);
         Task DeleteEventById(int id);
         Task<EventRequest> CreateEvent(EventRequest request);
+
+        Task<IEnumerable<EventResponseDTO>> GetAllEventsDTO();
     }
 }
