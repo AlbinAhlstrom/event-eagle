@@ -4,12 +4,7 @@ import { defaultEventListing } from "../util";
 import { categoryType, categories } from "../util";
 import MapWindow from "./MapWindow";
 
-const categoryOptions = [
-  { value: categories.music, label: categories.music },
-  { value: categories.sports, label: categories.sports },
-  { value: categories.arts, label: categories.arts },
-  { value: categories.family, label: categories.family },
-] as const;
+
 
 type categoryOption = {
   value: categoryType;
