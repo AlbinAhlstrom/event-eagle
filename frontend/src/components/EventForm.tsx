@@ -58,7 +58,7 @@ const EventForm = ({ onSave, defaultEvent = defaultEventListing, title }: props)
   return (
     <form
       onSubmit={handleSubmit(handleSave)}
-      className="flex items-center h-80vh"
+      className="flex items-center gap-4 h-80vh"
     >
       <div className="card w-96 h-80vh bg-neutral text-neutral-content">
         <div className="card-body">
