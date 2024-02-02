@@ -46,6 +46,17 @@ namespace EventFider.Controllers
 
             return Ok(eventResponse);
         }
+        [HttpGet("dto/{id}")]
+        public async Task<ActionResult<EventResponse>> GetEventDTO(int id)
+        {
+            var ev = await _context.Events.FindAsync(id);
+
+            if (ev == null) return NotFound();
+
+            var eventResponse = await _repo.GetEventDTOById(id); 
+
+            return Ok(eventResponse);
+        }
 
         [HttpPost]
         public async Task<ActionResult<EventRequest>> PostEvent(EventRequest newEvent)
