@@ -22,7 +22,7 @@ type formFields = {
 }
 
 const EventForm = ({defaultEvent = defaultEventListing, title = ""}: props) => { 
-  const {register} = useForm<formFields>();
+  const {register, handleSubmit} = useForm<formFields>();
 
   const [position, setPosition] = useState({
     lat: defaultEvent.latitude,
@@ -48,7 +48,7 @@ const EventForm = ({defaultEvent = defaultEventListing, title = ""}: props) => {
   }
 
   return (
-    <form className="flex items-center gap-4 h-80vh">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex items-center gap-4 h-80vh">
       <div className="card w-96 h-80vh bg-neutral text-neutral-content">
         <div className="card-body">
           <h1 className="text-xl">{title ? title : "Create new event:"}</h1>
