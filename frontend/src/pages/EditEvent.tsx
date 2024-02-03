@@ -28,24 +28,24 @@ const EditEvent = () => {
     fetchEvent();
   }, [EVENTS_ENDPOINT]);
 
-  const updateEvent = async (eventData: EventListing) => {
-    console.log('put here:', eventData);
-    try {
-      const response = await fetch(EVENTS_ENDPOINT, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(eventData),
-      });
+  const updateEvent = async () => {
+    console.log('put here');
+    // try {
+    //   const response = await fetch(EVENTS_ENDPOINT, {
+    //     method: 'PUT',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(eventData),
+    //   });
 
-      if (!response.ok) {
-        throw new Error('Failed to update event');
-      }
-      navigate('/admin');
-    } catch (error) {
-      console.error('Failed to update event', error);
-    }
+    //   if (!response.ok) {
+    //     throw new Error('Failed to update event');
+    //   }
+    //   navigate('/admin');
+    // } catch (error) {
+    //   console.error('Failed to update event', error);
+    // }
   };
 
   // Only display the form if eventData is present

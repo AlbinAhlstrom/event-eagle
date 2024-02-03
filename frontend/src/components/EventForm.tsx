@@ -11,37 +11,21 @@ type props = {
   title?: string;
 };
 
-const EventForm = ({ onSave, defaultEvent = defaultEventListing, title }: props) => {
-  // Form
+const EventForm = ({
+  onSave,
+  defaultEvent = defaultEventListing,
+  title,
+}: props) => {
   const { register, control, handleSubmit } = useForm({
     defaultValues: defaultEvent,
   });
 
-  const handleSave = async (formValues: EventListing) => {
-    await onSave(formValues);
-  };
-
-  const { field } = useController({ name: "category", control });
-
-  const handleFieldChange = (
-    newValue: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    field.onChange(newValue.currentTarget.value);
-  };
-
-  // Map
   const [position, setPosition] = useState({
     lat: defaultEvent.latitude,
     lng: defaultEvent.longitude,
   });
 
-  //
   useEffect(() => {
-    if (
-      position.lat != defaultEventListing.latitude &&
-      position.lng != defaultEventListing.longitude
-    )
-      return;
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setPosition({
@@ -55,14 +39,36 @@ const EventForm = ({ onSave, defaultEvent = defaultEventListing, title }: props)
     );
   }, []);
 
+  const [eventState, setEventState] = useState<EventListing>(defaultEvent);
+
+  useEffect(() => {
+    setEventState((listing) => ({
+      ...listing,
+      latitude: position.lat,
+      longitude: position.lng,
+    }));
+    console.log("position updated");
+  }, [position]);
+
+  const handleFieldChange = (
+    changeEvent:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const { name, value } = changeEvent.target;
+    setEventState({ ...eventState, [name]: value });
+  };
+
+  const handleSave = async (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log(e.)
+  };
+
   return (
-    <form
-      onSubmit={handleSubmit(handleSave)}
-      className="flex items-center gap-4 h-80vh"
-    >
+    <form onSubmit={handleSave} className="flex items-center gap-4 h-80vh">
       <div className="card w-96 h-80vh bg-neutral text-neutral-content">
         <div className="card-body">
-          <h1 className="text-xl">{title ? title: "Create new event:"}</h1>
+          <h1 className="text-xl">{title ? title : "Create new event:"}</h1>
           <label>
             <p className="label-text">{"title"}</p>
             <input className="input input-bordered" {...register("title")} />
@@ -109,17 +115,16 @@ const EventForm = ({ onSave, defaultEvent = defaultEventListing, title }: props)
         </div>
       </div>
       <div className="card w-96 bg-neutral text-neutral-content">
-  <div className="card-body w-full h-80vh rounded">
-    <input className="hidden" {...register("latitude")} />
-    <input className="hidden" {...register("longitude")} />
-    <div className="h-full w-full">
-      <MapWindow position={position} setPosition={setPosition} />
-    </div>
-  </div>
-</div>
+        <div className="card-body w-full h-80vh rounded">
+          <input className="hidden" {...register("latitude")} />
+          <input className="hidden" {...register("longitude")} />
+          <div className="h-full w-full">
+            <MapWindow position={position} setPosition={setPosition} />
+          </div>
+        </div>
+      </div>
     </form>
   );
 };
 
 export default EventForm;
-
