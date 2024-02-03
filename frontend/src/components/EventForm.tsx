@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { EventListing, categoryType } from "../util";
 import { defaultEventListing } from "../util";
 import { categories } from "../util";
@@ -42,6 +42,10 @@ const EventForm = ({defaultEvent = defaultEventListing, title = ""}: props) => {
       }
     );
   }, []);
+
+  const onSubmit: SubmitHandler<formFields> = (data) => {
+    console.log(data)
+  }
 
   return (
     <form className="flex items-center gap-4 h-80vh">
