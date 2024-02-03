@@ -11,14 +11,8 @@ type props = {
   title?: string;
 };
 
-const EventForm = ({
-  onSave,
-  defaultEvent = defaultEventListing,
-  title,
-}: props) => {
-  const { register, control, handleSubmit } = useForm({
-    defaultValues: defaultEvent,
-  });
+const EventForm = ({defaultEvent = defaultEventListing, title = ""}: props) => { 
+  
 
   const [position, setPosition] = useState({
     lat: defaultEvent.latitude,
@@ -59,10 +53,6 @@ const EventForm = ({
     setEventState({ ...eventState, [name]: value });
   };
 
-  const handleSave = async (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log(e.)
-  };
 
   return (
     <form className="flex items-center gap-4 h-80vh">
@@ -125,6 +115,6 @@ const EventForm = ({
       </div>
     </form>
   );
-};
+}
 
 export default EventForm;
