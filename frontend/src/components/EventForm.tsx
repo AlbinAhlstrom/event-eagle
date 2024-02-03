@@ -79,9 +79,8 @@ const EventForm = ({defaultEvent = defaultEventListing, title = ""}: props) => {
             <p className="label-text">{"category"}</p>
             <select
               className="select select-bordered"
-              value={field.value}
+              value={defaultEvent.category}
               defaultValue={defaultEvent.category}
-              onChange={handleFieldChange}
             >
               <option disabled selected></option>
               <option value={categories.music}>{categories.music}</option>
