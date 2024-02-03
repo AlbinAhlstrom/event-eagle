@@ -43,18 +43,6 @@ const EventForm = ({defaultEvent = defaultEventListing, title = ""}: props) => {
     );
   }, []);
 
-
-  useEffect(() => {
-    setEventState((listing) => ({
-      ...listing,
-      latitude: position.lat,
-      longitude: position.lng,
-    }));
-    console.log("position updated");
-  }, [position]);
-
-
-
   return (
     <form className="flex items-center gap-4 h-80vh">
       <div className="card w-96 h-80vh bg-neutral text-neutral-content">
