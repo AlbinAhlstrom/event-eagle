@@ -22,7 +22,7 @@ type formFields = {
 }
 
 const EventForm = ({defaultEvent = defaultEventListing, title = ""}: props) => { 
-  const form = useForm<formFields>();
+  const {register} = useForm<formFields>();
 
   const [position, setPosition] = useState({
     lat: defaultEvent.latitude,
