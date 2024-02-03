@@ -43,7 +43,6 @@ const EventForm = ({defaultEvent = defaultEventListing, title = ""}: props) => {
     );
   }, []);
 
-  const [eventState, setEventState] = useState<EventListing>(defaultEvent);
 
   useEffect(() => {
     setEventState((listing) => ({
@@ -54,14 +53,6 @@ const EventForm = ({defaultEvent = defaultEventListing, title = ""}: props) => {
     console.log("position updated");
   }, [position]);
 
-  const handleFieldChange = (
-    changeEvent:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    const { name, value } = changeEvent.target;
-    setEventState({ ...eventState, [name]: value });
-  };
 
 
   return (
