@@ -54,7 +54,7 @@ const EventForm = ({defaultEvent = defaultEventListing, title = ""}: props) => {
           <h1 className="text-xl">{title ? title : "Create new event:"}</h1>
           <label>
             <p className="label-text">{"title"}</p>
-            <input className="input input-bordered" {...register("title")} />
+            <input className="input input-bordered" {...register("title", {required: true})} />
           </label>
           <label>
             <p className="label-text">{"description"}</p>
@@ -68,7 +68,7 @@ const EventForm = ({defaultEvent = defaultEventListing, title = ""}: props) => {
             <input
               type="datetime-local"
               className="input input-bordered"
-              {...register("startTime")}
+              {...register("startTime", {required: true})}
             />
           </label>
           <label>
