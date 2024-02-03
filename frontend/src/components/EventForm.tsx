@@ -1,4 +1,4 @@
-import { useForm, useController } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { EventListing } from "../util";
 import { defaultEventListing } from "../util";
 import { categories } from "../util";
@@ -12,7 +12,7 @@ type props = {
 };
 
 const EventForm = ({defaultEvent = defaultEventListing, title = ""}: props) => { 
-  
+  const form = useForm();
 
   const [position, setPosition] = useState({
     lat: defaultEvent.latitude,
