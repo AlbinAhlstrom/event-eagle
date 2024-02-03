@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { EventListing } from "../util";
+import { EventListing, categoryType } from "../util";
 import { defaultEventListing } from "../util";
 import { categories } from "../util";
 import MapWindow from "./MapWindow";
@@ -11,8 +11,18 @@ type props = {
   title?: string;
 };
 
+type formFields = {
+  title: string,
+  description: string,
+  startTime: Date,
+  price: number,
+  category: categoryType,
+  latitude: number,
+  longitude: number,
+}
+
 const EventForm = ({defaultEvent = defaultEventListing, title = ""}: props) => { 
-  const form = useForm();
+  const form = useForm<formFields>();
 
   const [position, setPosition] = useState({
     lat: defaultEvent.latitude,
