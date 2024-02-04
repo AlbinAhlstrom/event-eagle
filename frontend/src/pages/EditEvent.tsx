@@ -18,7 +18,7 @@ const EditEvent = () => {
         if (!response.ok) {
           throw new Error('Event not found');
         }
-        const data = await response.json();
+        const data: EventListing = await response.json();
         setEventData(data);
       } catch (error) {
         console.error('Failed to fetch event', error);
