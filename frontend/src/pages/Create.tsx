@@ -6,7 +6,7 @@ const Create = () => {
   const navigate = useNavigate()
 
   const postEvent = async (event: EventListing) => {
-    console.log(event)
+    console.log("posting", event)
     const BASE_URL = "http://event-eagle.azurewebsites.net"
     const EVENTS_ENDPOINT = `${BASE_URL}/Events`;
     const response = await fetch(EVENTS_ENDPOINT, {

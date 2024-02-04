@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Coordinate, EventListing, categoryType } from "../util";
+import { Coordinate, EventListing, categoryType, formFields } from "../util";
 import { defaultEventListing } from "../util";
 import { categories } from "../util";
 import MapWindow from "./MapWindow";
@@ -11,17 +11,9 @@ type props = {
   title?: string;
 };
 
-type formFields = {
-  title: string;
-  description: string;
-  startTime: Date;
-  price: number;
-  category: categoryType;
-  latitude: number;
-  longitude: number;
-};
 
-const EventForm = ({ defaultEvent = defaultEventListing, title = "",}: props) => {
+
+const EventForm = ({onSave, defaultEvent = defaultEventListing, title = "",}: props) => {
   const { register, handleSubmit, formState: { errors }, setValue } = useForm<formFields>();
 
   const [{lat, lng}, setPosition] = useState({lat: defaultEvent.latitude, lng: defaultEvent.longitude})
@@ -45,7 +37,7 @@ const EventForm = ({ defaultEvent = defaultEventListing, title = "",}: props) =>
   }, []);
 
   const onSubmit: SubmitHandler<formFields> = (data) => {
-    console.log(data);
+    onSave(data)
   };
 
   return (
@@ -88,7 +80,7 @@ const EventForm = ({ defaultEvent = defaultEventListing, title = "",}: props) =>
             <p className="label-text">{"price"}</p>
             <input
               {...register("price", {
-                required: false,
+                required: true,
                 validate: {
                   isNumeric: (value) => !isNaN(value),
                   isPositive: (value) => value >= 0,
@@ -113,7 +105,6 @@ const EventForm = ({ defaultEvent = defaultEventListing, title = "",}: props) =>
               value={defaultEvent.category}
               defaultValue={defaultEvent.category}
             >
-              <option disabled selected></option>
               <option value={categories.music}>{categories.music}</option>
               <option value={categories.sports}>{categories.sports}</option>
               <option value={categories.arts}>{categories.arts}</option>
