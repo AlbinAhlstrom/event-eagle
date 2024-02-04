@@ -55,6 +55,9 @@ const EventForm = ({defaultEvent = defaultEventListing, title = ""}: props) => {
           <label>
             <p className="label-text">{"title"}</p>
             <input className="input input-bordered" {...register("title", {required: true})} />
+            {errors.title && (
+              <div className="text-error">{errors.title.message}</div>
+            )}
           </label>
           <label>
             <p className="label-text">{"description"}</p>
@@ -70,6 +73,9 @@ const EventForm = ({defaultEvent = defaultEventListing, title = ""}: props) => {
               className="input input-bordered"
               {...register("startTime", {required: true})}
             />
+            {errors.startTime && (
+                <div className="text-error">{errors.startTime.message}</div>
+              )}
           </label>
           <label>
             <p className="label-text">{"price"}</p>
