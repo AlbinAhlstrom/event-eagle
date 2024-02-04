@@ -1,5 +1,11 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Coordinate, EventListing, formFields, formToListing, defaultEventListing } from "../util";
+import {
+  Coordinate,
+  EventListing,
+  formFields,
+  formToListing,
+  defaultEventListing,
+} from "../util";
 import { categories } from "../util";
 import MapWindow from "./MapWindow";
 import { useEffect, useState } from "react";
@@ -10,36 +16,41 @@ type props = {
   title?: string;
 };
 
+const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm<formFields>();
 
-
-const EventForm = ({onSave, defaultEvent, title = "",}: props) => {
-  const { register, handleSubmit, formState: { errors }, setValue} = useForm<formFields>();
-
-  const [{lat, lng}, setPosition] = useState({lat: defaultEvent.latitude, lng: defaultEvent.longitude})
+  const [{ lat, lng }, setPosition] = useState({
+    lat: defaultEvent.latitude,
+    lng: defaultEvent.longitude,
+  });
 
   const updatePosition = (newPosition: Coordinate) => {
-    setPosition(newPosition)
-    setValue("latitude", newPosition.lat)
-    setValue("longitude", newPosition.lng)
-  }
+    setPosition(newPosition);
+    setValue("latitude", newPosition.lat);
+    setValue("longitude", newPosition.lng);
+  };
 
   useEffect(() => {
     if (defaultEvent === defaultEventListing) {
-      console.log("creating new event")
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        updatePosition({lat: position.coords.latitude, lng: position.coords.longitude})
-        return
-      })
+      console.log("creating new event");
+      navigator.geolocation.getCurrentPosition((position) => {
+        updatePosition({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+        return;
+      });
     }
-
-    updatePosition({lat: defaultEvent.latitude, lng: defaultEvent.longitude})
-
-    
+    updatePosition({ lat: defaultEvent.latitude, lng: defaultEvent.longitude });
   }, [defaultEvent]);
 
   const onSubmit: SubmitHandler<formFields> = (data) => {
-    onSave(formToListing(data))
+    onSave(formToListing(data));
   };
 
   return (
@@ -108,7 +119,7 @@ const EventForm = ({onSave, defaultEvent, title = "",}: props) => {
             <select
               className="select select-bordered"
               defaultValue={defaultEvent.category}
-              {...register('category', { required: 'This field is required' })}
+              {...register("category", { required: "This field is required" })}
             >
               <option value={categories.music}>{categories.music}</option>
               <option value={categories.sports}>{categories.sports}</option>
@@ -125,10 +136,18 @@ const EventForm = ({onSave, defaultEvent, title = "",}: props) => {
       </div>
       <div className="card w-96 bg-neutral text-neutral-content">
         <div className="card-body w-full h-80vh rounded">
-          <input className="" {...register("latitude")} defaultValue={defaultEvent.latitude}/>
-          <input className="" {...register("longitude")} defaultValue={defaultEvent.longitude}/>
+          <input
+            className=""
+            {...register("latitude")}
+            defaultValue={defaultEvent.latitude}
+          />
+          <input
+            className=""
+            {...register("longitude")}
+            defaultValue={defaultEvent.longitude}
+          />
           <div className="h-full w-full">
-            <MapWindow position={{lat, lng}} setPosition={updatePosition} />
+            <MapWindow position={{ lat, lng }} setPosition={updatePosition} />
           </div>
         </div>
       </div>
