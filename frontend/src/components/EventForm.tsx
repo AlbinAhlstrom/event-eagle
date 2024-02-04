@@ -12,49 +12,48 @@ type props = {
 };
 
 type formFields = {
-  title: string,
-  description: string,
-  startTime: Date,
-  price: number,
-  category: categoryType,
-  latitude: number,
-  longitude: number,
-}
+  title: string;
+  description: string;
+  startTime: Date;
+  price: number;
+  category: categoryType;
+  latitude: number;
+  longitude: number;
+};
 
-const EventForm = ({defaultEvent = defaultEventListing, title = ""}: props) => { 
-  const {register, handleSubmit, formState: {errors}} = useForm<formFields>();
+const EventForm = ({ defaultEvent = defaultEventListing, title = "",}: props) => {
+  const { register, handleSubmit, formState: { errors } } = useForm<formFields>();
 
-  const [position, setPosition] = useState({
-    lat: defaultEvent.latitude,
-    lng: defaultEvent.longitude,
-  });
+  const [latitude, setLatitude] = useState(defaultEvent.latitude,);
+  const [longitude, setLongitude] = useState(defaultEvent.longitude,);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        setPosition({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
-      },
-      (error) => {
-        console.error(error);
+        setLatitude( position.coords.latitude)
+        setLongitude( position.coords.longitude)
       }
     );
   }, []);
 
   const onSubmit: SubmitHandler<formFields> = (data) => {
-    console.log(data)
-  }
+    console.log(data);
+  };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex items-center gap-4 h-80vh">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex items-center gap-4 h-80vh"
+    >
       <div className="card w-96 h-80vh bg-neutral text-neutral-content">
         <div className="card-body">
           <h1 className="text-xl">{title ? title : "Create new event:"}</h1>
           <label>
             <p className="label-text">{"title"}</p>
-            <input className="input input-bordered" {...register("title", {required: true})} />
+            <input
+              className="input input-bordered"
+              {...register("title", { required: "Title is required." })}
+            />
             {errors.title && (
               <div className="text-error">{errors.title.message}</div>
             )}
@@ -71,20 +70,33 @@ const EventForm = ({defaultEvent = defaultEventListing, title = ""}: props) => {
             <input
               type="datetime-local"
               className="input input-bordered"
-              {...register("startTime", {required: true})}
+              {...register("startTime", { required: true })}
             />
             {errors.startTime && (
-                <div className="text-error">{errors.startTime.message}</div>
-              )}
+              <div className="text-error">{errors.startTime.message}</div>
+            )}
           </label>
           <label>
             <p className="label-text">{"price"}</p>
-            <input className="input input-bordered" {
-              ...register("price", {
+            <input
+              {...register("price", {
                 required: false,
-                validate: (number) => number >= 0
-              })
-              } />
+                validate: {
+                  isNumeric: (value) => !isNaN(value),
+                  isPositive: (value) => value >= 0,
+                },
+              })}
+            />
+            {errors.price && (
+              <div className="text-error">
+                {errors.price.type === "isNumeric" && (
+                  <p>Please enter a valid price</p>
+                )}
+                {errors.price.type === "isPositive" && (
+                  <p>Price must be positive</p>
+                )}
+              </div>
+            )}
           </label>
           <label>
             <p className="label-text">{"category"}</p>
@@ -112,12 +124,12 @@ const EventForm = ({defaultEvent = defaultEventListing, title = ""}: props) => {
           <input className="hidden" {...register("latitude")} />
           <input className="hidden" {...register("longitude")} />
           <div className="h-full w-full">
-            <MapWindow position={position} setPosition={setPosition} />
+            <MapWindow position={{lat}} setPosition={setPosition} />
           </div>
         </div>
       </div>
     </form>
   );
-}
+};
 
 export default EventForm;
