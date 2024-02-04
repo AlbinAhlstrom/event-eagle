@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Coordinate, EventListing, categoryType, formFields } from "../util";
+import { Coordinate, EventListing, categoryType, formFields, formToListing } from "../util";
 import { defaultEventListing } from "../util";
 import { categories } from "../util";
 import MapWindow from "./MapWindow";
@@ -37,7 +37,7 @@ const EventForm = ({onSave, defaultEvent = defaultEventListing, title = "",}: pr
   }, []);
 
   const onSubmit: SubmitHandler<formFields> = (data) => {
-    onSave(data)
+    onSave(formToListing(data))
   };
 
   return (
