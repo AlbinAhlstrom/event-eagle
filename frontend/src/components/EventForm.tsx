@@ -96,6 +96,7 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
           <label>
             <p className="label-text">{"price"}</p>
             <input
+              className="input input-bordered"
               defaultValue={defaultEvent.price}
               {...register("price", {
                 required: true,
