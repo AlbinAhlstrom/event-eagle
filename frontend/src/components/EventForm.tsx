@@ -21,20 +21,17 @@ const EventForm = ({onSave, defaultEvent, title = "",}: props) => {
     setPosition(newPosition)
     setValue("latitude", newPosition.lat)
     setValue("longitude", newPosition.lng)
-    console.log(newPosition)
   }
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         updatePosition({lat: position.coords.latitude, lng: position.coords.longitude})
-        console.log("default: ", defaultEvent)
       }
     );
   }, []);
 
   const onSubmit: SubmitHandler<formFields> = (data) => {
-    console.log("default event on submit:", defaultEvent)
     onSave(formToListing(data))
   };
 
