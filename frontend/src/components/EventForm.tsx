@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Coordinate, EventListing, formFields, formToListing } from "../util";
+import { Coordinate, EventListing, formFields, formToListing, defaultEventListing } from "../util";
 import { categories } from "../util";
 import MapWindow from "./MapWindow";
 import { useEffect, useState } from "react";
@@ -24,14 +24,19 @@ const EventForm = ({onSave, defaultEvent, title = "",}: props) => {
   }
 
   useEffect(() => {
-    
-    console.log()
+    if (defaultEvent === defaultEventListing) {
+      console.log("creating new event")
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        updatePosition({lat: defaultEvent.latitude, lng: defaultEvent.longitude})
-      }
-    );
-  }, []);
+        updatePosition({lat: position.coords.latitude, lng: position.coords.longitude})
+        return
+      })
+    }
+
+    updatePosition({lat: defaultEvent.latitude, lng: defaultEvent.longitude})
+
+    
+  }, [defaultEvent]);
 
   const onSubmit: SubmitHandler<formFields> = (data) => {
     onSave(formToListing(data))
