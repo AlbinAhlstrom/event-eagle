@@ -1,20 +1,19 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Coordinate, EventListing, categoryType, formFields, formToListing } from "../util";
-import { defaultEventListing } from "../util";
 import { categories } from "../util";
 import MapWindow from "./MapWindow";
 import { useEffect, useState } from "react";
 
 type props = {
   onSave: (formData: EventListing) => void;
-  defaultEvent?: EventListing;
+  defaultEvent: EventListing;
   title?: string;
 };
 
 
 
-const EventForm = ({onSave, defaultEvent = defaultEventListing, title = "",}: props) => {
-  const { register, handleSubmit, formState: { errors }, setValue } = useForm<formFields>();
+const EventForm = ({onSave, defaultEvent, title = "",}: props) => {
+  const { register, handleSubmit, formState: { errors }, setValue} = useForm<formFields>();
 
   const [{lat, lng}, setPosition] = useState({lat: defaultEvent.latitude, lng: defaultEvent.longitude})
 
@@ -29,11 +28,13 @@ const EventForm = ({onSave, defaultEvent = defaultEventListing, title = "",}: pr
     navigator.geolocation.getCurrentPosition(
       (position) => {
         updatePosition({lat: position.coords.latitude, lng: position.coords.longitude})
+        console.log("default: ", defaultEvent)
       }
     );
   }, []);
 
   const onSubmit: SubmitHandler<formFields> = (data) => {
+    console.log("default event on submit:", defaultEvent)
     onSave(formToListing(data))
   };
 
@@ -49,6 +50,7 @@ const EventForm = ({onSave, defaultEvent = defaultEventListing, title = "",}: pr
             <p className="label-text">{"title"}</p>
             <input
               className="input input-bordered"
+              defaultValue={defaultEvent.title}
               {...register("title", { required: "Title is required." })}
             />
             {errors.title && (
@@ -59,6 +61,7 @@ const EventForm = ({onSave, defaultEvent = defaultEventListing, title = "",}: pr
             <p className="label-text">{"description"}</p>
             <input
               className="input input-bordered"
+              defaultValue={defaultEvent.description}
               {...register("description")}
             />
           </label>
@@ -76,6 +79,7 @@ const EventForm = ({onSave, defaultEvent = defaultEventListing, title = "",}: pr
           <label>
             <p className="label-text">{"price"}</p>
             <input
+              defaultValue={defaultEvent.price}
               {...register("price", {
                 required: true,
                 validate: {
@@ -99,6 +103,7 @@ const EventForm = ({onSave, defaultEvent = defaultEventListing, title = "",}: pr
             <p className="label-text">{"category"}</p>
             <select
               className="select select-bordered"
+              defaultValue={defaultEvent.category}
               {...register('category', { required: 'This field is required' })}
             >
               <option value={categories.music}>{categories.music}</option>
@@ -116,8 +121,8 @@ const EventForm = ({onSave, defaultEvent = defaultEventListing, title = "",}: pr
       </div>
       <div className="card w-96 bg-neutral text-neutral-content">
         <div className="card-body w-full h-80vh rounded">
-          <input className="" {...register("latitude")} />
-          <input className="" {...register("longitude")} />
+          <input className="" {...register("latitude")} defaultValue={defaultEvent.latitude}/>
+          <input className="" {...register("longitude")} defaultValue={defaultEvent.longitude}/>
           <div className="h-full w-full">
             <MapWindow position={{lat, lng}} setPosition={updatePosition} />
           </div>
