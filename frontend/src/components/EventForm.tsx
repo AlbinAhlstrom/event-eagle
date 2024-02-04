@@ -140,12 +140,12 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
       <div className="card w-96 bg-neutral text-neutral-content">
         <div className="card-body w-full h-80vh rounded">
           <input
-            className=""
+            className="hidden"
             {...register("latitude")}
             defaultValue={defaultEvent.latitude}
           />
           <input
-            className=""
+            className="hidden"
             {...register("longitude")}
             defaultValue={defaultEvent.longitude}
           />
