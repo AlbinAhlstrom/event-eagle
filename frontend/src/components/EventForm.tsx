@@ -39,7 +39,7 @@ const EventForm = ({ defaultEvent = defaultEventListing, title = "",}: props) =>
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        setPosition({lat: position.coords.latitude, lng: position.coords.longitude})
+        updatePosition({lat: position.coords.latitude, lng: position.coords.longitude})
       }
     );
   }, []);
@@ -129,8 +129,8 @@ const EventForm = ({ defaultEvent = defaultEventListing, title = "",}: props) =>
       </div>
       <div className="card w-96 bg-neutral text-neutral-content">
         <div className="card-body w-full h-80vh rounded">
-          <input className="hidden" {...register("latitude")} />
-          <input className="hidden" {...register("longitude")} />
+          <input className="" {...register("latitude")} />
+          <input className="" {...register("longitude")} />
           <div className="h-full w-full">
             <MapWindow position={{lat, lng}} setPosition={updatePosition} />
           </div>
