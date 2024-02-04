@@ -1,4 +1,4 @@
-import { EventListing } from '../util';
+import { EventListing, defaultEventListing } from '../util';
 import EventForm from '../components/EventForm';
 import { useNavigate } from 'react-router-dom';
 
@@ -24,7 +24,7 @@ const Create = () => {
 
     return (
         <div className="flex flex-col items-center h-screen-h">
-          <EventForm onSave={postEvent} />
+          <EventForm onSave={postEvent} defaultEvent={defaultEventListing}/>
           <button className='btn btn-primary fixed bottom-2 mt-auto self-center' onClick={() => navigate("/admin")}>Back to dashboard</button>
         </div>
       )
