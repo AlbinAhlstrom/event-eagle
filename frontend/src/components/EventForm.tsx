@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Coordinate, EventListing, categoryType, formFields, formToListing } from "../util";
+import { Coordinate, EventListing, formFields, formToListing } from "../util";
 import { categories } from "../util";
 import MapWindow from "./MapWindow";
 import { useEffect, useState } from "react";
