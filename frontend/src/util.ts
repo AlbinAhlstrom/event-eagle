@@ -109,7 +109,8 @@ export type formFields = {
   longitude: number;
 };
 
-
+export const formToListing = (formData: formFields): EventListing => {
+  return {...formData, id:0, endTime: formData.startTime, venue: "", address: ""}
 }
 
 export type TicketmasterEvent = {
