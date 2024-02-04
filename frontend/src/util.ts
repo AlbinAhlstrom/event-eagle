@@ -99,6 +99,19 @@ export type Coordinate = {
     lng: number
 }
 
+export type formFields = {
+  title: string;
+  description: string;
+  startTime: Date;
+  price: number;
+  category: categoryType;
+  latitude: number;
+  longitude: number;
+};
+
+
+}
+
 export type TicketmasterEvent = {
     id: string;
     name: string;
