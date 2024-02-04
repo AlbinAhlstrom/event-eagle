@@ -22,11 +22,8 @@ const EventForm = ({onSave, defaultEvent = defaultEventListing, title = "",}: pr
     setPosition(newPosition)
     setValue("latitude", newPosition.lat)
     setValue("longitude", newPosition.lng)
+    console.log(newPosition)
   }
-
-  useEffect(() => {
-    console.log(lat, lng)
-  }, [lat, lng])
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -102,8 +99,7 @@ const EventForm = ({onSave, defaultEvent = defaultEventListing, title = "",}: pr
             <p className="label-text">{"category"}</p>
             <select
               className="select select-bordered"
-              value={defaultEvent.category}
-              defaultValue={defaultEvent.category}
+              {...register('category', { required: 'This field is required' })}
             >
               <option value={categories.music}>{categories.music}</option>
               <option value={categories.sports}>{categories.sports}</option>
