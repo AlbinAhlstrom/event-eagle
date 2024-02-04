@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import EventForm from '../components/EventForm';
-import { EventListing } from '../util';
+import { EventListing, defaultEventListing } from '../util';
 
 const EditEvent = () => {
   const { id } = useParams<'id'>();
-  const [eventData, setEventData] = useState(null);
+  const [eventData, setEventData] = useState(defaultEventListing);
   const navigate = useNavigate();
 
   const BASE_URL = 'https://event-eagle.azurewebsites.net';
@@ -28,8 +28,8 @@ const EditEvent = () => {
     fetchEvent();
   }, [EVENTS_ENDPOINT]);
 
-  const updateEvent = async () => {
-    console.log('put here');
+  const updateEvent = async (event: EventListing) => {
+    console.log('put here', event);
     // try {
     //   const response = await fetch(EVENTS_ENDPOINT, {
     //     method: 'PUT',
@@ -51,7 +51,7 @@ const EditEvent = () => {
   // Only display the form if eventData is present
   return eventData ? (
     <div className='div className="flex flex-col justify-center items-center h-screen-h"'>
-    <EventForm defaultEvent={eventData}/>
+    <EventForm defaultEvent={eventData} onSave={updateEvent}/>
     <button className='btn btn-primary fixed bottom-2 mt-auto self-center' onClick={() => navigate("/admin")}>Back to dashboard</button>
     </div>
   ) : (
