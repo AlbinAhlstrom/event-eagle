@@ -73,7 +73,12 @@ const EventForm = ({defaultEvent = defaultEventListing, title = ""}: props) => {
           </label>
           <label>
             <p className="label-text">{"price"}</p>
-            <input className="input input-bordered" {...register("price")} />
+            <input className="input input-bordered" {
+              ...register("price", {
+                required: false,
+                validate: (number) => number >= 0
+              })
+              } />
           </label>
           <label>
             <p className="label-text">{"category"}</p>
