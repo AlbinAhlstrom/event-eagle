@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { EventListing, categoryType } from "../util";
+import { Coordinate, EventListing, categoryType } from "../util";
 import { defaultEventListing } from "../util";
 import { categories } from "../util";
 import MapWindow from "./MapWindow";
@@ -22,16 +22,24 @@ type formFields = {
 };
 
 const EventForm = ({ defaultEvent = defaultEventListing, title = "",}: props) => {
-  const { register, handleSubmit, formState: { errors } } = useForm<formFields>();
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm<formFields>();
 
-  const [latitude, setLatitude] = useState(defaultEvent.latitude,);
-  const [longitude, setLongitude] = useState(defaultEvent.longitude,);
+  const [{lat, lng}, setPosition] = useState({lat: defaultEvent.latitude, lng: defaultEvent.longitude})
+
+  const updatePosition = (newPosition: Coordinate) => {
+    setPosition(newPosition)
+    setValue("latitude", newPosition.lat)
+    setValue("longitude", newPosition.lng)
+  }
+
+  useEffect(() => {
+    console.log(lat, lng)
+  }, [lat, lng])
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        setLatitude( position.coords.latitude)
-        setLongitude( position.coords.longitude)
+        setPosition({lat: position.coords.latitude, lng: position.coords.longitude})
       }
     );
   }, []);
@@ -124,7 +132,7 @@ const EventForm = ({ defaultEvent = defaultEventListing, title = "",}: props) =>
           <input className="hidden" {...register("latitude")} />
           <input className="hidden" {...register("longitude")} />
           <div className="h-full w-full">
-            <MapWindow position={{lat}} setPosition={setPosition} />
+            <MapWindow position={{lat, lng}} setPosition={updatePosition} />
           </div>
         </div>
       </div>
