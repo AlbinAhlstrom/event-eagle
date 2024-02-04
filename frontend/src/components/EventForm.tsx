@@ -58,7 +58,7 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex items-center gap-4 h-80vh"
+      className="flex justify-center items-center gap-4 h-80vh"
     >
       <div className="card w-96 h-80vh bg-neutral text-neutral-content">
         <div className="card-body">
@@ -66,7 +66,7 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
           <label>
             <p className="label-text">{"title"}</p>
             <input
-              className="input input-bordered"
+              className="input input-bordered w-3/4"
               defaultValue={defaultEvent.title}
               {...register("title", { required: "Title is required." })}
             />
@@ -77,7 +77,7 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
           <label>
             <p className="label-text">{"description"}</p>
             <input
-              className="input input-bordered"
+              className="input input-bordered  w-3/4"
               defaultValue={defaultEvent.description}
               {...register("description")}
             />
@@ -86,7 +86,7 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
             <p className="label-text">{"start time"}</p>
             <input
               type="datetime-local"
-              className="input input-bordered"
+              className="input input-bordered  w-3/4"
               {...register("startTime", { required: true })}
             />
             {errors.startTime && (
@@ -96,7 +96,7 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
           <label>
             <p className="label-text">{"price"}</p>
             <input
-              className="input input-bordered"
+              className="input input-bordered  w-3/4"
               defaultValue={defaultEvent.price}
               {...register("price", {
                 required: true,
@@ -120,7 +120,7 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
           <label>
             <p className="label-text">{"category"}</p>
             <select
-              className="select select-bordered"
+              className="select select-bordered w-3/4"
               defaultValue={defaultEvent.category}
               {...register("category", { required: "This field is required" })}
             >
