@@ -25,6 +25,10 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
     setValue,
   } = useForm<formFields>();
 
+  const onSubmit: SubmitHandler<formFields> = (data) => {
+    onSave(formToListing(data));
+  };
+
   // Position
   const [{ lat, lng }, setPosition] = useState({
     lat: defaultEvent.latitude,
@@ -50,10 +54,6 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
     }
     updatePosition({ lat: defaultEvent.latitude, lng: defaultEvent.longitude });
   }, [defaultEvent]);
-
-  const onSubmit: SubmitHandler<formFields> = (data) => {
-    onSave(formToListing(data));
-  };
 
   return (
     <form
