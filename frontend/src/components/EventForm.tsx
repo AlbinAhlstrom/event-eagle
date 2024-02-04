@@ -17,6 +17,7 @@ type props = {
 };
 
 const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
+  // Form
   const {
     register,
     handleSubmit,
@@ -24,6 +25,7 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
     setValue,
   } = useForm<formFields>();
 
+  // Position
   const [{ lat, lng }, setPosition] = useState({
     lat: defaultEvent.latitude,
     lng: defaultEvent.longitude,
