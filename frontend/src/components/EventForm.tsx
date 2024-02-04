@@ -24,9 +24,11 @@ const EventForm = ({onSave, defaultEvent, title = "",}: props) => {
   }
 
   useEffect(() => {
+    
+    console.log()
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        updatePosition({lat: position.coords.latitude, lng: position.coords.longitude})
+        updatePosition({lat: defaultEvent.latitude, lng: defaultEvent.longitude})
       }
     );
   }, []);
