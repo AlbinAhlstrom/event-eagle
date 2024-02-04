@@ -137,8 +137,8 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
           </div>
         </div>
       </div>
-      <div className="card w-96 bg-neutral text-neutral-content">
-        <div className="card-body w-full h-80vh rounded">
+      <div className="card w-80vh h-80vh bg-neutral text-neutral-content">
+        <div className="card-body w-80vh h-80vh rounded">
           <input
             className="hidden"
             {...register("latitude")}
