@@ -112,10 +112,10 @@ namespace EventFider.Controllers
             return NoContent();
         }
 
-         [HttpDelete("userEvents/{id}")]
-        public async Task<IActionResult> DeleteUserEvent(int id)
+         [HttpDelete("userEvents/delete")]
+        public async Task<IActionResult> DeleteUserEvent(string userId, int eventId)
         {
-             await _repo.DeleteUserEventById(id); 
+             await _repo.DeleteUserEventById(userId, eventId); 
             return NoContent();
         }
 
