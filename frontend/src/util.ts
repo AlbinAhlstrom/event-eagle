@@ -65,6 +65,17 @@ export const fromDateTimeString = (dateTimeString: string): Date => {
   return new Date(year, month - 1, day, hours, minutes);
 };
 
+export interface SavedEvent {
+  event: {
+    id: number;
+    title: string;
+    description: string;
+    startTime: string | Date;
+    venue: string | undefined;
+    price: number;
+    category: categoryType;
+  };
+}
 
 export type EventListing = {
   id: number;
@@ -102,10 +113,11 @@ export type EventCardProps = {
   venue: string | undefined;
   price: number;
   category: categoryType;
+  updateSavedEvents?: () => void;
 };
 
 export interface CountdownTimerProps {
-  targetDate: string;
+  targetDate: string | Date;
 }
 
 export interface IconMap {
