@@ -30,33 +30,65 @@ const userEvent = {
 };
 
 const PostUserEvent = () => {
+  return fetch("https://event-eagle.azurewebsites.net/Events/add/userEvent", {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userEvent),
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json(); 
+    })
+    .then(data => {
+      console.log('Success:', data);
+      return data; 
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      throw error; 
+    });
+};
 
-fetch("https://event-eagle.azurewebsites.net/Events/add/userEvent", {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(userEvent),
-})
-  .then(response => {
+
+const handleDeleteEvent = async () => {
+  try {
+    const response = await fetch(
+      `  https://event-eagle.azurewebsites.net/Events/userEvents/delete?userId=${user?.id}&eventId=${props.id}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
-    return response.json();
-  })
-  .then(data => {
-    // Handle the response data
-    console.log('Success:', data);
-  })
-  .catch(error => {
-    // Handle errors
+    console.log('Event deleted successfully');
+  } catch (error) {
     console.error('Error:', error);
-  });
-}
+  }
+};
+
 
 const handleSaveEventClick = () => {
-PostUserEvent();
+  PostUserEvent()
+    .then(() => props.updateSavedEvents?.())
+    .then(() => navigate("/savedEvents"))
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+}
+
+const handleDeleteSavedEventClick = async () => {
+  await handleDeleteEvent();
+await props.updateSavedEvents?.();
 navigate("/savedEvents");
+
 }
 
 const isSaveEventButtonVisible = location.pathname !== "/savedEvents";
@@ -69,11 +101,16 @@ const isSaveEventButtonVisible = location.pathname !== "/savedEvents";
         <img src={iconSrc} alt={props.category} />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">{props.title}</h2>
+        <div className="flex">
+
+        <h2 className="card-title mr-auto">{props.title}</h2>
+        {!isSaveEventButtonVisible && (
+          <button onClick={handleDeleteSavedEventClick}>Remove</button>
+          )}
+        </div>
         <p>{props.description}</p>
         <p>{props.price} SEK</p>
         <CountdownTimer targetDate={props.startTime} />
-
         <div className="card-actions justify-center mt-10">
           <button className="btn btn-primary" onClick={handleSeeDetailsClick}>
             See Details
