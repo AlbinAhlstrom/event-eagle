@@ -40,6 +40,8 @@ export default {
         '30vh': '30vh',
         '40vh': '40vh',
         'max-card-h': '38vh',
+        '60vh': '60vh',
+        '70vh': '70vh',
         '80vh': '80vh',
         '90vh': '90vh',
         'vh': '100vh',

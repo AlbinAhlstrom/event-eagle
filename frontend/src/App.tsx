@@ -4,6 +4,7 @@ import { SignedOut, SignedIn } from "@clerk/clerk-react";
 import Home from "./pages/Home";
 import Categories from "./pages/Categories";
 import Events from "./pages/Events";
+import EventsMap from "./pages/EventsMap";
 import NoPage from "./pages/NoPage";
 import EventDetails from "./pages/EventDetails";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -32,6 +33,7 @@ function App() {
                 <Route path="/savedEvents" element={<SavedEvents />} />
                 <Route path="/categories" element={<Categories />} />
                 <Route path="/events" element={<Events />} />
+                <Route path="/eventsMap" element={<EventsMap />} />
                 <Route path="/events/create" element={<Create />} />
                 <Route path="/events/:id/edit" element={<EditEvent />} />
                 <Route path="/events/:type" element={<Events />} />

@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { categories, toDateTimeString } from "../util";
-import MapWindow from "./MapWindow";
+import MapWindow from "./FormMap";
 import { useEffect, useState } from "react";
 import {
   Coordinate,
