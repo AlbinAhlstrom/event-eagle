@@ -5,7 +5,7 @@ import { EventListing, defaultEventListing } from '../util';
 
 const EditEvent = () => {
   const { id } = useParams<'id'>();
-  const [eventData, setEventData] = useState(defaultEventListing);
+  const [eventData, setEventData] = useState(null);
   const navigate = useNavigate();
 
   const BASE_URL = 'https://event-eagle.azurewebsites.net';
