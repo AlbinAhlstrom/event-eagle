@@ -11,7 +11,7 @@ const ticketmasterKey = import.meta.env.VITE_TICKETMASTER_API_KEY;
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-const Events: React.FC = () => {
+const EventsMap: React.FC = () => {
   const [userLocation, setUserLocation] = React.useState<{
     lat: number;
     lng: number;
