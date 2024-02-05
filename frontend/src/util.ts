@@ -81,7 +81,7 @@ export type EventListing = {
   id: number;
   title: string;
   description: string;
-  startTime: string;
+  startTime: string | Date;
   endTime: string;
   venue: string;
   address: string;
@@ -95,7 +95,7 @@ export const defaultEventListing: EventListing = {
   id: 0,
   title: "default",
   description: "desc",
-  startTime: toDateTimeString(new Date),
+  startTime: toDateTimeString(new Date) ,
   endTime: toDateTimeString(new Date),
   venue: "",
   address: "",
