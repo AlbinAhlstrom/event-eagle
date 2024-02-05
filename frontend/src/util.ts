@@ -57,6 +57,15 @@ export const toDateTimeString = (date: Date) => {
   return `${year}-${month}-${day}T${hours}:${minutes}`
 }
 
+export const fromDateTimeString = (dateTimeString: string): Date => {
+  const [datePart, timePart] = dateTimeString.split('T');
+  const [year, month, day] = datePart.split('-').map(Number);
+  const [hours, minutes] = timePart.split(':').map(Number);
+
+  return new Date(year, month - 1, day, hours, minutes);
+};
+
+
 export type EventListing = {
   id: number;
   title: string;
