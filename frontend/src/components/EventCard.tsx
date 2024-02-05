@@ -59,6 +59,8 @@ PostUserEvent();
 navigate("/savedEvents");
 }
 
+const isSaveEventButtonVisible = location.pathname !== "/savedEvents";
+
 
   const iconSrc = getIcon[props.category] || "";
   return (
@@ -76,9 +78,11 @@ navigate("/savedEvents");
           <button className="btn btn-primary" onClick={handleSeeDetailsClick}>
             See Details
           </button>
-          <button className="btn btn-primary" onClick={handleSaveEventClick}>
-            Save Event
-          </button>
+          {isSaveEventButtonVisible && (
+            <button className="btn btn-primary" onClick={handleSaveEventClick}>
+              Save Event
+            </button>
+          )}
         </div>
       </div>
     </div>
