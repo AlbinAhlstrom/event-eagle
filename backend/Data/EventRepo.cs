@@ -220,17 +220,11 @@ namespace Data
             return null;
         }
 
-        public async Task<IEnumerable<UserEventDTO>> GetUserEventsData()
+        public async Task<IEnumerable<UserEvents>> GetUserEventsData()
         {
              var userEvents = await _context.UserEvents.ToListAsync();
-            var userEventDtoList = userEvents.Select(ev => new UserEventDTO
-            {
-                UserId = ev.UserId,
-                EventId = ev.EventId,
-                CreatedByUser = ev.CreatedByUser
-            }).ToList();
 
-            return userEventDtoList;
+            return userEvents;
         }
 
         public async Task<UserEvents> CreateUserEvent(UserEventDTO userEvent)
