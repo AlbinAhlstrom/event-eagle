@@ -7,7 +7,7 @@ type MapWindowProps =  {
   setPosition: ({lat, lng}:Coordinate) => void
   pins?: AdvancedMarkerRef[]
 }
-const MapWindow: React.FC<MapWindowProps> = ({position, setPosition}: MapWindowProps) => {
+const FormMap: React.FC<MapWindowProps> = ({position, setPosition}: MapWindowProps) => {
   const apiUrl = import.meta.env.VITE_GMAPS_KEY;
   const mapId = import.meta.env.VITE_GMAPS_MAPID;
   
@@ -41,4 +41,4 @@ const MapWindow: React.FC<MapWindowProps> = ({position, setPosition}: MapWindowP
   )
 };
 
-export default MapWindow;
+export default FormMap;
