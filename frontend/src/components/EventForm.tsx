@@ -26,6 +26,7 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
   } = useForm<formFields>();
 
   const onSubmit: SubmitHandler<formFields> = (data) => {
+    console.log(data)
     onSave(formToListing(data));
   };
 
@@ -68,7 +69,7 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
             <input
               className="input input-bordered w-3/4"
               defaultValue={defaultEvent.title}
-              {...register("title", { required: "Title is required." })}
+              {...register("title")}
             />
             {errors.title && (
               <div className="text-error">{errors.title.message}</div>
@@ -87,7 +88,7 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
             <input
               type="datetime-local"
               className="input input-bordered  w-3/4"
-              {...register("startTime", { required: true })}
+              {...register("startTime", )}
             />
             {errors.startTime && (
               <div className="text-error">{errors.startTime.message}</div>
@@ -98,31 +99,15 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
             <input
               className="input input-bordered  w-3/4"
               defaultValue={defaultEvent.price}
-              {...register("price", {
-                required: true,
-                validate: {
-                  isNumeric: (value) => !isNaN(value),
-                  isPositive: (value) => value >= 0,
-                },
-              })}
+              {...register("price")}
             />
-            {errors.price && (
-              <div className="text-error">
-                {errors.price.type === "isNumeric" && (
-                  <p>Please enter a valid price</p>
-                )}
-                {errors.price.type === "isPositive" && (
-                  <p>Price must be positive</p>
-                )}
-              </div>
-            )}
           </label>
           <label>
             <p className="label-text">{"category"}</p>
             <select
               className="select select-bordered w-3/4"
               defaultValue={defaultEvent.category}
-              {...register("category", { required: "This field is required" })}
+              {...register("category")}
             >
               <option value={categories.music}>{categories.music}</option>
               <option value={categories.sports}>{categories.sports}</option>
