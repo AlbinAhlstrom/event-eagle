@@ -40,6 +40,9 @@ if(user?.publicMetadata.role === "admin"){
       </div>
       <div className="flex-none">
         <div>
+          <button className="btn btn-ghost text-xl h-nav-icon-h" onClick={()=>navigate("/savedEvents")}>Saved Events</button>
+        </div>
+        <div>
           {content}
         </div>
 
