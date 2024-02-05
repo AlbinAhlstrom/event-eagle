@@ -93,6 +93,7 @@ navigate("/savedEvents");
 
 const isSaveEventButtonVisible = location.pathname !== "/savedEvents";
 
+const isIdANumber = typeof props.id === 'number';
 
   const iconSrc = getIcon[props.category] || "";
   return (
@@ -115,7 +116,7 @@ const isSaveEventButtonVisible = location.pathname !== "/savedEvents";
           <button className="btn btn-primary" onClick={handleSeeDetailsClick}>
             See Details
           </button>
-          {isSaveEventButtonVisible && (
+          {isSaveEventButtonVisible&& isIdANumber && (
             <button className="btn btn-primary" onClick={handleSaveEventClick}>
               Save Event
             </button>
