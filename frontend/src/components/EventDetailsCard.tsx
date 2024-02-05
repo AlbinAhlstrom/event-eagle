@@ -3,11 +3,11 @@ import CountdownTimer from './CountDown';
 import { useNavigate } from 'react-router-dom';
 import { EventListing } from '../util';
 
-interface EventDetailsCardProps {
+interface props {
   event: EventListing;
 }
 
-const EventDetailsCard: React.FC<EventDetailsCardProps> = ({ event }) => {
+const EventDetailsCard: React.FC<props> = ({ event }) => {
   const navigate = useNavigate();
 
   return (
