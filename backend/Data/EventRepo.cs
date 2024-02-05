@@ -258,9 +258,9 @@ namespace Data
             return addUserEvent;
         }
 
-        public async Task DeleteUserEventById(int id)
+        public async Task DeleteUserEventById(string userId, int eventId)
         {
-            var eventToDelete = await _context.UserEvents.FindAsync(id);
+            var eventToDelete = await _context.UserEvents.FirstOrDefaultAsync(ue => ue.UserId == userId && ue.EventId == eventId);
 
             if (eventToDelete != null)
             {
