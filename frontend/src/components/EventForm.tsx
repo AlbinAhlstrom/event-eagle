@@ -50,9 +50,9 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         });
+        setValue("title", defaultEvent.title)
+        setValue("description", defaultEvent.description)
         setValue("startTime", toDateTimeString(defaultEvent.startTime))
-        console.log(defaultEvent.startTime)
-        console.log(datetime)
         return;
       });
     }
@@ -71,18 +71,13 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
             <p className="label-text">{"title"}</p>
             <input
               className="input input-bordered w-3/4"
-              defaultValue={defaultEvent.title}
               {...register("title")}
             />
-            {errors.title && (
-              <div className="text-error">{errors.title.message}</div>
-            )}
           </label>
           <label>
             <p className="label-text">{"description"}</p>
             <input
               className="input input-bordered  w-3/4"
-              defaultValue={defaultEvent.description}
               {...register("description")}
             />
           </label>
@@ -90,13 +85,9 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
             <p className="label-text">{"start time"}</p>
             <input
               type="datetime-local"
-              
               className="input input-bordered  w-3/4"
               {...register("startTime")}
             />
-            {errors.startTime && (
-              <div className="text-error">{errors.startTime.message}</div>
-            )}
           </label>
           <label>
             <p className="label-text">{"price"}</p>
