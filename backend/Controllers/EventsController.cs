@@ -21,9 +21,9 @@ namespace EventFider.Controllers
         }
 
         [HttpGet("userEvents")]
-        public async Task<ActionResult<IEnumerable<UserEvents>>> GetUserEvents()
+        public async Task<ActionResult<IEnumerable<UserEvents>>> GetUserEvents(string userId)
         {
-            var response = await _repo.GetUserEventsData();
+            var response = await _repo.GetUserEventsData(userId);
             return Ok(response);
         }
         [HttpPost("add/userEvent")]
@@ -111,6 +111,14 @@ namespace EventFider.Controllers
 
             return NoContent();
         }
+
+         [HttpDelete("userEvents/{id}")]
+        public async Task<IActionResult> DeleteUserEvent(int id)
+        {
+             await _repo.DeleteUserEventById(id); 
+            return NoContent();
+        }
+
 
         private bool EventExists(int id)
         {

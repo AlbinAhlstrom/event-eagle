@@ -119,29 +119,29 @@ namespace Data
 
 
 
-         public async Task<IEnumerable<EventResponseDTO>> GetAllEventsDTO()
+        public async Task<IEnumerable<EventResponseDTO>> GetAllEventsDTO()
         {
             var events = await _context.Events.ToListAsync();
             var eventResponseList = events.Select(ev => new EventResponseDTO
-        {
-            eventId = ev.eventId,
-            Id = ev.Id,
-            Title = ev.Title,
-            Description = ev.Description,
-            Details = new Details
             {
-                StartTime = ev.StartTime,
-                EndTime = ev.EndTime,
-                Price = ev.Price
-            },
-            Location = new Location
-            {
-                Latitude = ev.Latitude,
-                Longitude = ev.Longitude,
-                Venue = ev.Venue,
-                Address = ev.Address,
-            },
-            ActionOptions =
+                eventId = ev.eventId,
+                Id = ev.Id,
+                Title = ev.Title,
+                Description = ev.Description,
+                Details = new Details
+                {
+                    StartTime = ev.StartTime,
+                    EndTime = ev.EndTime,
+                    Price = ev.Price
+                },
+                Location = new Location
+                {
+                    Latitude = ev.Latitude,
+                    Longitude = ev.Longitude,
+                    Venue = ev.Venue,
+                    Address = ev.Address,
+                },
+                ActionOptions =
                 [
                     new ActionOption
                     {
@@ -162,7 +162,7 @@ namespace Data
                         Method = "PUT"
                     }
                 ]
-        }).ToList();
+            }).ToList();
 
             return eventResponseList;
         }
@@ -174,25 +174,25 @@ namespace Data
             if (eventToReturn != null)
             {
                 var eventResponse = new EventResponseDTO
-        {
-            eventId = eventToReturn.eventId,
-            Id = eventToReturn.Id,
-            Title = eventToReturn.Title,
-            Description = eventToReturn.Description,
-            Details = new Details
-            {
-                StartTime = eventToReturn.StartTime,
-                EndTime = eventToReturn.EndTime,
-                Price = eventToReturn.Price
-            },
-            Location = new Location
-            {
-                Latitude = eventToReturn.Latitude,
-                Longitude = eventToReturn.Longitude,
-                Venue = eventToReturn.Venue,
-                Address = eventToReturn.Address,
-            },
-            ActionOptions =
+                {
+                    eventId = eventToReturn.eventId,
+                    Id = eventToReturn.Id,
+                    Title = eventToReturn.Title,
+                    Description = eventToReturn.Description,
+                    Details = new Details
+                    {
+                        StartTime = eventToReturn.StartTime,
+                        EndTime = eventToReturn.EndTime,
+                        Price = eventToReturn.Price
+                    },
+                    Location = new Location
+                    {
+                        Latitude = eventToReturn.Latitude,
+                        Longitude = eventToReturn.Longitude,
+                        Venue = eventToReturn.Venue,
+                        Address = eventToReturn.Address,
+                    },
+                    ActionOptions =
                 [
                     new ActionOption
                     {
@@ -213,7 +213,7 @@ namespace Data
                         Method = "PUT"
                     }
                 ]
-        };
+                };
 
                 return eventResponse;
             }
@@ -221,42 +221,54 @@ namespace Data
             return null;
         }
 
-        public async Task<IEnumerable<UserEvents>> GetUserEventsData()
+        public async Task<IEnumerable<UserEvents>> GetUserEventsData(string userId)
         {
-            var userEvents = await _context.UserEvents
-                                    .Include(ue => ue.Event) 
-                                    .ToListAsync(); 
+            var userEvents = await _context.UserEvents.Where(ue => ue.UserId == userId)
+                                    .Include(ue => ue.Event)
+                                    .ToListAsync();
 
             return userEvents;
         }
 
         public async Task<UserEvents> CreateUserEvent(UserEventDTO userEvent)
-{
-    var existingUserEvent = await _context.UserEvents
-        .Where(ue => ue.UserId == userEvent.UserId && ue.EventId == userEvent.EventId)
-        .FirstOrDefaultAsync();
+        {
+            var existingUserEvent = await _context.UserEvents
+                .Where(ue => ue.UserId == userEvent.UserId && ue.EventId == userEvent.EventId)
+                .FirstOrDefaultAsync();
 
-    if (existingUserEvent != null)
-    {
-        return null;
-    }
+            if (existingUserEvent != null)
+            {
+                return null;
+            }
 
-    var mappingObj = await _context.Events.Where(e => e.Id == userEvent.EventId).SingleOrDefaultAsync();
-    var addUserEvent = new UserEvents
-    {
-        UserId = userEvent.UserId,
-        EventId = userEvent.EventId,
-        Event = mappingObj,
-        CreatedByUser = userEvent.CreatedByUser
-    };
+            var mappingObj = await _context.Events.Where(e => e.Id == userEvent.EventId).SingleOrDefaultAsync();
+            var addUserEvent = new UserEvents
+            {
+                UserId = userEvent.UserId,
+                EventId = userEvent.EventId,
+                Event = mappingObj,
+                CreatedByUser = userEvent.CreatedByUser
+            };
 
-    _context.UserEvents.Add(addUserEvent);
-    await _context.SaveChangesAsync();
+            _context.UserEvents.Add(addUserEvent);
+            await _context.SaveChangesAsync();
 
-    
 
-    return addUserEvent;
-}
+
+            return addUserEvent;
+        }
+
+        public async Task DeleteUserEventById(int id)
+        {
+            var eventToDelete = await _context.UserEvents.FindAsync(id);
+
+            if (eventToDelete != null)
+            {
+                _context.UserEvents.Remove(eventToDelete);
+                await _context.SaveChangesAsync();
+            }
+        }
+
 
     }
 }
