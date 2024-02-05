@@ -7,6 +7,7 @@ type MapWindowProps =  {
   center: Coordinate
   zoom: number
 }
+
 const MapWindow: React.FC<MapWindowProps> = ({events, center, zoom=16}: MapWindowProps) => {
   const apiUrl = import.meta.env.VITE_GMAPS_KEY;
   const mapId = import.meta.env.VITE_GMAPS_MAPID;
@@ -27,8 +28,6 @@ const MapWindow: React.FC<MapWindowProps> = ({events, center, zoom=16}: MapWindo
           >
           <Pin />
           </AdvancedMarker>
-          
-            
         </Map>
       </APIProvider>
     </div>
