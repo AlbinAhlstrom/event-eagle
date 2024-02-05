@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { categories } from "../util";
+import { categories} from "../util";
 import MapWindow from "./FormMap";
 import { useEffect, useState } from "react";
 import {
@@ -10,7 +10,7 @@ import {
 } from "../util";
 
 type props = {
-  onSave: (formData: EventListing) => void;
+  onSave: (formData: formFields) => void;
   defaultEvent: EventListing;
   title?: string;
 };
