@@ -6,7 +6,6 @@ import {
   Coordinate,
   EventListing,
   formFields,
-  formToListing,
   defaultEventListing,
 } from "../util";
 
@@ -21,13 +20,13 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
     setValue,
   } = useForm<formFields>();
 
   const onSubmit: SubmitHandler<formFields> = (data) => {
-    console.log(data)
-    onSave(formToListing(data));
+    console.log("default event:", defaultEvent)
+    console.log("updated event:", data)
+    onSave(data)
   };
 
   // Position
@@ -50,7 +49,6 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         });
-        setValue("startTime", toDateTimeString(defaultEvent.startTime))
         setValue("category", defaultEvent.category)
         return;
       });
@@ -69,17 +67,16 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
           <label>
             <p className="label-text">{"title"}</p>
             <input
+            type="text"
               className="input input-bordered w-3/4"
-              defaultValue={defaultEvent.title}
-              {...register("title")}
+              {...register("title", {value: defaultEvent.title})}
             />
           </label>
           <label>
             <p className="label-text">{"description"}</p>
             <input
               className="input input-bordered  w-3/4"
-              defaultValue={defaultEvent.description}
-              {...register("description")}
+              {...register("description", {value: defaultEvent.description})}
             />
           </label>
           <label>
@@ -87,7 +84,7 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
             <input
               type="datetime-local"
               className="input input-bordered  w-3/4"
-              {...register("startTime")}
+              {...register("startTime", {value: defaultEvent.startTime})}
             />
           </label>
           <label>
@@ -95,7 +92,7 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
             <input
               className="input input-bordered  w-3/4"
               defaultValue={defaultEvent.price}
-              {...register("price")}
+              {...register("price", {value: defaultEvent.price})}
             />
           </label>
           <label>
