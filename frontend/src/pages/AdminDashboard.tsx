@@ -41,7 +41,7 @@ const AdminDashboard = () => {
   }
 
   return (
-      <div className="flex flex-col h-screen-h justify-center items-center w-full">
+      <div className="flex flex-col h-screen-h items-center w-full ">
         <h1 className="text-5xl font-bold m-5"> Admin Dashboard</h1>
       <ul className="flex justify-center flex-wrap w-2/3 gap-10">
         {events.map((event) => (
