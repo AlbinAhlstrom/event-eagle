@@ -3,10 +3,11 @@ import { Coordinate, EventListing } from '../util';
 
 
 type MapWindowProps =  {
-  center: Coordinate
   events: EventListing[]
+  center: Coordinate
+  zoom: number
 }
-const MapWindow: React.FC<MapWindowProps> = ({center, events}: MapWindowProps) => {
+const MapWindow: React.FC<MapWindowProps> = ({events, center, zoom}: MapWindowProps) => {
   const apiUrl = import.meta.env.VITE_GMAPS_KEY;
   const mapId = import.meta.env.VITE_GMAPS_MAPID;
 
@@ -15,19 +16,18 @@ const MapWindow: React.FC<MapWindowProps> = ({center, events}: MapWindowProps) =
       <APIProvider apiKey={apiUrl}>
         <Map
         className="h-full w-full rounded-xl"
-          zoom={16}
+          zoom={zoom}
           center={center}
           mapId={mapId}
           gestureHandling={'greedy'}
           disableDefaultUI={false}>          
-          {/* <AdvancedMarker
-            position={position}
-            draggable={true}
-            onDragEnd={handleDragEnd}
+          <AdvancedMarker
+            position={center}
+            draggable={false}
           >
           <Pin />
           </AdvancedMarker>
-          */}
+          
             
         </Map>
       </APIProvider>
