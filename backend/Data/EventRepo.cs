@@ -222,7 +222,9 @@ namespace Data
 
         public async Task<IEnumerable<UserEvents>> GetUserEventsData()
         {
-             var userEvents = await _context.UserEvents.ToListAsync();
+            var userEvents = await _context.UserEvents
+                                    .Include(ue => ue.Event) 
+                                    .ToListAsync(); 
 
             return userEvents;
         }
