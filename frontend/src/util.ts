@@ -24,8 +24,8 @@ export type EventDetailsListing = {
   id: number | string;
   title: string;
   description: string;
-  startTime: Date;
-  endTime?: Date | null | undefined;
+  startTime: string | Date;
+  endTime?: Date | string | null;
   venue?: string;
   address: string;
   latitude: number;
@@ -82,7 +82,7 @@ export type EventListing = {
   title: string;
   description: string;
   startTime: string | Date;
-  endTime: string;
+  endTime: string | Date;
   venue: string;
   address: string;
   latitude: number;
@@ -130,9 +130,13 @@ export type Coordinate = {
 }
 
 export type formFields = {
+  id: number;
   title: string;
   description: string;
   startTime: string | Date;
+  endTime: string;
+  venue: string;
+  address: string;
   price: number;
   category: categoryType;
   latitude: number;
