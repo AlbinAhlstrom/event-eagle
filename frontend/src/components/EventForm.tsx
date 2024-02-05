@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { categories } from "../util";
+import { categories, toDateTimeString } from "../util";
 import MapWindow from "./MapWindow";
 import { useEffect, useState } from "react";
 import {
@@ -50,6 +50,9 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         });
+        setValue("startTime", toDateTimeString(defaultEvent.startTime))
+        console.log(defaultEvent.startTime)
+        console.log(datetime)
         return;
       });
     }
@@ -87,8 +90,9 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
             <p className="label-text">{"start time"}</p>
             <input
               type="datetime-local"
+              
               className="input input-bordered  w-3/4"
-              {...register("startTime", )}
+              {...register("startTime")}
             />
             {errors.startTime && (
               <div className="text-error">{errors.startTime.message}</div>
