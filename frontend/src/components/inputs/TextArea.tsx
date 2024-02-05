@@ -1,13 +1,13 @@
 import React from "react";
 
-type textAreaProps = {
-    title: string,
-    name: string,
-    value: string,
-    onChange: (formEvent: React.ChangeEvent<HTMLTextAreaElement>) => void
-}
+type TextAreaProps = {
+  title: string;
+  name: string;
+  value: string;
+  onChange: (formEvent: React.ChangeEvent<HTMLTextAreaElement>) => void;
+};
 
-const TextArea: React.FC<textAreaProps> = ({name, onChange}) => {
+const TextArea: React.FC<TextAreaProps> = ({ title, name, value, onChange }) => {
   return (
     <div>
       <label>
