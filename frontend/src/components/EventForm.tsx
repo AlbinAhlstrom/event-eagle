@@ -21,7 +21,7 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
     register,
     handleSubmit,
     setValue,
-  } = useForm<formFields>();
+  } = useForm<formFields>({defaultValues: defaultEvent});
 
   const onSubmit: SubmitHandler<formFields> = (data) => {
     console.log("default event:", defaultEvent)
@@ -49,6 +49,7 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         });
+        setValue("title", defaultEvent.title)
         setValue("category", defaultEvent.category)
         return;
       });
@@ -69,14 +70,14 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
             <input
             type="text"
               className="input input-bordered w-3/4"
-              {...register("title", {value: defaultEvent.title})}
+              {...register("title")}
             />
           </label>
           <label>
             <p className="label-text">{"description"}</p>
             <input
               className="input input-bordered  w-3/4"
-              {...register("description", {value: defaultEvent.description})}
+              {...register("description")}
             />
           </label>
           <label>
@@ -84,7 +85,7 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
             <input
               type="datetime-local"
               className="input input-bordered  w-3/4"
-              {...register("startTime", {value: defaultEvent.startTime})}
+              {...register("startTime")}
             />
           </label>
           <label>
@@ -92,14 +93,13 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
             <input
               className="input input-bordered  w-3/4"
               defaultValue={defaultEvent.price}
-              {...register("price", {value: defaultEvent.price})}
+              {...register("price")}
             />
           </label>
           <label>
             <p className="label-text">{"category"}</p>
             <select
               className="select select-bordered w-3/4"
-              defaultValue={defaultEvent.category}
               {...register("category")}
             >
               <option value={categories.music}>{categories.music}</option>
