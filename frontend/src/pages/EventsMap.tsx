@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
 import useSWR from "swr";
 import { useParams, useNavigate } from "react-router-dom";
-import EventCard from "../components/EventCard";
 import DistanceSlider from "../components/DistanceSlider";
 import { EventDetailsListing, EventListing, getDistanceFromLatLonInKm } from "../util";
+import DiscoveryMap from "../components/DiscoveryMap"
 
 const BASE_URL = "https://event-eagle.azurewebsites.net/";
 const EVENTS_ENDPOINT = `${BASE_URL}Events`;
@@ -177,18 +177,7 @@ console.log(eventsNearby)
         {!events && (
           <span className="loading loading-lg big-spinner h-16 text-primary text-xl"></span>
         )}
-        {filteredEvents.map((event) => (
-          <EventCard
-            key={event.id}
-            id={event.id}
-            title={event.title}
-            description={event.description}
-            startTime={new Date(event.startTime)}
-            venue={event.venue}
-            price={event.price}
-            category={event.category ?? "Arts & Theatre"}
-          />
-        ))}
+        <DiscoveryMap center={userLocation} events={filteredEvents} />
       </div>
       <button
         className="btn btn-primary self-center fixed bottom-2 mt-auto w-40 z-50 max-md:w-5/6"
