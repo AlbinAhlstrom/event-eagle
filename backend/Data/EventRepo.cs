@@ -219,5 +219,35 @@ namespace Data
 
             return null;
         }
+
+        public async Task<IEnumerable<UserEventDTO>> GetUserEventsData()
+        {
+             var userEvents = await _context.UserEvents.ToListAsync();
+            var userEventDtoList = userEvents.Select(ev => new UserEventDTO
+            {
+                UserId = ev.UserId,
+                EventId = ev.EventId,
+                CreatedByUser = ev.CreatedByUser
+            }).ToList();
+
+            return userEventDtoList;
+        }
+
+        public async Task<UserEvents> CreateUserEvent(UserEventDTO userEvent)
+        {
+            var mappingObj = await _context.Events.Where(e => e.Id == userEvent.EventId).SingleOrDefaultAsync();
+            var addUserEvent = new UserEvents
+            {
+                UserId = userEvent.UserId,
+                EventId = userEvent.EventId,
+                Event = mappingObj,
+                CreatedByUser = userEvent.CreatedByUser
+            };
+
+            _context.UserEvents.Add(addUserEvent);
+            await _context.SaveChangesAsync();
+
+            return addUserEvent;
+        }
     }
 }
