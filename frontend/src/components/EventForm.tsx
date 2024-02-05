@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { categories} from "../util";
+import { categories } from "../util";
 import MapWindow from "./FormMap";
 import { useEffect, useState } from "react";
 import {
