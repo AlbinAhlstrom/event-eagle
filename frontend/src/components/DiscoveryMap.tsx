@@ -17,7 +17,7 @@ const MapWindow: React.FC<MapWindowProps> = ({events, center, zoom=16}: MapWindo
       <APIProvider apiKey={apiUrl}>
         <Map
         className="h-full w-full rounded-xl"
-          zoom={zoom}
+          zoom={16 - zoom}
           center={center}
           mapId={mapId}
           gestureHandling={'greedy'}
