@@ -15,7 +15,7 @@ const EventsMap: React.FC = () => {
   const [userLocation, setUserLocation] = React.useState<{
     lat: number;
     lng: number;
-  } | null>(null);
+  }>({lat: 0, lng: 0});
   const [distanceFilter, setDistanceFilter] = useState(2);
   const { type } = useParams<"type">();
   const navigate = useNavigate();
