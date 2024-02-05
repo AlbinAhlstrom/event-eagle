@@ -111,7 +111,7 @@ export type Coordinate = {
 export type formFields = {
   title: string;
   description: string;
-  startTime: Date;
+  startTime: string;
   price: number;
   category: categoryType;
   latitude: number;
