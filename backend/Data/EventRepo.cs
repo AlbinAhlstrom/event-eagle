@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Models;
 
@@ -230,20 +231,30 @@ namespace Data
         }
 
         public async Task<UserEvents> CreateUserEvent(UserEventDTO userEvent)
-        {
-            var mappingObj = await _context.Events.Where(e => e.Id == userEvent.EventId).SingleOrDefaultAsync();
-            var addUserEvent = new UserEvents
-            {
-                UserId = userEvent.UserId,
-                EventId = userEvent.EventId,
-                Event = mappingObj,
-                CreatedByUser = userEvent.CreatedByUser
-            };
+{
+    var existingUserEvent = await _context.UserEvents
+        .Where(ue => ue.UserId == userEvent.UserId && ue.EventId == userEvent.EventId)
+        .FirstOrDefaultAsync();
 
-            _context.UserEvents.Add(addUserEvent);
-            await _context.SaveChangesAsync();
+    if (existingUserEvent != null)
+    {
+        return null;
+    }
 
-            return addUserEvent;
-        }
+    var mappingObj = await _context.Events.Where(e => e.Id == userEvent.EventId).SingleOrDefaultAsync();
+    var addUserEvent = new UserEvents
+    {
+        UserId = userEvent.UserId,
+        EventId = userEvent.EventId,
+        Event = mappingObj,
+        CreatedByUser = userEvent.CreatedByUser
+    };
+
+    _context.UserEvents.Add(addUserEvent);
+    await _context.SaveChangesAsync();
+
+    return addUserEvent;
+}
+
     }
 }
