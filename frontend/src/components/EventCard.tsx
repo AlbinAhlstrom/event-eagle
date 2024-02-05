@@ -105,7 +105,7 @@ const isSaveEventButtonVisible = location.pathname !== "/savedEvents";
 
         <h2 className="card-title mr-auto">{props.title}</h2>
         {!isSaveEventButtonVisible && (
-          <button onClick={handleDeleteSavedEventClick}>Remove</button>
+          <button className="btn btn-primary" onClick={handleDeleteSavedEventClick}>Remove</button>
           )}
         </div>
         <p>{props.description}</p>
