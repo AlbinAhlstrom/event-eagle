@@ -61,8 +61,8 @@ export type EventListing = {
   id: number;
   title: string;
   description: string;
-  startTime: Date;
-  endTime: Date;
+  startTime: string;
+  endTime: string;
   venue: string;
   address: string;
   latitude: number;
@@ -73,16 +73,16 @@ export type EventListing = {
 
 export const defaultEventListing: EventListing = {
   id: 0,
-  title: "",
-  description: "",
-  startTime: new Date,
-  endTime: new Date,
+  title: "default",
+  description: "desc",
+  startTime: toDateTimeString(new Date),
+  endTime: toDateTimeString(new Date),
   venue: "",
   address: "",
   latitude: 0,
   longitude: 0,
-  price: 0,
-  category: categories.music,
+  price: 10,
+  category: categories.sports,
 };
 
 export type EventCardProps = {
@@ -111,7 +111,7 @@ export type Coordinate = {
 export type formFields = {
   title: string;
   description: string;
-  startTime: string;
+  startTime: string | Date;
   price: number;
   category: categoryType;
   latitude: number;

@@ -6,7 +6,6 @@ import {
   Coordinate,
   EventListing,
   formFields,
-  formToListing,
   defaultEventListing,
 } from "../util";
 
@@ -21,13 +20,13 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
     setValue,
-  } = useForm<formFields>();
+  } = useForm<formFields>({defaultValues: defaultEvent});
 
   const onSubmit: SubmitHandler<formFields> = (data) => {
-    console.log(data)
-    onSave(formToListing(data));
+    console.log("default event:", defaultEvent)
+    console.log("updated event:", data)
+    onSave(data)
   };
 
   // Position
@@ -50,7 +49,7 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         });
-        setValue("startTime", toDateTimeString(defaultEvent.startTime))
+        setValue("title", defaultEvent.title)
         setValue("category", defaultEvent.category)
         return;
       });
@@ -69,8 +68,8 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
           <label>
             <p className="label-text">{"title"}</p>
             <input
+            type="text"
               className="input input-bordered w-3/4"
-              defaultValue={defaultEvent.title}
               {...register("title")}
             />
           </label>
@@ -78,7 +77,6 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
             <p className="label-text">{"description"}</p>
             <input
               className="input input-bordered  w-3/4"
-              defaultValue={defaultEvent.description}
               {...register("description")}
             />
           </label>
@@ -102,7 +100,6 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
             <p className="label-text">{"category"}</p>
             <select
               className="select select-bordered w-3/4"
-              defaultValue={defaultEvent.category}
               {...register("category")}
             >
               <option value={categories.music}>{categories.music}</option>

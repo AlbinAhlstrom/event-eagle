@@ -5,7 +5,7 @@ import { EventListing, defaultEventListing } from '../util';
 
 const EditEvent = () => {
   const { id } = useParams<'id'>();
-  const [eventData, setEventData] = useState(defaultEventListing);
+  const [eventData, setEventData] = useState(null);
   const navigate = useNavigate();
 
   const BASE_URL = 'https://event-eagle.azurewebsites.net';
@@ -56,9 +56,9 @@ const EditEvent = () => {
   // Only display the form if eventData is present
   return eventData ? (
     <div className='flex flex-col justify-between items-center h-screen-h'>
-    <EventForm defaultEvent={eventData} onSave={updateEvent} title="Update event:"/>
-    <button className='btn btn-primary fixed bottom-2 mt-auto mx-auto' onClick={() => navigate("/admin")}>Back to dashboard</button>
-</div>
+      <EventForm defaultEvent={{...eventData}} onSave={updateEvent} title="Update event:"/>
+      <button className='btn btn-primary fixed bottom-2 mt-auto mx-auto' onClick={() => navigate("/admin")}>Back to dashboard</button>
+    </div>
   ) : (
     <p>Loading event...</p>
   );
