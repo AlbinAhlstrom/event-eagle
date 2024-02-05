@@ -1,11 +1,11 @@
-import { APIProvider, Map, AdvancedMarker, AdvancedMarkerRef, Pin } from '@vis.gl/react-google-maps';
+import { APIProvider, Map, AdvancedMarker, Pin } from '@vis.gl/react-google-maps';
 import { Coordinate, EventListing } from '../util';
 
 
 type MapWindowProps =  {
   events: EventListing[]
   center: Coordinate
-  zoom: number
+  distanceFilter: number
 }
 
 const MapWindow: React.FC<MapWindowProps> = ({events, center, distanceFilter}: MapWindowProps) => {
@@ -13,7 +13,10 @@ const MapWindow: React.FC<MapWindowProps> = ({events, center, distanceFilter}: M
   const mapId = import.meta.env.VITE_GMAPS_MAPID;
 
   return (
+    
     <div className="relative h-60vh w-60vh rounded">
+      <h1 className='hidden'>{events.toString()}</h1>
+      <h1 className='hidden'>{distanceFilter}</h1>
       <APIProvider apiKey={apiUrl}>
         <Map
           className="h-full w-full rounded-xl"
