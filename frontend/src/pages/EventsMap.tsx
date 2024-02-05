@@ -200,4 +200,4 @@ console.log(eventsNearby)
   );
 };
 
-export default Events;
+export default EventsMap;
