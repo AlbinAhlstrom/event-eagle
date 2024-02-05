@@ -20,6 +20,19 @@ namespace EventFider.Controllers
             _repo = repo;
         }
 
+        [HttpGet("userEvents")]
+        public async Task<ActionResult<IEnumerable<UserEvents>>> GetUserEvents()
+        {
+            var response = await _repo.GetUserEventsData();
+            return Ok(response);
+        }
+        [HttpPost("add/userEvent")]
+        public async Task<ActionResult<UserEvents>> AddUserEvent(UserEventDTO userEvents)
+        {
+            var response = await _repo.CreateUserEvent(userEvents);
+             return Ok(response);
+        }
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EventResponse>>> GetEvents() 
         {
