@@ -1,7 +1,7 @@
 import React from "react";
 
 type textInputProps = {
-    register: ()
+    register:  () => void;
 }
 
 const TextInput: React.FC<textInputProps> = ({register, name}) => {
