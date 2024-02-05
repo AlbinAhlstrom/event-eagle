@@ -5,12 +5,26 @@ import { UserButton, useClerk } from "@clerk/clerk-react";
 
 const Header = () => {
   const navigate = useNavigate();
-  const {user} = useClerk();
+  const { user } = useClerk();
 
-  let content;
-if(user?.publicMetadata.role === "admin"){
- content = (
-<button
+  let savedEventsButton = null;
+  let adminButton = null;
+
+  if (user) {
+    // User is signed in, show Saved Events button
+    savedEventsButton = (
+      <button
+        className="btn btn-ghost text-xl h-nav-icon-h"
+        onClick={() => navigate("/savedEvents")}
+      >
+        Saved Events
+      </button>
+    );
+
+    // Check if the user is an admin
+    if (user.publicMetadata.role === "admin") {
+      adminButton = (
+        <button
           className="btn btn-square btn-ghost"
           onClick={() => navigate("/admin")}
         >
@@ -28,24 +42,21 @@ if(user?.publicMetadata.role === "admin"){
             ></path>
           </svg>
         </button>
-)
-}
+      );
+    }
+  }
+
   return (
     <div className="navbar bg-ghost shadow-lg h-nav z-50 sticky top-0 h-nav-h">
       <div className="flex-1">
         <Link to="/home" className="btn btn-ghost text-xl h-nav-icon-h">
-          <img src={logo} className="h-full"></img>
+          <img src={logo} className="h-full" alt="Event Eagle Logo" />
           <h1>Event Eagle</h1>
         </Link>
       </div>
       <div className="flex-none">
-        <div>
-          <button className="btn btn-ghost text-xl h-nav-icon-h" onClick={()=>navigate("/savedEvents")}>Saved Events</button>
-        </div>
-        <div>
-          {content}
-        </div>
-
+        <div>{savedEventsButton}</div>
+        <div>{adminButton}</div>
       </div>
       <UserButton afterSignOutUrl="/" />
     </div>
