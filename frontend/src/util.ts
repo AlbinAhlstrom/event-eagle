@@ -48,6 +48,15 @@ export const categories = {
 
 export type categoryType = (typeof categories)[keyof typeof categories];
 
+export const toDateTimeString = (date: Date) => {
+  const year = date.getFullYear()
+  const month = (date.getMonth() + 1).toString().padStart(2, "0")
+  const day = date.getDate().toString().padStart(2, "0")
+  const hours = date.getHours()
+  const minutes = date.getMinutes()
+  return `${year}-${month}-${day}T${hours}:${minutes}`
+}
+
 export type EventListing = {
   id: number;
   title: string;
