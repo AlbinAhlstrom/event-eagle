@@ -11,6 +11,7 @@ import SignInPage from "./pages/SignInPage";
 import EditEvent from "./pages/EditEvent";
 import Purchase from "./pages/Purchase";
 import Create from "./pages/Create";
+import SavedEvents from "./pages/SavedEvents";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
               <Routes>
                 <Route index element={<Home />} />
                 <Route path="/home" element={<Home />} />
+                <Route path="/savedEvents" element={<SavedEvents />} />
                 <Route path="/categories" element={<Categories />} />
                 <Route path="/events" element={<Events />} />
                 <Route path="/events/create" element={<Create />} />
