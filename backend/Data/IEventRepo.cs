@@ -14,5 +14,7 @@ namespace Data
 
         Task<IEnumerable<EventResponseDTO>> GetAllEventsDTO();
         Task<EventResponseDTO> GetEventDTOById(int id);
+        Task<IEnumerable<UserEventDTO>> GetUserEventsData();
+        Task<UserEvents> CreateUserEvent (UserEventDTO userEvent);
     }
 }
