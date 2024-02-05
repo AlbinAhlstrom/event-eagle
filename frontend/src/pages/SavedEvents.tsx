@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import EventCard from "../components/EventCard";
 import { useClerk } from "@clerk/clerk-react";
 import { SavedEvent } from "../util";
+import { useNavigate } from "react-router-dom";
 
 const SavedEvents: React.FC = () => {
   const [savedEvents, setSavedEvents] = useState<SavedEvent[]>([]);
   const {user} = useClerk();
+  const navigate = useNavigate();
 
   const fetchUserEvents = async () => {
     const response = await fetch(
@@ -23,9 +25,14 @@ const SavedEvents: React.FC = () => {
   }, []);
 
 
+  const handleBackToListClick = () => {
+    navigate(-1);
+  }
+
   return (
     <div className="flex flex-col justify-center items-center mt-10">
       <h1 className="text-5xl font-bold">Saved Events</h1>
+      <button className="btn btn-primary mt-5" onClick={handleBackToListClick}>Back to list</button>
       <div className="flex gap-10 flex-wrap justify-center mt-10 ">
 
       {savedEvents.map((ev, index) => {
