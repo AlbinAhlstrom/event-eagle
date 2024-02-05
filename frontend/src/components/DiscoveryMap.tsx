@@ -8,7 +8,7 @@ type MapWindowProps =  {
   zoom: number
 }
 
-const MapWindow: React.FC<MapWindowProps> = ({events, center, zoom=16}: MapWindowProps) => {
+const MapWindow: React.FC<MapWindowProps> = ({events, center, distanceFilter}: MapWindowProps) => {
   const apiUrl = import.meta.env.VITE_GMAPS_KEY;
   const mapId = import.meta.env.VITE_GMAPS_MAPID;
 
@@ -17,7 +17,8 @@ const MapWindow: React.FC<MapWindowProps> = ({events, center, zoom=16}: MapWindo
       <APIProvider apiKey={apiUrl}>
         <Map
         className="h-full w-full rounded-xl"
-          zoom={16 - zoom}
+          // Zoom out when distance filter increases
+          zoom={16 - distanceFilter}
           center={center}
           mapId={mapId}
           gestureHandling={'greedy'}

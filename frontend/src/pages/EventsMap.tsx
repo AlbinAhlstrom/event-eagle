@@ -177,7 +177,7 @@ console.log(eventsNearby)
         {!events && (
           <span className="loading loading-lg big-spinner h-16 text-primary text-xl"></span>
         )}
-        <DiscoveryMap center={userLocation} events={filteredEvents} zoom={distanceFilter}/>
+        <DiscoveryMap center={userLocation} events={filteredEvents} distanceFilter={distanceFilter}/>
       </div>
       <button
         className="btn btn-primary self-center fixed bottom-2 mt-auto w-40 z-50 max-md:w-5/6"
