@@ -5,8 +5,9 @@ import family from "../images/family-icon.webp";
 import arts from "../images/arts-icon.webp";
 import music from "../images/music-icon.webp";
 import CountdownTimer from "./CountDown";
-import { EventCardProps, IconMap } from "../util";
+import { IconMap } from "../util";
 import { useClerk } from "@clerk/clerk-react";
+import { categoryType } from "../util";
 
 const getIcon: IconMap = {
   Music: music,
@@ -15,7 +16,18 @@ const getIcon: IconMap = {
   Family: family,
 };
 
-const EventCard: React.FC<EventCardProps> = (props) => {
+ type Props = {
+  id: number | string;
+  title: string;
+  description: string;
+  startTime: string | Date;
+  venue: string | undefined;
+  price: number;
+  category: categoryType;
+  updateSavedEvents?: () => void;
+};
+
+const EventCard: React.FC<Props> = (props) => {
   const navigate = useNavigate();
   const {user} = useClerk();
 

@@ -1,3 +1,20 @@
+export const toDateTimeString = (date: Date) => {
+  const year = date.getFullYear()
+  const month = (date.getMonth() + 1).toString().padStart(2, "0")
+  const day = date.getDate().toString().padStart(2, "0")
+  const hours = date.getHours()
+  const minutes = date.getMinutes()
+  return `${year}-${month}-${day}T${hours}:${minutes}`
+}
+
+export const fromDateTimeString = (dateTimeString: string): Date => {
+  const [datePart, timePart] = dateTimeString.split('T');
+  const [year, month, day] = datePart.split('-').map(Number);
+  const [hours, minutes] = timePart.split(':').map(Number);
+
+  return new Date(year, month - 1, day, hours, minutes);
+};
+
 export const getDistanceFromLatLonInKm = (
   lat1: number,
   lon1: number,
@@ -20,21 +37,6 @@ export const getDistanceFromLatLonInKm = (
   return d;
 };
 
-export type EventDetailsListing = {
-  id: number | string;
-  title: string;
-  description: string;
-  startTime: string | Date;
-  endTime?: Date | string | null;
-  venue?: string;
-  address: string;
-  latitude: number;
-  longitude: number;
-  price: number;
-  category?: categoryType;
-};
-
-
 export const deg2rad = (deg: number): number => {
   return deg * (Math.PI / 180);
 };
@@ -42,42 +44,14 @@ export const deg2rad = (deg: number): number => {
 export const categories = {
     music: "Music",
     sports: "Sports",
-    arts: "Arts & Theatre",
+    arts: "Arts",
     family: "Family",
 } as const
 
 export type categoryType = (typeof categories)[keyof typeof categories];
 
-export const toDateTimeString = (date: Date) => {
-  const year = date.getFullYear()
-  const month = (date.getMonth() + 1).toString().padStart(2, "0")
-  const day = date.getDate().toString().padStart(2, "0")
-  const hours = date.getHours()
-  const minutes = date.getMinutes()
-  return `${year}-${month}-${day}T${hours}:${minutes}`
-}
 
-export const fromDateTimeString = (dateTimeString: string): Date => {
-  const [datePart, timePart] = dateTimeString.split('T');
-  const [year, month, day] = datePart.split('-').map(Number);
-  const [hours, minutes] = timePart.split(':').map(Number);
-
-  return new Date(year, month - 1, day, hours, minutes);
-};
-
-export interface SavedEvent {
-  event: {
-    id: number;
-    title: string;
-    description: string;
-    startTime: string | Date;
-    venue: string | undefined;
-    price: number;
-    category: categoryType;
-  };
-}
-
-export type EventListing = {
+export type Event = {
   id: number;
   title: string;
   description: string;
@@ -91,7 +65,7 @@ export type EventListing = {
   category: categoryType;
 };
 
-export const defaultEventListing: EventListing = {
+export const defaultEventListing: Event = {
   id: 0,
   title: "default",
   description: "desc",
@@ -105,16 +79,7 @@ export const defaultEventListing: EventListing = {
   category: categories.sports,
 };
 
-export type EventCardProps = {
-  id: number | string;
-  title: string;
-  description: string;
-  startTime: string | Date;
-  venue: string | undefined;
-  price: number;
-  category: categoryType;
-  updateSavedEvents?: () => void;
-};
+
 
 export interface CountdownTimerProps {
   targetDate: string | Date;
