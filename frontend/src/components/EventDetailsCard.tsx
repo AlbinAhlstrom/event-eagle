@@ -1,10 +1,10 @@
 import React from 'react';
 import CountdownTimer from './CountDown';
 import { useNavigate } from 'react-router-dom';
-import { EventListing } from '../util';
+import { Event } from '../util';
 
 interface props {
-  event: EventListing;
+  event: Event;
 }
 
 const EventDetailsCard: React.FC<props> = ({ event }) => {
