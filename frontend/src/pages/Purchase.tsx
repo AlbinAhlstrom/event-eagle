@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
-import { EventListing, defaultEventListing } from "../util";
+import { Event, defaultEventListing } from "../util";
 import { useParams } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 
 const Purchase = () => {
   const { id } = useParams<"id">();
   const BASE_URL = "https://event-eagle.azurewebsites.net";
-  const [event, setEvent] = useState<EventListing>(defaultEventListing);
+  const [event, setEvent] = useState<Event>(defaultEventListing);
 
   useEffect(() => {
     const fetchEvent = async () => {
       const EVENTS_ENDPOINT = `${BASE_URL}/Events/${id}`;
       try {
         const response = await fetch(EVENTS_ENDPOINT);
-        const data: EventListing = await response.json();
+        const data: Event = await response.json();
         setEvent(data);
       } catch (error) {
         console.error("Failed to fetch event", error);
