@@ -5,13 +5,12 @@ import { useClerk } from "@clerk/clerk-react";
 import EditEventCard from "../components/EditEventCard";
 import { useNavigate } from "react-router-dom";
 
-
 const AdminDashboard = () => {
   const [events, setEvents] = useState<Event[]>([]);
-  const {user} = useClerk();
+  const { user } = useClerk();
   const navigate = useNavigate();
 
-  const BASE_URL = "http://event-eagle.azurewebsites.net"
+  const BASE_URL = "http://event-eagle.azurewebsites.net";
 
   useEffect(() => {
     const EVENTS_ENDPOINT = `${BASE_URL}/Events`;
@@ -21,7 +20,7 @@ const AdminDashboard = () => {
   }, []);
 
   const deleteEvent = async (event: Event) => {
-    const BASE_URL = "http://event-eagle.azurewebsites.net"
+    const BASE_URL = "http://event-eagle.azurewebsites.net";
     const EVENTS_ENDPOINT = `${BASE_URL}/Events/${event.id}`;
     const response = await fetch(EVENTS_ENDPOINT, {
       method: "DELETE",
@@ -31,27 +30,26 @@ const AdminDashboard = () => {
     }
   };
 
-
   const handleCreateEvent = () => {
-    navigate("/events/create")
+    navigate("/events/create");
   };
 
-  if(user?.publicMetadata.role !== "admin"){
-  navigate("/home");  
+  if (user?.publicMetadata.role !== "admin") {
+    navigate("/home");
   }
 
   return (
-      <div className="flex flex-col h-screen-h items-center w-full ">
-        <h1 className="text-5xl font-bold m-5"> Admin Dashboard</h1>
+    <div className="flex flex-col h-screen-h items-center w-full ">
+      <h1 className="text-5xl font-bold m-5"> Admin Dashboard</h1>
       <ul className="flex justify-center flex-wrap w-2/3 gap-10">
         {events.map((event) => (
           <li key={event.id}>
-            <EditEventCard event={event} deleteEvent={deleteEvent}/>
+            <EditEventCard event={event} deleteEvent={deleteEvent} />
           </li>
         ))}
       </ul>
-        <BottomButton onClick={handleCreateEvent} text="Create new event" />
-      </div>
+      <BottomButton onClick={handleCreateEvent} text="Create new event" />
+    </div>
   );
 };
 
