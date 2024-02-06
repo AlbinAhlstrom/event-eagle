@@ -113,25 +113,45 @@ export const formToListing = (formData: formFields) => {
 }
 
 export type TicketmasterEvent = {
-    id: string;
-    name: string;
-    dates: {
-      start: {
-        dateTime: string;
+  id: string;
+  name: string;
+  dates: {
+    start: {
+      dateTime: string;
+    };
+  };
+  _embedded: {
+    venues: {
+      address: {
+        line1: string;
       };
-    };
-    _embedded: {
-      venues: {
-        address: {
-          line1: string;
-        };
-        location: {
-          latitude: string;
-          longitude: string;
-        };
-      }[];
-    };
-    priceRanges: {
-      min: number;
+      location: {
+        latitude: string;
+        longitude: string;
+      };
+      city: {
+        name: string;
+      };
     }[];
-}
+  };
+  priceRanges: {
+    min: number;
+  }[];
+  sales: {
+    public: {
+      endDateTime: string;
+    };
+  };
+};
+
+export const fetchUserEvents = async (id: string) => {
+  const response = await fetch(
+    `https://event-eagle.azurewebsites.net/Events/userEvents?userId=${id}`,
+  );
+  const data = await response.json();
+  return data;
+};
+export const updateSavedEvents = async (id: string) => {
+  const data = await fetchUserEvents(id);
+  return data;
+};

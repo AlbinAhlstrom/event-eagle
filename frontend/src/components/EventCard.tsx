@@ -5,7 +5,7 @@ import family from "../images/family-icon.webp";
 import arts from "../images/arts-icon.webp";
 import music from "../images/music-icon.webp";
 import CountdownTimer from "./CountDown";
-import { IconMap, Event } from "../util";
+import { IconMap, Event, fetchUserEvents } from "../util";
 import { useClerk } from "@clerk/clerk-react";
 
 const getIcon: IconMap = {
@@ -57,24 +57,25 @@ const EventCard: React.FC<Props> = ({event, updateSavedEvents }) => {
         throw error;
       });
   };
-
+  
   const handleDeleteEvent = async () => {
     try {
+      console.log(event.eventId)
       const response = await fetch(
-        `  https://event-eagle.azurewebsites.net/Events/userEvents/delete?userId=${user?.id}&eventId=${event.id}`,
+        `  https://event-eagle.azurewebsites.net/Events/userEvents/delete?userId=${user?.id}&eventId=${event.eventId}`,
         {
-          method: "DELETE",
+          method: 'DELETE',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
         }
       );
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw new Error('Network response was not ok');
       }
-      console.log("Event deleted successfully");
+      console.log('Event deleted successfully');
     } catch (error) {
-      console.error("Error:", error);
+      console.error('Error:', error);
     }
   };
 
@@ -88,10 +89,15 @@ const EventCard: React.FC<Props> = ({event, updateSavedEvents }) => {
   };
 
   const handleDeleteSavedEventClick = async () => {
-    await handleDeleteEvent();
-    await updateSavedEvents();
-    navigate("/savedEvents");
+    try {
+      await handleDeleteEvent();
+      if(user){await updateSavedEvents(user.id);}
+      navigate("/savedEvents");
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
+
 
   const isSaveEventButtonVisible = location.pathname !== "/savedEvents";
 

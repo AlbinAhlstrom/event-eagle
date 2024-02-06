@@ -3,7 +3,12 @@ import useSWR from "swr";
 import { useParams, useNavigate } from "react-router-dom";
 import EventCard from "../components/EventCard";
 import DistanceSlider from "../components/DistanceSlider";
-import { Event, getDistanceFromLatLonInKm } from "../util";
+import {
+  getDistanceFromLatLonInKm,
+  Event,
+  TicketmasterEvent,
+  updateSavedEvents,
+} from "../util";
 
 const BASE_URL = "https://event-eagle.azurewebsites.net/";
 const EVENTS_ENDPOINT = `${BASE_URL}Events`;
@@ -20,13 +25,13 @@ const Events: React.FC = () => {
   const { type } = useParams<"type">();
   const navigate = useNavigate();
 
-  const [data, setData] = useState<Event[]>();
+  const [data, setData] = useState<TicketmasterEvent[]>();
 
-  const endTime = new Date();
-  endTime.setHours(23, 59, 59);
-  const endTimeISOString =
-    endTime.toISOString().slice(0, -5) + "Z";
-  const ticketMasterAPI = `https://app.ticketmaster.com/discovery/v2/events.json?size=50&unit=km&geoPoint=u6scd&radius=10&endDateTime=${endTimeISOString}&sort=date,asc&apikey=${ticketmasterKey}`;
+  // const endTime = new Date();
+  // endTime.setHours(23, 59, 59);
+  // const endTimeISOString =
+  //   endTime.toISOString().slice(0, -5) + "Z";
+  const ticketMasterAPI = `https://app.ticketmaster.com/discovery/v2/events.json?size=50&unit=km&geoPoint=u6scd&radius=10&endDateTime=2024-02-29T23:59:59Z&sort=date,asc&apikey=${ticketmasterKey}`;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,65 +52,26 @@ const Events: React.FC = () => {
     fetchData();
   }, [ticketMasterAPI]);
 
-  const ticketEvents: Event[] = [];
+  console.log(data);
 
+  let ticketEvents: Event[] = [];
   if (data) {
-    data.forEach((event) => {
-      if (
-        "_embedded" in event &&
-        "priceRanges" in event &&
-        "name" in event &&
-        "dates" in event
-      ) {
-        const ticketmasterEvent = event as {
-          _embedded: {
-            venues: {
-              address: {
-                line1: string;
-              };
-              location: {
-                latitude: string;
-                longitude: string;
-              };
-            }[];
-          };
-          priceRanges: {
-            min: number;
-          }[];
-          name: string;
-          dates: {
-            start: {
-              dateTime: string;
-            };
-          };
-        };
-
-        const venue = ticketmasterEvent._embedded?.venues[0];
-        const priceRange = ticketmasterEvent.priceRanges?.[0];
-
-        ticketEvents.push({
-          id: event.id,
-          title: ticketmasterEvent.name || "Unknown Event",
-          description: "Ticketmaster event",
-          startTime: new Date(
-            ticketmasterEvent.dates?.start?.dateTime || ""
-          ),
-          address: venue?.address?.line1 || "No address available",
-          latitude: parseFloat(venue?.location?.latitude || "0") || 0,
-          longitude: parseFloat(venue?.location?.longitude || "0") || 0,
-          price: priceRange?.min || 0,
-          venue: "",
-          endTime: null,
-        });
-      } else {
-        ticketEvents.push(event);
-      }
-    });
+    ticketEvents = data.map((data: TicketmasterEvent) => ({
+      id: 0,
+      title: data.name || "Untitled Event",
+      description: "Ticketmaster Event",
+      startTime: data.dates.start.dateTime || "",
+      endTime: data.sales?.public.endDateTime || "",
+      venue: data._embedded.venues[0]?.city?.name || "Unknown Venue",
+      address: data._embedded.venues[0]?.address.line1 || "Unknown Address",
+      latitude: parseFloat(data._embedded.venues[0]?.location.latitude) || 0,
+      longitude: parseFloat(data._embedded.venues[0]?.location.longitude) || 0,
+      price: data.priceRanges[0]?.min || 0,
+      category: "Music",
+    }));
   }
 
-  const handleSliderChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const sliderValue = Number(event.target.value);
     setDistanceFilter(sliderValue);
   };
@@ -125,17 +91,9 @@ const Events: React.FC = () => {
   }, []);
 
   // eslint-disable-next-line prefer-const
-  let { data: events, error } = useSWR<Event[]>(
-    EVENTS_ENDPOINT,
-    fetcher
-  );
+  let { data: events, error } = useSWR<Event[]>(EVENTS_ENDPOINT, fetcher);
 
-  console.log(events);
-
-
-  events = Array.isArray(events)
-    ? [...events, ...ticketEvents]
-    : ticketEvents;
+  events = Array.isArray(events) ? [...events, ...ticketEvents] : ticketEvents;
 
   const eventsNearby = useMemo(() => {
     return (
@@ -154,24 +112,21 @@ const Events: React.FC = () => {
     );
   }, [events, userLocation, distanceFilter]);
 
-console.log(eventsNearby)
-
   const filteredEvents = useMemo(() => {
     return (
-      eventsNearby.filter(
-        (event) => !type || event.category === type
-      ) || []
+      eventsNearby.filter((event) => !type || event.category === type) || []
     );
   }, [eventsNearby, type]);
+
+  const handleUpdateSaveEvent = () => {
+    updateSavedEvents("test");
+  };
 
   console.log(filteredEvents);
 
   return (
     <div className="flex flex-col">
-      <DistanceSlider
-        value={distanceFilter}
-        onChange={handleSliderChange}
-      />
+      <DistanceSlider value={distanceFilter} onChange={handleSliderChange} />
       <div className="flex justify-center items-center flex-wrap gap-10 mt-10 mb-32">
         {error && <h1>Failed to load</h1>}
         {!events && (
@@ -180,13 +135,8 @@ console.log(eventsNearby)
         {filteredEvents.map((event) => (
           <EventCard
             key={event.id}
-            id={event.id}
-            title={event.title}
-            description={event.description}
-            startTime={new Date(event.startTime)}
-            venue={event.venue}
-            price={event.price}
-            category={event.category ?? "Arts & Theatre"}
+            event={event}
+            updateSavedEvents={handleUpdateSaveEvent}
           />
         ))}
       </div>
