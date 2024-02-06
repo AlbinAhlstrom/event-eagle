@@ -11,7 +11,7 @@ const CategoryCard: React.FC<CategoryCardProps> = (props) => {
 
   return (
     <div 
-    className="card shadow-lg bg-neutral max-h-max-card-h sm:max-w-max-card-w"
+    className="card shadow-lg bg-neutral max-h-max-card-h max-w-max-card-w "
     >
   <figure><img src={props.image} alt={props.category} className='h-full w-full'/></figure>
   <div className="card-body flex flex-row py-2">
