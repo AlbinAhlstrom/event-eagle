@@ -39,7 +39,7 @@ const EventsMap: React.FC = () => {
         onChange={handleSliderChange}
       />
       <div className="flex justify-center items-center flex-wrap gap-10 mt-4">
-        <DiscoveryMap center={userLocation} distanceFilter={distanceFilter}/>
+        <DiscoveryMap center={userLocation} distanceFilter={distanceFilter} circleRadius={() => 1000*distanceFilter}/>
       </div>
       <button
         className="btn btn-primary self-center fixed bottom-2 mt-auto w-40 z-50 max-md:w-5/6"

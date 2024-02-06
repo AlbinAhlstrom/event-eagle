@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import GoogleMap from 'google-map-react';
 
 type Coordinate = {
@@ -12,37 +12,57 @@ type MapWindowProps = {
 };
 
 const MapComponent = ({ center, distanceFilter }: MapWindowProps) => {
-
   const mapStyles = {
-    height: "70vh",
-    width: "70vh",
+    height: '70vh',
+    width: '70vh',
   };
 
-  useEffect(() => {}, [center]);
+  const mapRef = useRef();
+  const mapsRef = useRef();
+  const circleRef = useRef();
 
-  const Map = () =>(
+  useEffect(() => {
+    if (mapRef.current && mapsRef.current) {
+      if (circleRef.current) {
+        circleRef.current.setMap(null); // Clear the current circle
+      }
+
+      circleRef.current = new mapsRef.current.Circle({
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.3,
+        map: mapRef.current,
+        center: center,
+        radius: 1000 * distanceFilter, // Dynamic radius
+      });
+    }
+  }, [center, distanceFilter]);
+
+  return (
     <div style={mapStyles}>
       <GoogleMap
         bootstrapURLKeys={{ key: import.meta.env.VITE_GMAPS_KEY }}
         defaultZoom={16 - distanceFilter}
         defaultCenter={center}
-        onGoogleApiLoaded={({map, maps}) =>
-          new google.maps.Circle({
+        yesIWantToUseGoogleMapApiInternals // Enable the use of the internal Google Maps objects
+        onGoogleApiLoaded={({ map, maps }) => {
+          mapRef.current = map;
+          mapsRef.current = maps;
+          circleRef.current = new maps.Circle({
             strokeColor: '#FF0000',
             strokeOpacity: 0.8,
             strokeWeight: 2,
             fillColor: '#FF0000',
             fillOpacity: 0.3,
-            map,
+            map: map,
             center: center,
-            radius: 275,
-          })}
+            radius: 1000 * distanceFilter,
+          });
+        }}
       />
     </div>
-  );
-
-  return (
-    Map()
   );
 };
 
