@@ -5,9 +5,8 @@ import family from "../images/family-icon.webp";
 import arts from "../images/arts-icon.webp";
 import music from "../images/music-icon.webp";
 import CountdownTimer from "./CountDown";
-import { IconMap } from "../util";
+import { IconMap, Event } from "../util";
 import { useClerk } from "@clerk/clerk-react";
-import { categoryType } from "../util";
 
 const getIcon: IconMap = {
   Music: music,
@@ -16,119 +15,114 @@ const getIcon: IconMap = {
   Family: family,
 };
 
- type Props = {
-  id: number | string;
-  title: string;
-  description: string;
-  startTime: string | Date;
-  venue: string | undefined;
-  price: number;
-  category: categoryType;
-  updateSavedEvents?: () => void;
+type Props = {
+  event: Event;
+  updateSavedEvents: () => void;
 };
 
-const EventCard: React.FC<Props> = (props) => {
+const EventCard: React.FC<Props> = ({event, updateSavedEvents }) => {
   const navigate = useNavigate();
-  const {user} = useClerk();
+  const { user } = useClerk();
 
   const handleSeeDetailsClick = () => {
-    navigate(`/event/${props.id}`, { state: { event: props } });
+    navigate(`/event/${event.id}`, { state: { event: event } });
   };
 
-const userEvent = {
-  userId: user?.id,
-  eventId: props.id,
-  createdByUser: false
-};
+  const userEvent = {
+    userId: user?.id,
+    eventId: event.id,
+    createdByUser: false,
+  };
 
-const PostUserEvent = () => {
-  return fetch("https://event-eagle.azurewebsites.net/Events/add/userEvent", {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(userEvent),
-  })
-    .then(response => {
+  const PostUserEvent = () => {
+    return fetch("https://event-eagle.azurewebsites.net/Events/add/userEvent", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userEvent),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Success:", data);
+        return data;
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        throw error;
+      });
+  };
+
+  const handleDeleteEvent = async () => {
+    try {
+      const response = await fetch(
+        `  https://event-eagle.azurewebsites.net/Events/userEvents/delete?userId=${user?.id}&eventId=${event.id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
-      return response.json(); 
-    })
-    .then(data => {
-      console.log('Success:', data);
-      return data; 
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      throw error; 
-    });
-};
-
-
-const handleDeleteEvent = async () => {
-  try {
-    const response = await fetch(
-      `  https://event-eagle.azurewebsites.net/Events/userEvents/delete?userId=${user?.id}&eventId=${props.id}`,
-      {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
+      console.log("Event deleted successfully");
+    } catch (error) {
+      console.error("Error:", error);
     }
-    console.log('Event deleted successfully');
-  } catch (error) {
-    console.error('Error:', error);
-  }
-};
+  };
 
+  const handleSaveEventClick = () => {
+    PostUserEvent()
+      .then(() => updateSavedEvents())
+      .then(() => navigate("/savedEvents"))
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
 
-const handleSaveEventClick = () => {
-  PostUserEvent()
-    .then(() => props.updateSavedEvents?.())
-    .then(() => navigate("/savedEvents"))
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-}
+  const handleDeleteSavedEventClick = async () => {
+    await handleDeleteEvent();
+    await updateSavedEvents();
+    navigate("/savedEvents");
+  };
 
-const handleDeleteSavedEventClick = async () => {
-  await handleDeleteEvent();
-await props.updateSavedEvents?.();
-navigate("/savedEvents");
+  const isSaveEventButtonVisible = location.pathname !== "/savedEvents";
 
-}
+  const isIdANumber = typeof event.id === "number";
 
-const isSaveEventButtonVisible = location.pathname !== "/savedEvents";
-
-const isIdANumber = typeof props.id === 'number';
-
-  const iconSrc = getIcon[props.category] || "";
+  const iconSrc = getIcon[event.category] || "";
   return (
     <div className="card w-96 bg-base-100 shadow-xl image-full animate__animated animate__bounceInDown">
       <figure>
-        <img src={iconSrc} alt={props.category} />
+        <img src={iconSrc} alt={event.category} />
       </figure>
       <div className="card-body">
         <div className="flex">
-
-        <h2 className="card-title mr-auto">{props.title}</h2>
-        {!isSaveEventButtonVisible && (
-          <button className="btn btn-primary" onClick={handleDeleteSavedEventClick}>Remove</button>
+          <h2 className="card-title mr-auto">{event.title}</h2>
+          {!isSaveEventButtonVisible && (
+            <button
+              className="btn btn-primary"
+              onClick={handleDeleteSavedEventClick}
+            >
+              Remove
+            </button>
           )}
         </div>
-        <p>{props.description}</p>
-        <p>{props.price} SEK</p>
-        <CountdownTimer targetDate={props.startTime} />
+        <p>{event.description}</p>
+        <p>{event.price} SEK</p>
+        <CountdownTimer targetDate={event.startTime} />
         <div className="card-actions justify-center mt-10">
           <button className="btn btn-primary" onClick={handleSeeDetailsClick}>
             See Details
           </button>
-          {isSaveEventButtonVisible&& isIdANumber && (
+          {isSaveEventButtonVisible && isIdANumber && (
             <button className="btn btn-primary" onClick={handleSaveEventClick}>
               Save Event
             </button>
