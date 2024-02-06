@@ -50,6 +50,7 @@ export default {
         'screen-h': '90vh',
         '40vw': '40vw',
         'max-card-w': '38vh',
+        'default-my': '2rem'
       }
     }
   },
