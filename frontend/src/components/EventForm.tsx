@@ -4,18 +4,18 @@ import MapWindow from "./FormMap";
 import { useEffect, useState } from "react";
 import {
   Coordinate,
-  EventListing,
+  Event,
   formFields,
   defaultEventListing,
 } from "../util";
 
-type props = {
+type Props = {
   onSave: (formData: formFields) => void;
-  defaultEvent: EventListing;
+  defaultEvent: Event;
   title?: string;
 };
 
-const EventForm = ({ onSave, defaultEvent, title = "" }: props) => {
+const EventForm = ({ onSave, defaultEvent, title = "" }: Props) => {
   // Form
   const {
     register,
