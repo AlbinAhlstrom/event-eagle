@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import GoogleMap from 'google-map-react';
 
 type Coordinate = {
@@ -24,11 +24,9 @@ const MapComponent = ({ center, distanceFilter }: MapWindowProps) => {
   useEffect(() => {
     if (mapRef.current && mapsRef.current) {
       if (circleRef.current) {
-        // Update the circle
         circleRef.current.setCenter(center);
         circleRef.current.setRadius(1000 * distanceFilter);
       } else {
-        // Create new circle
         circleRef.current = new mapsRef.current.Circle({
           strokeColor: '#FF0000',
           strokeOpacity: 0.8,
@@ -43,10 +41,17 @@ const MapComponent = ({ center, distanceFilter }: MapWindowProps) => {
     }
   }, [center, distanceFilter]);
 
+  useEffect(() => {
+    if (mapRef.current && center) {
+      mapRef.current.panTo(center);
+    }
+  }, [center]);
+
   return (
     <div style={mapStyles}>
       <GoogleMap
         bootstrapURLKeys={{ key: import.meta.env.VITE_GMAPS_KEY }}
+        center={center}
         defaultZoom={16 - distanceFilter}
         defaultCenter={center}
         yesIWantToUseGoogleMapApiInternals
