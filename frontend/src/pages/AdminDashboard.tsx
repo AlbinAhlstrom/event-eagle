@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { EventListing } from "../util";
+import { Event } from "../util";
 import BottomButton from "../components/BottomButton";
 import { useClerk } from "@clerk/clerk-react";
 import EditEventCard from "../components/EditEventCard";
@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const AdminDashboard = () => {
-  const [events, setEvents] = useState<EventListing[]>([]);
+  const [events, setEvents] = useState<Event[]>([]);
   const {user} = useClerk();
   const navigate = useNavigate();
 
@@ -17,10 +17,10 @@ const AdminDashboard = () => {
     const EVENTS_ENDPOINT = `${BASE_URL}/Events`;
     fetch(EVENTS_ENDPOINT)
       .then((response) => response.json())
-      .then((data: EventListing[]) => setEvents(data));
+      .then((data: Event[]) => setEvents(data));
   }, []);
 
-  const deleteEvent = async (event: EventListing) => {
+  const deleteEvent = async (event: Event) => {
     const BASE_URL = "http://event-eagle.azurewebsites.net"
     const EVENTS_ENDPOINT = `${BASE_URL}/Events/${event.id}`;
     const response = await fetch(EVENTS_ENDPOINT, {
