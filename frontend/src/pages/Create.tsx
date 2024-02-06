@@ -1,11 +1,11 @@
-import { EventListing, defaultEventListing } from '../util';
+import { Event, defaultEventListing } from '../util';
 import EventForm from '../components/EventForm';
 import { useNavigate } from 'react-router-dom';
 
 const Create = () => {
   const navigate = useNavigate()
 
-  const postEvent = async (event: EventListing) => {
+  const postEvent = async (event: Event) => {
     console.log("posting", event)
     const BASE_URL = "http://event-eagle.azurewebsites.net"
     const EVENTS_ENDPOINT = `${BASE_URL}/Events`;
@@ -16,7 +16,7 @@ const Create = () => {
       },
       body: JSON.stringify(event),
     });
-    const data: EventListing = await response.json();
+    const data: Event = await response.json();
     console.log("posting", data)
     navigate("/admin");
 
