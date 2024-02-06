@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import EventForm from '../components/EventForm';
-import { EventListing, defaultEventListing, formFields } from '../util';
+import { Event, defaultEventListing, formFields } from '../util';
 
 const EditEvent = () => {
   const { id } = useParams<'id'>();
-  const [eventData, setEventData] = useState<EventListing | null>(null);
+  const [eventData, setEventData] = useState<Event | null>(null);
   const navigate = useNavigate();
 
   const BASE_URL = 'https://event-eagle.azurewebsites.net';
@@ -18,7 +18,7 @@ const EditEvent = () => {
         if (!response.ok) {
           throw new Error('Event not found');
         }
-        const data: EventListing = await response.json();
+        const data: Event = await response.json();
         setEventData(data);
       } catch (error) {
         console.error('Failed to fetch event', error);
