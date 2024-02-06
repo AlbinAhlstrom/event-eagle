@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import GoogleMap from 'google-map-react';
 
 type Coordinate = {
@@ -17,26 +17,29 @@ const MapComponent = ({ center, distanceFilter }: MapWindowProps) => {
     width: '70vh',
   };
 
-  const mapRef = useRef();
-  const mapsRef = useRef();
-  const circleRef = useRef();
+  const mapRef = useRef(null);
+  const mapsRef = useRef(null);
+  const circleRef = useRef(null);
 
   useEffect(() => {
     if (mapRef.current && mapsRef.current) {
       if (circleRef.current) {
-        circleRef.current.setMap(null); // Clear the current circle
+        // Update the circle
+        circleRef.current.setCenter(center);
+        circleRef.current.setRadius(1000 * distanceFilter);
+      } else {
+        // Create new circle
+        circleRef.current = new mapsRef.current.Circle({
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: '#FF0000',
+          fillOpacity: 0.3,
+          map: mapRef.current,
+          center: center,
+          radius: 1000 * distanceFilter,
+        });
       }
-
-      circleRef.current = new mapsRef.current.Circle({
-        strokeColor: '#FF0000',
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: '#FF0000',
-        fillOpacity: 0.3,
-        map: mapRef.current,
-        center: center,
-        radius: 1000 * distanceFilter, // Dynamic radius
-      });
     }
   }, [center, distanceFilter]);
 
@@ -46,7 +49,7 @@ const MapComponent = ({ center, distanceFilter }: MapWindowProps) => {
         bootstrapURLKeys={{ key: import.meta.env.VITE_GMAPS_KEY }}
         defaultZoom={16 - distanceFilter}
         defaultCenter={center}
-        yesIWantToUseGoogleMapApiInternals // Enable the use of the internal Google Maps objects
+        yesIWantToUseGoogleMapApiInternals
         onGoogleApiLoaded={({ map, maps }) => {
           mapRef.current = map;
           mapsRef.current = maps;
