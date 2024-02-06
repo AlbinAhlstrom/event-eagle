@@ -172,8 +172,7 @@ console.log(eventsNearby)
         value={distanceFilter}
         onChange={handleSliderChange}
       />
-      {distanceFilter}
-      <div className="flex justify-center items-center flex-wrap gap-10 mt-10 mb-32">
+      <div className="flex justify-center items-center flex-wrap gap-10 mt-4">
         {error && <h1>Failed to load</h1>}
         {!events && (
           <span className="loading loading-lg big-spinner h-16 text-primary text-xl"></span>
