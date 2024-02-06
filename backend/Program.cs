@@ -1,6 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Data;
+using DotNetEnv;
+using Models;
+
+DotNetEnv.Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +19,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 builder.Services.AddScoped<IEventRepo, EventRepo>();
+
+builder.Services.Configure<StripeSettings>(options =>
+{
+    options.PublicKey = Env.GetString("STRIPE_PUBLIC_KEY");
+    options.SecretKey = Env.GetString("STRIPE_SECRET_KEY");
+});
 
 var app = builder.Build();
 
