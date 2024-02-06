@@ -4,7 +4,7 @@ import family from '../images/family-icon.webp';
 import arts from '../images/arts-icon.webp';
 import music from '../images/music-icon.webp';
 import { IconMap } from '../util';
-import { EventListing } from '../util';
+import { Event } from '../util';
 import { useNavigate } from 'react-router-dom';
 
 const getIcon: IconMap = {
@@ -15,8 +15,8 @@ const getIcon: IconMap = {
 };
 
 interface EditEvenCardProps {
-    event: EventListing
-    deleteEvent: (event: EventListing) => void
+    event: Event
+    deleteEvent: (event: Event) => void
 }
 
 const EditEventCard: React.FC<EditEvenCardProps> = ({event, deleteEvent}) => {
