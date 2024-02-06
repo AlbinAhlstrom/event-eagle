@@ -24,7 +24,7 @@ const MapComponent = ({ center, distanceFilter }: MapWindowProps) => {
     <div style={mapStyles}>
       <GoogleMap
         bootstrapURLKeys={{ key: import.meta.env.VITE_GMAPS_KEY }}
-        defaultZoom={16}
+        defaultZoom={16 - distanceFilter}
         defaultCenter={center}
         onGoogleApiLoaded={({map, maps}) =>
           new google.maps.Circle({
