@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import useSWR from "swr";
 import { useParams, useNavigate } from "react-router-dom";
 import DistanceSlider from "../components/DistanceSlider";
-import { EventDetailsListing, EventListing, getDistanceFromLatLonInKm } from "../util";
+import { Event, getDistanceFromLatLonInKm } from "../util";
 import DiscoveryMap from "../components/DiscoveryMap"
 
 const BASE_URL = "https://event-eagle.azurewebsites.net/";
@@ -20,7 +20,7 @@ const EventsMap: React.FC = () => {
   const { type } = useParams<"type">();
   const navigate = useNavigate();
 
-  const [data, setData] = useState<EventListing[]>();
+  const [data, setData] = useState<Event[]>();
 
   const endTime = new Date();
   endTime.setHours(23, 59, 59);
@@ -47,7 +47,7 @@ const EventsMap: React.FC = () => {
     fetchData();
   }, [ticketMasterAPI]);
 
-  const ticketEvents: EventDetailsListing[] = [];
+  const ticketEvents: Event[] = [];
 
   if (data) {
     data.forEach((event) => {
@@ -125,7 +125,7 @@ const EventsMap: React.FC = () => {
   }, []);
 
   // eslint-disable-next-line prefer-const
-  let { data: events, error } = useSWR<EventDetailsListing[]>(
+  let { data: events, error } = useSWR<Event[]>(
     EVENTS_ENDPOINT,
     fetcher
   );
