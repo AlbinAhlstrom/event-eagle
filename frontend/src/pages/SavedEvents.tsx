@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import EventCard from "../components/EventCard";
 import { useClerk } from "@clerk/clerk-react";
-import { SavedEvent } from "../util";
+import { Event } from "../util";
 import { useNavigate } from "react-router-dom";
 
 const SavedEvents: React.FC = () => {
-  const [savedEvents, setSavedEvents] = useState<SavedEvent[]>([]);
+  const [savedEvents, setSavedEvents] = useState<Event[]>([]);
   const {user} = useClerk();
   const navigate = useNavigate();
 
@@ -22,13 +22,17 @@ const SavedEvents: React.FC = () => {
 
   useEffect(() => {
     fetchUserEvents();
+
+    
   }, []);
-
-
+  
+  
   const handleBackToListClick = () => {
     navigate(-1);
   }
-
+  
+  
+  console.log(savedEvents);
   return (
     <div className="flex flex-col justify-center items-center mt-10">
       <h1 className="text-5xl font-bold">Saved Events</h1>
