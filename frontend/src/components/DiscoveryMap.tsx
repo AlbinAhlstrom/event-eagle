@@ -7,7 +7,7 @@ type Coordinate = {
 };
 
 type MapWindowProps = {
-  center: Coordinate;
+  center?: Coordinate;
   distanceFilter: number;
 };
 
@@ -17,14 +17,23 @@ const MapComponent = ({ center, distanceFilter }: MapWindowProps) => {
     width: '70vh',
   };
 
+  useEffect(()=>{}, [center])
+
   const mapRef = useRef(null);
   const mapsRef = useRef(null);
   const circleRef = useRef(null);
 
+  const defaultPosition = {
+    lat: 0,
+    lng: 0,
+  };
+
+
+
   useEffect(() => {
     if (mapRef.current && mapsRef.current) {
       if (circleRef.current) {
-        circleRef.current.setCenter(center);
+        circleRef.current.setCenter(center || defaultPosition);
         circleRef.current.setRadius(1000 * distanceFilter);
       } else {
         circleRef.current = new mapsRef.current.Circle({
@@ -34,26 +43,19 @@ const MapComponent = ({ center, distanceFilter }: MapWindowProps) => {
           fillColor: '#FF0000',
           fillOpacity: 0.3,
           map: mapRef.current,
-          center: center,
+          center: center || defaultPosition,
           radius: 1000 * distanceFilter,
         });
       }
     }
   }, [center, distanceFilter]);
 
-  useEffect(() => {
-    if (mapRef.current && center) {
-      mapRef.current.panTo(center);
-    }
-  }, [center]);
-
   return (
     <div style={mapStyles}>
       <GoogleMap
         bootstrapURLKeys={{ key: import.meta.env.VITE_GMAPS_KEY }}
-        center={center}
+        center={center || defaultPosition}
         defaultZoom={16 - distanceFilter}
-        defaultCenter={center}
         yesIWantToUseGoogleMapApiInternals
         onGoogleApiLoaded={({ map, maps }) => {
           mapRef.current = map;
@@ -65,7 +67,7 @@ const MapComponent = ({ center, distanceFilter }: MapWindowProps) => {
             fillColor: '#FF0000',
             fillOpacity: 0.3,
             map: map,
-            center: center,
+            center: center || defaultPosition,
             radius: 1000 * distanceFilter,
           });
         }}
