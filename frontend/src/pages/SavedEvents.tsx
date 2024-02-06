@@ -16,6 +16,8 @@ const SavedEvents: React.FC = () => {
     const data = await response.json();
     setSavedEvents(data);
   };
+
+  
   const updateSavedEvents = async () => {
     await fetchUserEvents();
   };
@@ -43,13 +45,7 @@ const SavedEvents: React.FC = () => {
         return (
           <EventCard
           key={index}
-          id={ev.event.id}
-          title={ev.event.title}
-          description={ev.event.description}
-          startTime={ev.event.startTime}
-          venue={ev.event.venue}
-          price={ev.event.price}
-          category={ev.event.category}
+          event={ev}
           updateSavedEvents={updateSavedEvents}
           />
           );
