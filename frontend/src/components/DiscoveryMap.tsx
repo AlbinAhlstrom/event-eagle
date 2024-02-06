@@ -1,9 +1,9 @@
 import { APIProvider, Map, AdvancedMarker, Pin } from '@vis.gl/react-google-maps';
-import { Coordinate, EventListing } from '../util';
+import { Coordinate, Event } from '../util';
 
 
 type MapWindowProps =  {
-  events: EventListing[]
+  events: Event[]
   center: Coordinate
   distanceFilter: number
 }
