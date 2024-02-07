@@ -41,7 +41,16 @@ type MarkersProps = {
 }
 
 const Markers = ({events}: MarkersProps) => {
-  return null;
+
+  return (
+  <>
+    {events.map((event) => {
+      <AdvancedMarker position={{lat: event.latitude, lng: event.longitude}} key={event.id}>
+        <span>🎵</span>
+      </AdvancedMarker>
+    })}
+  </>
+  )
 }
 
 export default DiscoveryMap;
