@@ -17,7 +17,7 @@ const EventDetailsCard: React.FC<props> = ({ event }) => {
 
       // Make a request to your backend to create a checkout session
       const response = await fetch(
-        "http://localhost:5004/Payment/create-checkout-session",
+        "https://event-eagle.azurewebsites.net/Payment/create-checkout-session",
         {
           method: "POST",
           headers: {
@@ -26,6 +26,7 @@ const EventDetailsCard: React.FC<props> = ({ event }) => {
           body: JSON.stringify({
             amount: event.price, // Use the price of the ticket as the amount
             productName: event.description,
+            productcategory: event.title,
           }),
         }
       );

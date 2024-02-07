@@ -47,7 +47,8 @@ namespace Controllers
                                 ProductData = new SessionLineItemPriceDataProductDataOptions
                                 {
                                     Name = paymentRequest.ProductName,
-                                    Description = "Product Description"
+                                    Description = paymentRequest.ProductCategory
+
                                 }
                             },
                             Quantity = 1
