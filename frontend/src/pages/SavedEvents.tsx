@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import EventCard from "../components/EventCard";
 import { useClerk } from "@clerk/clerk-react";
-import { Event, fetchUserEvents, updateSavedEvents } from "../util";
+import { UserEvent, fetchUserEvents, updateSavedEvents } from "../util";
 import { useNavigate } from "react-router-dom";
 
 const SavedEvents: React.FC = () => {
-  const [savedEvents, setSavedEvents] = useState<Event[]>([]);
+  const [savedEvents, setSavedEvents] = useState<UserEvent[]>([]);
   const { user } = useClerk();
   const navigate = useNavigate();
 
@@ -26,7 +26,7 @@ const SavedEvents: React.FC = () => {
     navigate(-1);
   };
 
-  const handleUpdateSaveEvent = async (id: string) => {
+  const handleUpdateSaveEvent = async () => {
     if (user) {
       setSavedEvents(await updateSavedEvents(user.id));
       console.log(savedEvents);
@@ -44,7 +44,7 @@ const SavedEvents: React.FC = () => {
           return (
             <EventCard
               key={index}
-              event={ev}
+              event={ev.event}
               updateSavedEvents={handleUpdateSaveEvent}
             />
           );
