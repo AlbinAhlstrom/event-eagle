@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Models;
 
@@ -269,6 +270,33 @@ namespace Data
             }
         }
 
+        public async Task<IEnumerable<Ticket>> GetAllTickets()
+        {
+            var ticketList = await _context.Tickets.ToListAsync();
 
+            return ticketList;
+        }
+
+        public async Task<Ticket> GetTicketById(TicketId id)
+        {
+            var ticket = await _context.Tickets.FindAsync(id);
+
+            return ticket;
+        }
+
+        public async Task<TicketRequest> CreateTicket(TicketRequest request)
+        {
+            var ticketToAdd = new Ticket{
+                EventId = request.EventId,
+                SellerId = request.SellerId,
+                SellerName = request.SellerName,
+                Available = request.Available,
+            };
+
+            _context.Tickets.Add(ticketToAdd);
+            await _context.SaveChangesAsync();
+
+            return request;
+        }
     }
 }
