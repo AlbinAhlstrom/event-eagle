@@ -1,12 +1,12 @@
 import { Circle } from "./Circle";
-import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
-import {Event} from "../util";
-import { useState } from "react";
+import { APIProvider, Map, AdvancedMarker, Marker } from "@vis.gl/react-google-maps";
+import { useState, useEffect } from "react";
+import { defaultEventListing } from "../util";
+import { Coordinate } from "../util";
 
-type Coordinate = {
-  lat: number;
-  lng: number;
-};
+export type Point = google.maps.LatLngLiteral & {key: string};
+
+
 
 type MapWindowProps = {
   center: Coordinate;
@@ -18,6 +18,7 @@ const DiscoveryMap = ({ center, circleRadius, zoom }: MapWindowProps) => {
   const apiUrl = import.meta.env.VITE_GMAPS_KEY;
   const mapId = import.meta.env.VITE_GMAPS_MAPID;
 
+  const points = [{lat: 59.39758577087886, lng: 18.035769033715795, key: "point"}]
 
   return (
     <div className="h-60vh w-60vh">
@@ -29,26 +30,20 @@ const DiscoveryMap = ({ center, circleRadius, zoom }: MapWindowProps) => {
           gestureHandling={"greedy"}
         >
           <Circle center={center} radius={circleRadius} />
-          <Markers events={[]}/>
+          <Markers points={points}/>
         </Map>
       </APIProvider>
     </div>
   );
 };
 
-type MarkersProps = {
-  events: Event[];
-}
-
-const Markers = ({events}: MarkersProps) => {
+const Markers = () => {
 
   return (
   <>
-    {events.map((event) => {
-      <AdvancedMarker position={{lat: event.latitude, lng: event.longitude}} key={event.id}>
-        <span>🎵</span>
+      <AdvancedMarker position={{lat: 59.39758577087886, lng: 18.035769033715795}} key={"sf"}>
+        <div className="card card-neutral"><span className="text-5xl bg-red">🎵</span></div>
       </AdvancedMarker>
-    })}
   </>
   )
 }
