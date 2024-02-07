@@ -27,11 +27,11 @@ const Events: React.FC = () => {
 
   const [data, setData] = useState<TicketmasterEvent[]>();
 
-  // const endTime = new Date();
-  // endTime.setHours(23, 59, 59);
-  // const endTimeISOString =
-  //   endTime.toISOString().slice(0, -5) + "Z";
-  const ticketMasterAPI = `https://app.ticketmaster.com/discovery/v2/events.json?size=50&unit=km&geoPoint=u6scd&radius=10&endDateTime=2024-02-29T23:59:59Z&sort=date,asc&apikey=${ticketmasterKey}`;
+  const endTime = new Date();
+  endTime.setHours(23, 59, 59);
+  const endTimeISOString =
+    endTime.toISOString().slice(0, -5) + "Z";
+  const ticketMasterAPI = `https://app.ticketmaster.com/discovery/v2/events.json?size=50&unit=km&geoPoint=u6scd&radius=10&endDateTime=${endTimeISOString}&sort=date,asc&apikey=${ticketmasterKey}`;
 
   useEffect(() => {
     const fetchData = async () => {
