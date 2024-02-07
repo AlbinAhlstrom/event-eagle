@@ -9,6 +9,7 @@ const Header = () => {
 
   let savedEventsButton = null;
   let adminButton = null;
+  let sellTicketButton = null;
 
   if (user) {
     // User is signed in, show Saved Events button
@@ -18,6 +19,15 @@ const Header = () => {
         onClick={() => navigate("/savedEvents")}
       >
         Saved Events
+      </button>
+    );
+
+    sellTicketButton = (
+      <button
+        className="btn btn-ghost text-xl h-nav-icon-h"
+        onClick={() => navigate("/sellticket")}
+      >
+        Sell Tickets
       </button>
     );
 
@@ -55,6 +65,7 @@ const Header = () => {
         </Link>
       </div>
       <div className="flex-none">
+        <div>{sellTicketButton}</div>
         <div>{savedEventsButton}</div>
         <div>{adminButton}</div>
       </div>
