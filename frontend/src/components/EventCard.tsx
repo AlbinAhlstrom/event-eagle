@@ -5,7 +5,7 @@ import family from "../images/family-icon.webp";
 import arts from "../images/arts-icon.webp";
 import music from "../images/music-icon.webp";
 import CountdownTimer from "./CountDown";
-import { IconMap, Event, fetchUserEvents } from "../util";
+import { IconMap, Event } from "../util";
 import { useClerk } from "@clerk/clerk-react";
 
 const getIcon: IconMap = {
@@ -60,9 +60,8 @@ const EventCard: React.FC<Props> = ({event, updateSavedEvents }) => {
   
   const handleDeleteEvent = async () => {
     try {
-      console.log(event.eventId)
       const response = await fetch(
-        `  https://event-eagle.azurewebsites.net/Events/userEvents/delete?userId=${user?.id}&eventId=${event.eventId}`,
+        `  https://event-eagle.azurewebsites.net/Events/userEvents/delete?userId=${user?.id}&eventId=${event.id}`,
         {
           method: 'DELETE',
           headers: {
@@ -91,7 +90,7 @@ const EventCard: React.FC<Props> = ({event, updateSavedEvents }) => {
   const handleDeleteSavedEventClick = async () => {
     try {
       await handleDeleteEvent();
-      if(user){await updateSavedEvents(user.id);}
+      await updateSavedEvents();
       navigate("/savedEvents");
     } catch (error) {
       console.error("Error:", error);
@@ -130,7 +129,7 @@ const EventCard: React.FC<Props> = ({event, updateSavedEvents }) => {
           </button>
           {isSaveEventButtonVisible && isIdANumber && (
             <button className="btn btn-primary" onClick={handleSaveEventClick}>
-              Save Event
+              Pin Event
             </button>
           )}
         </div>
