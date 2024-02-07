@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { useForm, SubmitHandler } from "react-hook-form";
 import { categories } from "../util";
 import MapWindow from "./FormMap";

@@ -1,16 +1,16 @@
 export const toDateTimeString = (date: Date) => {
-  const year = date.getFullYear()
-  const month = (date.getMonth() + 1).toString().padStart(2, "0")
-  const day = date.getDate().toString().padStart(2, "0")
-  const hours = date.getHours()
-  const minutes = date.getMinutes()
-  return `${year}-${month}-${day}T${hours}:${minutes}`
-}
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
+};
 
 export const fromDateTimeString = (dateTimeString: string): Date => {
-  const [datePart, timePart] = dateTimeString.split('T');
-  const [year, month, day] = datePart.split('-').map(Number);
-  const [hours, minutes] = timePart.split(':').map(Number);
+  const [datePart, timePart] = dateTimeString.split("T");
+  const [year, month, day] = datePart.split("-").map(Number);
+  const [hours, minutes] = timePart.split(":").map(Number);
 
   return new Date(year, month - 1, day, hours, minutes);
 };
@@ -42,14 +42,13 @@ export const deg2rad = (deg: number): number => {
 };
 
 export const categories = {
-    music: "Music",
-    sports: "Sports",
-    arts: "Arts",
-    family: "Family",
-} as const
+  music: "Music",
+  sports: "Sports",
+  arts: "Arts",
+  family: "Family",
+} as const;
 
 export type categoryType = (typeof categories)[keyof typeof categories];
-
 
 export type Event = {
   id: number;
@@ -69,8 +68,8 @@ export const defaultEventListing: Event = {
   id: 0,
   title: "default",
   description: "desc",
-  startTime: toDateTimeString(new Date) ,
-  endTime: toDateTimeString(new Date),
+  startTime: toDateTimeString(new Date()),
+  endTime: toDateTimeString(new Date()),
   venue: "",
   address: "",
   latitude: 0,
@@ -78,8 +77,6 @@ export const defaultEventListing: Event = {
   price: 10,
   category: categories.sports,
 };
-
-
 
 export interface CountdownTimerProps {
   targetDate: string | Date;
@@ -90,9 +87,9 @@ export interface IconMap {
 }
 
 export type Coordinate = {
-    lat: number
-    lng: number
-}
+  lat: number;
+  lng: number;
+};
 
 export type formFields = {
   id: number;
@@ -109,29 +106,119 @@ export type formFields = {
 };
 
 export const formToListing = (formData: formFields) => {
-  return {...formData, endTime: formData.startTime, venue: "", address: ""}
-}
+  return { ...formData, endTime: formData.startTime, venue: "", address: "" };
+};
 
 export type TicketmasterEvent = {
-    id: string;
-    name: string;
-    dates: {
-      start: {
-        dateTime: string;
+  id: string;
+  name: string;
+  dates: {
+    start: {
+      dateTime: string;
+    };
+  };
+  _embedded: {
+    venues: {
+      address: {
+        line1: string;
       };
-    };
-    _embedded: {
-      venues: {
-        address: {
-          line1: string;
-        };
-        location: {
-          latitude: string;
-          longitude: string;
-        };
-      }[];
-    };
-    priceRanges: {
-      min: number;
+      location: {
+        latitude: string;
+        longitude: string;
+      };
+      city: {
+        name: string;
+      };
     }[];
+  };
+  priceRanges: {
+    min: number;
+  }[];
+  sales: {
+    public: {
+      endDateTime: string;
+    };
+  };
+};
+
+export type UserEvent = {
+  id: number;
+  userId: string;
+  eventId: number;
+  title: string;
+  createdByUser: boolean;
+  event: Event;
+};
+
+export const fetchUserEvents = async (id: string) => {
+  const response = await fetch(
+    `https://event-eagle.azurewebsites.net/Events/userEvents?userId=${id}`
+  );
+  const data = await response.json();
+  return data;
+};
+export const updateSavedEvents = async (id: string) => {
+  const data = await fetchUserEvents(id);
+  return data;
+};
+
+
+export type Ticket = {
+  ticketId: string;
+  eventId: number;
+  sellerId: string;
+  sellerName: string;
+  available: boolean;
+};
+
+export type EventTicket = {
+  address: string;
+  category: string;
+  description: string;
+  endTime: string;
+  eventId: number;
+  eventTickets: Ticket[];
+  latitude: number;
+  longitude: number;
+  price: number;
+  startTime: string;
+  title: string;
+  venue: string;
+};
+
+export const getDefaultEventData = (): EventTicket => ({
+  address: "",
+  category: "",
+  description: "",
+  endTime: "",
+  eventId: 0,
+  eventTickets: [],
+  latitude: 0,
+  longitude: 0,
+  price: 0,
+  startTime: "",
+  title: "",
+  venue: "",
+});
+
+export interface TicketCardProps {
+  ticket: Ticket | undefined;
+}
+
+
+
+
+export const setUnavailable = (ticketId: number) => {
+  fetch(`https://event-eagle.azurewebsites.net/Events/Tickets/Update?ticketId=${ticketId}`, {
+   method: 'PUT',
+   headers: {
+     'Content-Type': 'application/json',
+   },
+   body: JSON.stringify({
+     ticketId : ticketId,
+     available : false
+   }),
+ });
+
+ setUnavailable(ticketId);
 }

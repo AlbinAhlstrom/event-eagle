@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Models;
 
@@ -269,6 +271,93 @@ namespace Data
             }
         }
 
+        public async Task<IEnumerable<Ticket>> GetAllTickets()
+        {
+            var ticketList = await _context.Tickets.ToListAsync();
+
+            return ticketList;
+        }
+
+        public async Task<Ticket> GetTicketById(string ticketId)
+        {
+            var ticket = await _context.Tickets.Where(t=> t.TicketId == ticketId)
+            .Include(ti => ti.Event)
+            .SingleOrDefaultAsync();
+
+            return ticket;
+        }
+
+        public async Task<Ticket> CreateTicket(TicketRequest request)
+        {
+            var ticketToAdd = new Ticket{
+                EventId = request.EventId,
+                SellerId = request.SellerId,
+                SellerName = request.SellerName,
+                Available = request.Available,
+            };
+
+            _context.Tickets.Add(ticketToAdd);
+            await _context.SaveChangesAsync();
+
+            return ticketToAdd;
+        }
+
+        public async Task<Ticket> UpdateTicketAvailability(UpdateTicketDTO req)
+        {
+            var ticket = _context.Tickets.Where(ti => ti.TicketId == req.TicketId).Include(e => e.Event).FirstOrDefault();
+
+            ticket.Available = req.Available;
+
+            var finished = _context.Tickets.Update(ticket);
+            await _context.SaveChangesAsync();
+
+            return ticket;
+        }
+
+        public async Task DeleteTicket(string id)
+        {
+            var ticketToDelete = await _context.Tickets.FirstOrDefaultAsync(ti => ti.TicketId == id);
+            if(ticketToDelete!= null)
+            {
+                _context.Tickets.Remove(ticketToDelete);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<EventTicketDTO> GetEventWithTickets(int eventId)
+        {
+          var eventToReturn = await _context.Events.FindAsync(eventId);
+        
+        var tickets = await _context.Tickets
+        .Where(t => t.EventId == eventId)
+        .Select(t => new TicketResponse
+        {
+            TicketId = t.TicketId,
+            EventId = t.EventId,
+            SellerId = t.SellerId,
+            SellerName = t.SellerName,
+            Available = t.Available
+        })
+        .ToListAsync();
+
+         var eventTicketResponse = new EventTicketDTO();
+            if (eventToReturn != null)
+            {
+                    eventTicketResponse.EventId = eventToReturn.Id;
+                    eventTicketResponse.Title = eventToReturn.Title;
+                    eventTicketResponse.Description = eventToReturn.Description;
+                    eventTicketResponse.StartTime = eventToReturn.StartTime;
+                    eventTicketResponse.EndTime = eventToReturn.EndTime;
+                    eventTicketResponse.Venue = eventToReturn.Venue;
+                    eventTicketResponse.Address = eventToReturn.Address;
+                    eventTicketResponse.Latitude = eventToReturn.Latitude;
+                    eventTicketResponse.Longitude = eventToReturn.Longitude;
+                    eventTicketResponse.Price = eventToReturn.Price;
+                    eventTicketResponse.Category = eventToReturn.Category;
+                    eventTicketResponse.EventTickets = tickets;
+            }
+                return eventTicketResponse;
+        }
 
     }
 }

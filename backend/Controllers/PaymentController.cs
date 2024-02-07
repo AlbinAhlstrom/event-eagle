@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Stripe;
 using Stripe.Checkout;
-using Models; 
+using Models;
 using System;
 using System.Collections.Generic;
 
@@ -30,7 +30,7 @@ namespace Controllers
       try
       {
         var currency = "sek";
-        var successUrl = "http://localhost:3000/success";
+        var successUrl = "https://event-eagle.vercel.app/success";
         var cancelUrl = "http://localhost:3000/cancel";
 
         var options = new SessionCreateOptions
@@ -46,8 +46,9 @@ namespace Controllers
                                 UnitAmount = paymentRequest.Amount * 100,  // Amount in cents
                                 ProductData = new SessionLineItemPriceDataProductDataOptions
                                 {
-                                    Name = "Product Name",
-                                    Description = "Product Description"
+                                    Name = paymentRequest.ProductName,
+                                    Description = paymentRequest.ProductCategory
+
                                 }
                             },
                             Quantity = 1
@@ -72,3 +73,4 @@ namespace Controllers
     }
   }
 }
+

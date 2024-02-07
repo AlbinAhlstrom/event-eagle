@@ -57,24 +57,24 @@ const EventCard: React.FC<Props> = ({event, updateSavedEvents }) => {
         throw error;
       });
   };
-
+  
   const handleDeleteEvent = async () => {
     try {
       const response = await fetch(
         `  https://event-eagle.azurewebsites.net/Events/userEvents/delete?userId=${user?.id}&eventId=${event.id}`,
         {
-          method: "DELETE",
+          method: 'DELETE',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
         }
       );
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw new Error('Network response was not ok');
       }
-      console.log("Event deleted successfully");
+      console.log('Event deleted successfully');
     } catch (error) {
-      console.error("Error:", error);
+      console.error('Error:', error);
     }
   };
 
@@ -88,14 +88,19 @@ const EventCard: React.FC<Props> = ({event, updateSavedEvents }) => {
   };
 
   const handleDeleteSavedEventClick = async () => {
-    await handleDeleteEvent();
-    await updateSavedEvents();
-    navigate("/savedEvents");
+    try {
+      await handleDeleteEvent();
+      await updateSavedEvents();
+      navigate("/savedEvents");
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
+
 
   const isSaveEventButtonVisible = location.pathname !== "/savedEvents";
 
-  const isIdANumber = typeof event.id === "number";
+  const isFromTicketmaster = event.description === "Ticketmaster Event";
 
   const iconSrc = getIcon[event.category] || "";
   return (
@@ -122,9 +127,9 @@ const EventCard: React.FC<Props> = ({event, updateSavedEvents }) => {
           <button className="btn btn-primary" onClick={handleSeeDetailsClick}>
             See Details
           </button>
-          {isSaveEventButtonVisible && isIdANumber && (
+          {isSaveEventButtonVisible && !isFromTicketmaster && (
             <button className="btn btn-primary" onClick={handleSaveEventClick}>
-              Save Event
+              Pin Event
             </button>
           )}
         </div>

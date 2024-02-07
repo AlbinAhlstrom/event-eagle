@@ -1,11 +1,12 @@
 import { useLocation } from 'react-router-dom';
 import image from '../images/nature.jpg';
 import EventDetailsCard from '../components/EventDetailsCard';
+import TicketCard from '../components/TicketCard';
 
 const EventDetails = () => {
   const location = useLocation();
   const event = location.state?.event;
-
+console.log(event.id);
   if (!event) {
     return <div>Loading event details...</div>;
   }
@@ -22,7 +23,10 @@ const EventDetails = () => {
           {/* <EventMiniMap position={position} /> */}
         </span>
         <div className="hero-overlay bg-opacity-60"></div>
-        <EventDetailsCard event={event}/>
+        <div className='flex flex-col'>
+
+        <EventDetailsCard event={event.id}/>
+        </div>
       </div>
     </>
   );

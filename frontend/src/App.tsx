@@ -10,9 +10,11 @@ import EventDetails from "./pages/EventDetails";
 import AdminDashboard from "./pages/AdminDashboard";
 import SignInPage from "./pages/SignInPage";
 import EditEvent from "./pages/EditEvent";
-import Purchase from "./pages/Purchase";
 import Create from "./pages/Create";
 import SavedEvents from "./pages/SavedEvents";
+import SuccessPage from "./pages/SuccessPage";
+import SellTicket from "./pages/SellTicket";
+
 
 function App() {
   return (
@@ -30,6 +32,7 @@ function App() {
               <Routes>
                 <Route index element={<Home />} />
                 <Route path="/home" element={<Home />} />
+                <Route path="/sellticket" element={<SellTicket />} />
                 <Route path="/savedEvents" element={<SavedEvents />} />
                 <Route path="/categories" element={<Categories />} />
                 <Route path="/events" element={<Events />} />
@@ -38,7 +41,7 @@ function App() {
                 <Route path="/events/:id/edit" element={<EditEvent />} />
                 <Route path="/events/:type" element={<Events />} />
                 <Route path="/event/:id" element={<EventDetails />} />
-                <Route path="/event/:id/purchase" element={<Purchase />} />
+                <Route path="/success" element={<SuccessPage />} />
                 <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="*" element={<NoPage />} />
               </Routes>

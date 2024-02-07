@@ -11,6 +11,90 @@ const EventsMap: React.FC = () => {
   const [distanceFilter, setDistanceFilter] = useState(2);
   const navigate = useNavigate();
 
+  const [data, setData] = useState<Event[]>();
+
+  const endTime = new Date();
+  endTime.setHours(23, 59, 59);
+  const endTimeISOString =
+    endTime.toISOString().slice(0, -5) + "Z";
+  const ticketMasterAPI = `https://app.ticketmaster.com/discovery/v2/events.json?size=50&unit=km&geoPoint=u6scd&radius=10&endDateTime=${endTimeISOString}&sort=date,asc&apikey=${ticketmasterKey}`;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(ticketMasterAPI);
+        const result = await res.json();
+
+        if (result._embedded && result._embedded.events) {
+          setData(result._embedded.events);
+        } else {
+          console.error("No TicketMaster events today.");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [ticketMasterAPI]);
+
+  const ticketEvents: Event[] = [];
+
+  if (data) {
+    data.forEach((event) => {
+      if (
+        "_embedded" in event &&
+        "priceRanges" in event &&
+        "name" in event &&
+        "dates" in event
+      ) {
+        const ticketmasterEvent = event as {
+          _embedded: {
+            venues: {
+              address: {
+                line1: string;
+              };
+              location: {
+                latitude: string;
+                longitude: string;
+              };
+            }[];
+          };
+          priceRanges: {
+            min: number;
+          }[];
+          name: string;
+          dates: {
+            start: {
+              dateTime: string;
+            };
+          };
+        };
+
+        const venue = ticketmasterEvent._embedded?.venues[0];
+        const priceRange = ticketmasterEvent.priceRanges?.[0];
+
+        ticketEvents.push({
+          id: event.id,
+          title: ticketmasterEvent.name || "Unknown Event",
+          description: "Ticketmaster event",
+          startTime: new Date(
+            ticketmasterEvent.dates?.start?.dateTime || ""
+          ),
+          address: venue?.address?.line1 || "No address available",
+          latitude: parseFloat(venue?.location?.latitude || "0") || 0,
+          longitude: parseFloat(venue?.location?.longitude || "0") || 0,
+          price: priceRange?.min || 0,
+          venue: "",
+          category: "Music",
+          endTime: "null",
+        });
+      } else {
+        ticketEvents.push(event);
+      }
+    });
+  }
+
   const handleSliderChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
