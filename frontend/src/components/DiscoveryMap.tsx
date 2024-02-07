@@ -26,17 +26,7 @@ const DiscoveryMap = ({ center }: MapWindowProps) => {
           mapId={mapId}
           gestureHandling={"greedy"}
         >
-          <Circle
-          radius={ distanceFilter}
-          center={center}
-          strokeColor={'#0c4cb3'}
-          strokeOpacity={1}
-          strokeWeight={3}
-          fillColor={'#3b82f6'}
-          fillOpacity={0.3}
-          editable
-          draggable
-        />
+          <Circle center={center} radius={15000} />
         </Map>
       </APIProvider>
     </div>
