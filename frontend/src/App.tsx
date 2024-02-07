@@ -13,7 +13,7 @@ import EditEvent from "./pages/EditEvent";
 import Purchase from "./pages/Purchase";
 import Create from "./pages/Create";
 import SavedEvents from "./pages/SavedEvents";
-
+import SuccessPage from "./pages/SuccessPage"
 function App() {
   return (
     <Routes>
@@ -39,6 +39,7 @@ function App() {
                 <Route path="/events/:type" element={<Events />} />
                 <Route path="/event/:id" element={<EventDetails />} />
                 <Route path="/event/:id/purchase" element={<Purchase />} />
+                <Route path="/success" element={<SuccessPage />} />
                 <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="*" element={<NoPage />} />
               </Routes>
