@@ -20,5 +20,7 @@ namespace Data
         Task<IEnumerable<Ticket>> GetAllTickets();
         Task<Ticket> GetTicketById(string ticketId);
         Task<Ticket> CreateTicket(TicketRequest request);
+        Task<Ticket> UpdateTicketAvailability(UpdateTicketDTO req);
+        Task DeleteTicket(string id);
     }
 }
