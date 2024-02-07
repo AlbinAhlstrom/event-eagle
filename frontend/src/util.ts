@@ -144,6 +144,16 @@ export type TicketmasterEvent = {
   };
 };
 
+export type UserEvent = {
+id: number;
+userId: string;
+eventId: number;
+title: string;
+createdByUser: boolean;
+event: Event;
+
+};
+
 export const fetchUserEvents = async (id: string) => {
   const response = await fetch(
     `https://event-eagle.azurewebsites.net/Events/userEvents?userId=${id}`,
@@ -155,3 +165,4 @@ export const updateSavedEvents = async (id: string) => {
   const data = await fetchUserEvents(id);
   return data;
 };
+
