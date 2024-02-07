@@ -129,9 +129,9 @@ namespace EventFider.Controllers
         }
 
          [HttpGet("Tickets/get/{id}")]
-        public async Task<ActionResult<IEnumerable<Ticket>>> GetAllTickets(string Id)
+        public async Task<ActionResult<IEnumerable<Ticket>>> GetTicketById(string id)
         {
-            var ticket = await _repo.GetTicketById(Id);
+            var ticket = await _repo.GetTicketById(id);
 
             return Ok(ticket);
         }
