@@ -1,5 +1,6 @@
 import { Circle } from "./Circle";
 import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
+import {Event} from "../util";
 import { useState } from "react";
 
 type Coordinate = {
@@ -28,15 +29,19 @@ const DiscoveryMap = ({ center, circleRadius, zoom }: MapWindowProps) => {
           gestureHandling={"greedy"}
         >
           <Circle center={center} radius={circleRadius} />
-          <Markers/>
+          <Markers events={[]}/>
         </Map>
       </APIProvider>
     </div>
   );
 };
 
-const Markers = () => {
-  return null
+type MarkersProps = {
+  events: Event[];
+}
+
+const Markers = ({events}: MarkersProps) => {
+  return null;
 }
 
 export default DiscoveryMap;
