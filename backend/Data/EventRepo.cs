@@ -277,14 +277,16 @@ namespace Data
             return ticketList;
         }
 
-        public async Task<Ticket> GetTicketById(TicketId id)
+        public async Task<Ticket> GetTicketById(string ticketId)
         {
-            var ticket = await _context.Tickets.FindAsync(id);
+            var ticket = await _context.Tickets.Where(t=> t.TicketId == ticketId)
+            .Include(ti => ti.Event)
+            .SingleOrDefaultAsync();
 
             return ticket;
         }
 
-        public async Task<TicketRequest> CreateTicket(TicketRequest request)
+        public async Task<Ticket> CreateTicket(TicketRequest request)
         {
             var ticketToAdd = new Ticket{
                 EventId = request.EventId,
@@ -296,7 +298,7 @@ namespace Data
             _context.Tickets.Add(ticketToAdd);
             await _context.SaveChangesAsync();
 
-            return request;
+            return ticketToAdd;
         }
     }
 }
