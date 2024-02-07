@@ -18,6 +18,6 @@ namespace Data
         Task<UserEvents> CreateUserEvent (UserEventDTO userEvent);
         Task DeleteUserEventById(string userId, int eventId);
         Task<IEnumerable<Ticket>> GetAllTickets();
-        Task<Ticket> GetTicketById(int id);
+        Task<Ticket> GetTicketById(TicketId id);
     }
 }
