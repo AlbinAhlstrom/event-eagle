@@ -4,10 +4,7 @@ import DistanceSlider from "../components/DistanceSlider";
 import DiscoveryMap from "../components/DiscoveryMap"
 
 const EventsMap: React.FC = () => {
-  const [userLocation, setUserLocation] = React.useState<{
-    lat: number;
-    lng: number;
-   } | null>(null);
+  const [userLocation, setUserLocation] = React.useState({lat:0, lng:0});
   const [distanceFilter, setDistanceFilter] = useState(2);
   const navigate = useNavigate();
 
