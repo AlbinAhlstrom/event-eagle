@@ -28,10 +28,15 @@ const DiscoveryMap = ({ center, circleRadius, zoom }: MapWindowProps) => {
           gestureHandling={"greedy"}
         >
           <Circle center={center} radius={circleRadius} />
+          <Markers/>
         </Map>
       </APIProvider>
     </div>
   );
 };
+
+const Markers = () => {
+  return null
+}
 
 export default DiscoveryMap;
