@@ -4,6 +4,7 @@ using Models;
 using Data;
 using Microsoft.Identity.Client;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 
 namespace EventFider.Controllers
 {
@@ -12,7 +13,7 @@ namespace EventFider.Controllers
     public class EventsController : ControllerBase
     {
         private readonly EventContext _context;
-        private readonly IEventRepo _repo; 
+        private readonly IEventRepo _repo;
 
         public EventsController(EventContext context, IEventRepo repo)
         {
@@ -30,20 +31,20 @@ namespace EventFider.Controllers
         public async Task<ActionResult<UserEvents>> AddUserEvent(UserEventDTO userEvents)
         {
             var response = await _repo.CreateUserEvent(userEvents);
-             return Ok(response);
+            return Ok(response);
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EventResponse>>> GetEvents() 
+        public async Task<ActionResult<IEnumerable<EventResponse>>> GetEvents()
         {
-            var eventResponseList = await _repo.GetAllEvents(); 
+            var eventResponseList = await _repo.GetAllEvents();
 
             return Ok(eventResponseList);
         }
         [HttpGet("dto")]
-        public async Task<ActionResult<IEnumerable<EventResponseDTO>>> GetEventsDTO() 
+        public async Task<ActionResult<IEnumerable<EventResponseDTO>>> GetEventsDTO()
         {
-            var eventResponseList = await _repo.GetAllEventsDTO(); 
+            var eventResponseList = await _repo.GetAllEventsDTO();
 
             return Ok(eventResponseList);
         }
@@ -55,7 +56,7 @@ namespace EventFider.Controllers
 
             if (ev == null) return NotFound();
 
-            var eventResponse = await _repo.GetEventById(id); 
+            var eventResponse = await _repo.GetEventById(id);
 
             return Ok(eventResponse);
         }
@@ -66,7 +67,7 @@ namespace EventFider.Controllers
 
             if (ev == null) return NotFound();
 
-            var eventResponse = await _repo.GetEventDTOById(id); 
+            var eventResponse = await _repo.GetEventDTOById(id);
 
             return Ok(eventResponse);
         }
@@ -74,7 +75,7 @@ namespace EventFider.Controllers
         [HttpPost]
         public async Task<ActionResult<EventRequest>> PostEvent(EventRequest newEvent)
         {
-            var response = await _repo.CreateEvent(newEvent); 
+            var response = await _repo.CreateEvent(newEvent);
 
             return CreatedAtAction("PostEvent", new { id = response.Id }, response);
         }
@@ -82,7 +83,7 @@ namespace EventFider.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEvent(int id)
         {
-             await _repo.DeleteEventById(id); 
+            await _repo.DeleteEventById(id);
             return NoContent();
         }
 
@@ -91,7 +92,7 @@ namespace EventFider.Controllers
         {
             if (id != updatedEvent.Id) return BadRequest();
 
-             _repo.UpdateEventById(id, updatedEvent);
+            _repo.UpdateEventById(id, updatedEvent);
 
             try
             {
@@ -112,11 +113,35 @@ namespace EventFider.Controllers
             return NoContent();
         }
 
-         [HttpDelete("userEvents/delete")]
+        [HttpDelete("userEvents/delete")]
         public async Task<IActionResult> DeleteUserEvent(string userId, int eventId)
         {
-             await _repo.DeleteUserEventById(userId, eventId); 
+            await _repo.DeleteUserEventById(userId, eventId);
             return NoContent();
+        }
+
+        [HttpGet("Tickets/getAll")]
+        public async Task<ActionResult<IEnumerable<Ticket>>> GetAllTickets()
+        {
+            var tickets = await _repo.GetAllTickets();
+
+            return Ok(tickets);
+        }
+
+         [HttpGet("Tickets/get/{id}")]
+        public async Task<ActionResult<IEnumerable<Ticket>>> GetAllTickets(string Id)
+        {
+            var ticket = await _repo.GetTicketById(Id);
+
+            return Ok(ticket);
+        }
+
+        [HttpPost("Tickets/add")]
+        public async Task<ActionResult<Ticket>> CreateTicket(TicketRequest req)
+        {
+        var result = await _repo.CreateTicket(req);
+           return CreatedAtAction("CreateTicket", new { id = result.Id }, req);
+
         }
 
 
