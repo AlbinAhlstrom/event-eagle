@@ -8,7 +8,6 @@ const EventsMap: React.FC = () => {
   const [distanceFilter, setDistanceFilter] = useState(2);
   const navigate = useNavigate();
 
-  
 
   const handleSliderChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -30,9 +29,7 @@ const EventsMap: React.FC = () => {
       }
     );
   }, []);
-
-  useEffect(() => {console.log(13 - Math.log(distanceFilter))}, [distanceFilter])
-
+  
   return (
     <div className="flex flex-col">
       <DistanceSlider
