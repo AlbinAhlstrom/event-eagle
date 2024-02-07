@@ -6,9 +6,7 @@ namespace Models
     {
         [Key]
         public int Id { get; set; }
-
         public string TicketId { get; set; }
-
         public int EventId { get; set; }
         public Event Event { get; set; }
         public string SellerId { get; set; }
