@@ -161,3 +161,64 @@ export const updateSavedEvents = async (id: string) => {
   const data = await fetchUserEvents(id);
   return data;
 };
+
+
+export type Ticket = {
+  ticketId: string;
+  eventId: number;
+  sellerId: string;
+  sellerName: string;
+  available: boolean;
+};
+
+export type EventTicket = {
+  address: string;
+  category: string;
+  description: string;
+  endTime: string;
+  eventId: number;
+  eventTickets: Ticket[];
+  latitude: number;
+  longitude: number;
+  price: number;
+  startTime: string;
+  title: string;
+  venue: string;
+};
+
+export const getDefaultEventData = (): EventTicket => ({
+  address: "",
+  category: "",
+  description: "",
+  endTime: "",
+  eventId: 0,
+  eventTickets: [],
+  latitude: 0,
+  longitude: 0,
+  price: 0,
+  startTime: "",
+  title: "",
+  venue: "",
+});
+
+export interface TicketCardProps {
+  ticket: Ticket | undefined;
+}
+
+
+
+
+export const setUnavailable = (ticketId: number) => {
+  fetch(`https://event-eagle.azurewebsites.net/Events/Tickets/Update?ticketId=${ticketId}`, {
+   method: 'PUT',
+   headers: {
+     'Content-Type': 'application/json',
+   },
+   body: JSON.stringify({
+     ticketId : ticketId,
+     available : false
+   }),
+ });
+
+ setUnavailable(ticketId);
+}
