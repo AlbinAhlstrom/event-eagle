@@ -5,6 +5,8 @@ using Data;
 using Microsoft.Identity.Client;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Diagnostics;
 
 namespace EventFider.Controllers
 {
@@ -128,7 +130,7 @@ namespace EventFider.Controllers
             return Ok(tickets);
         }
 
-         [HttpGet("Tickets/get/{id}")]
+        [HttpGet("Tickets/get/{id}")]
         public async Task<ActionResult<IEnumerable<Ticket>>> GetTicketById(string id)
         {
             var ticket = await _repo.GetTicketById(id);
@@ -139,10 +141,30 @@ namespace EventFider.Controllers
         [HttpPost("Tickets/add")]
         public async Task<ActionResult<Ticket>> CreateTicket(TicketRequest req)
         {
-        var result = await _repo.CreateTicket(req);
-           return CreatedAtAction("CreateTicket", new { id = result.Id }, req);
+            var result = await _repo.CreateTicket(req);
+            return CreatedAtAction("CreateTicket", new { id = result.Id }, req);
 
         }
+
+        [HttpPut("Tickets/Update")]
+        public async Task<ActionResult<Ticket>> ToggleTicketAvailability(string ticketId, UpdateTicketDTO updatedEvent)
+        {
+
+            var response = await _repo.UpdateTicketAvailability(updatedEvent);
+            await _context.SaveChangesAsync();
+
+            return Ok(response);
+        }
+
+
+        [HttpDelete("Tickets/Delete")]
+        public async Task<IActionResult> DeleteTicket (string ticketId)
+        {
+            await _repo.DeleteTicket(ticketId);
+
+            return NoContent();
+        } 
+
 
 
         private bool EventExists(int id)
