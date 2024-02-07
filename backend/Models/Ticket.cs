@@ -11,7 +11,7 @@ namespace Models
         public Event Event { get; set; }
         public string SellerId { get; set; }
         public string SellerName { get; set; }
-        public bool Available { get; set; }
+        public bool Available { get; set; } = true;
 
         public Ticket()
         {
