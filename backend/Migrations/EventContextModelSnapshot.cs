@@ -65,6 +65,36 @@ namespace backend.Migrations
                     b.ToTable("Events");
                 });
 
+            modelBuilder.Entity("Models.Ticket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Available")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SellerId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SellerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TicketId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("Tickets");
+                });
+
             modelBuilder.Entity("Models.UserEvents", b =>
                 {
                     b.Property<int>("Id")
@@ -87,6 +117,17 @@ namespace backend.Migrations
                     b.HasIndex("EventId");
 
                     b.ToTable("UserEvents");
+                });
+
+            modelBuilder.Entity("Models.Ticket", b =>
+                {
+                    b.HasOne("Models.Event", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
                 });
 
             modelBuilder.Entity("Models.UserEvents", b =>
