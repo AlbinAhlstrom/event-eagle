@@ -13,6 +13,9 @@ import EditEvent from "./pages/EditEvent";
 import Create from "./pages/Create";
 import SavedEvents from "./pages/SavedEvents";
 import SuccessPage from "./pages/SuccessPage";
+import SellTicket from "./pages/SellTicket";
+
+
 function App() {
   return (
     <Routes>
@@ -29,6 +32,7 @@ function App() {
               <Routes>
                 <Route index element={<Home />} />
                 <Route path="/home" element={<Home />} />
+                <Route path="/sellticket" element={<SellTicket />} />
                 <Route path="/savedEvents" element={<SavedEvents />} />
                 <Route path="/categories" element={<Categories />} />
                 <Route path="/events" element={<Events />} />
