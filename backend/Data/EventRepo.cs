@@ -335,7 +335,8 @@ namespace Data
             TicketId = t.TicketId,
             EventId = t.EventId,
             SellerId = t.SellerId,
-            SellerName = t.SellerName
+            SellerName = t.SellerName,
+            Available = t.Available
         })
         .ToListAsync();
 
