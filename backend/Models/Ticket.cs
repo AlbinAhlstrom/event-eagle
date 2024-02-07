@@ -1,8 +1,11 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Models;
 
 public class Ticket
 {
-    public int Id { get; set; }
+    [Key]
+    public TicketId Id { get; set; }
     public int EventId { get; set; }
     public Event Event { get; set; }
     public string SellerId { get; set; }
