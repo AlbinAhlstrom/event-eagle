@@ -95,7 +95,8 @@ const EventsMap: React.FC = () => {
           longitude: parseFloat(venue?.location?.longitude || "0") || 0,
           price: priceRange?.min || 0,
           venue: "",
-          endTime: null,
+          category: "Music",
+          endTime: "null",
         });
       } else {
         ticketEvents.push(event);
