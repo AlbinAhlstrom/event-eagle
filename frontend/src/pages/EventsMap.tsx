@@ -4,7 +4,7 @@ import DistanceSlider from "../components/DistanceSlider";
 import DiscoveryMap from "../components/DiscoveryMap"
 
 const EventsMap: React.FC = () => {
-  const [userLocation, setUserLocation] = React.useState({lat:0, lng:0});
+  const [userLocation, setUserLocation] = React.useState({ lat: 53.54992, lng: 10.00678 });
   const [distanceFilter, setDistanceFilter] = useState(2);
   const navigate = useNavigate();
 
@@ -38,7 +38,7 @@ const EventsMap: React.FC = () => {
         onChange={handleSliderChange}
       />
       <div className="flex justify-center items-center flex-wrap gap-10 mt-4">
-        <DiscoveryMap center={userLocation} distanceFilter={distanceFilter}/>
+        <DiscoveryMap center={userLocation} />
       </div>
       <button
         className="btn btn-primary self-center fixed bottom-2 mt-auto w-40 z-50 max-md:w-5/6"
