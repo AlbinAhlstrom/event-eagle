@@ -18,10 +18,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.50.0",
-    "swr": "^2.2.4",
+    "swr": "^2.2.4"
   },
   "devDependencies": {
-    "@types/google-map-react": "^2.1.10",
     "@types/node": "^20.11.10",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.18",
