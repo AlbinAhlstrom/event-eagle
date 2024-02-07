@@ -100,7 +100,7 @@ const EventCard: React.FC<Props> = ({event, updateSavedEvents }) => {
 
   const isSaveEventButtonVisible = location.pathname !== "/savedEvents";
 
-  const isIdANumber = typeof event.id === "number";
+  const isFromTicketmaster = event.description === "Ticketmaster Event";
 
   const iconSrc = getIcon[event.category] || "";
   return (
@@ -127,7 +127,7 @@ const EventCard: React.FC<Props> = ({event, updateSavedEvents }) => {
           <button className="btn btn-primary" onClick={handleSeeDetailsClick}>
             See Details
           </button>
-          {isSaveEventButtonVisible && isIdANumber && (
+          {isSaveEventButtonVisible && !isFromTicketmaster && (
             <button className="btn btn-primary" onClick={handleSaveEventClick}>
               Pin Event
             </button>
