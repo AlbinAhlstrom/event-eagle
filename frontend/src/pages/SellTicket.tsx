@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import image from "../images/nature.jpg";
 import { useClerk } from "@clerk/clerk-react";
-import { useNavigate } from "react-router-dom";
 
 const SellTicket = () => {
   const [events, setEvents] = useState<Event[]>([]);
