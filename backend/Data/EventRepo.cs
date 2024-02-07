@@ -324,5 +324,39 @@ namespace Data
             }
         }
 
+        public async Task<EventTicketDTO> GetEventWithTickets(int eventId)
+        {
+          var eventToReturn = await _context.Events.FindAsync(eventId);
+        
+        var tickets = await _context.Tickets
+        .Where(t => t.EventId == eventId)
+        .Select(t => new TicketResponse
+        {
+            TicketId = t.TicketId,
+            EventId = t.EventId,
+            SellerId = t.SellerId,
+            SellerName = t.SellerName
+        })
+        .ToListAsync();
+
+         var eventTicketResponse = new EventTicketDTO();
+            if (eventToReturn != null)
+            {
+                    eventTicketResponse.EventId = eventToReturn.Id;
+                    eventTicketResponse.Title = eventToReturn.Title;
+                    eventTicketResponse.Description = eventToReturn.Description;
+                    eventTicketResponse.StartTime = eventToReturn.StartTime;
+                    eventTicketResponse.EndTime = eventToReturn.EndTime;
+                    eventTicketResponse.Venue = eventToReturn.Venue;
+                    eventTicketResponse.Address = eventToReturn.Address;
+                    eventTicketResponse.Latitude = eventToReturn.Latitude;
+                    eventTicketResponse.Longitude = eventToReturn.Longitude;
+                    eventTicketResponse.Price = eventToReturn.Price;
+                    eventTicketResponse.Category = eventToReturn.Category;
+                    eventTicketResponse.EventTickets = tickets;
+            }
+                return eventTicketResponse;
+        }
+
     }
 }

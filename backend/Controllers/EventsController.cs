@@ -165,6 +165,16 @@ namespace EventFider.Controllers
             return NoContent();
         } 
 
+        [HttpGet("EventTickets")]
+        public async Task<ActionResult<EventTicketDTO>> GetEventWithTickets(int eventId)
+        {
+            var result = await _repo.GetEventWithTickets(eventId);
+
+            if(result.Title == null) return NotFound();
+
+            return Ok(result);
+        }
+
 
 
         private bool EventExists(int id)

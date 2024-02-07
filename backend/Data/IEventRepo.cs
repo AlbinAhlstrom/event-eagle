@@ -22,5 +22,6 @@ namespace Data
         Task<Ticket> CreateTicket(TicketRequest request);
         Task<Ticket> UpdateTicketAvailability(UpdateTicketDTO req);
         Task DeleteTicket(string id);
+        Task<EventTicketDTO> GetEventWithTickets(int eventId);
     }
 }
