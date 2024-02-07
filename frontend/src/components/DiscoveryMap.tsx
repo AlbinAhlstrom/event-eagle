@@ -10,9 +10,10 @@ type Coordinate = {
 type MapWindowProps = {
   center: Coordinate;
   circleRadius: number;
+  zoom: number;
 };
 
-const DiscoveryMap = ({ center, circleRadius }: MapWindowProps) => {
+const DiscoveryMap = ({ center, circleRadius, zoom }: MapWindowProps) => {
   const apiUrl = import.meta.env.VITE_GMAPS_KEY;
   const mapId = import.meta.env.VITE_GMAPS_MAPID;
 
@@ -21,7 +22,7 @@ const DiscoveryMap = ({ center, circleRadius }: MapWindowProps) => {
     <div className="h-60vh w-60vh">
       <APIProvider apiKey={apiUrl}>
         <Map
-          zoom={16}
+          zoom={zoom}
           center={center}
           mapId={mapId}
           gestureHandling={"greedy"}
