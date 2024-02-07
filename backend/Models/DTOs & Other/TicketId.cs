@@ -1,16 +1,19 @@
-namespace Models;
-public class TicketId
+namespace Models
 {
-    public string Id { get; }
-
-    public TicketId()
+    public class TicketId
     {
-        int randomNumber;
-        lock (new Random())
-        {
-            randomNumber = new Random().Next(100000000, 999999999);
-        }
+        private static readonly Random random = new Random();
+        private static readonly object lockObject = new object();
 
-        Id = "ti-" + randomNumber.ToString();
+        public string Id { get; }
+
+        public TicketId()
+        {
+            lock (lockObject)
+            {
+                int randomNumber = random.Next(100000000, 999999999);
+                Id = "ti-" + randomNumber.ToString();
+            }
+        }
     }
 }
