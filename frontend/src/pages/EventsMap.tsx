@@ -31,6 +31,8 @@ const EventsMap: React.FC = () => {
     );
   }, []);
 
+  useEffect(() => {console.log(13 - Math.log(distanceFilter))}, [distanceFilter])
+
   return (
     <div className="flex flex-col">
       <DistanceSlider
@@ -38,7 +40,7 @@ const EventsMap: React.FC = () => {
         onChange={handleSliderChange}
       />
       <div className="flex justify-center items-center flex-wrap gap-10 mt-4">
-        <DiscoveryMap center={userLocation} circleRadius={distanceFilter * 1000} zoom={13 - Math.log(distanceFilter)}/>
+        <DiscoveryMap center={userLocation} circleRadius={distanceFilter * 1000} zoom={Math.min(14, 14 - 1.5 * Math.log(distanceFilter))}/>
       </div>
       <button
         className="btn btn-primary self-center fixed bottom-2 mt-auto w-40 z-50 max-md:w-5/6"
