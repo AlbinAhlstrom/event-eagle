@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Models;
@@ -300,5 +301,28 @@ namespace Data
 
             return ticketToAdd;
         }
+
+        public async Task<Ticket> UpdateTicketAvailability(UpdateTicketDTO req)
+        {
+            var ticket = _context.Tickets.Where(ti => ti.TicketId == req.TicketId).Include(e => e.Event).FirstOrDefault();
+
+            ticket.Available = req.Available;
+
+            var finished = _context.Tickets.Update(ticket);
+            await _context.SaveChangesAsync();
+
+            return ticket;
+        }
+
+        public async Task DeleteTicket(string id)
+        {
+            var ticketToDelete = await _context.Tickets.FirstOrDefaultAsync(ti => ti.TicketId == id);
+            if(ticketToDelete!= null)
+            {
+                _context.Tickets.Remove(ticketToDelete);
+                await _context.SaveChangesAsync();
+            }
+        }
+
     }
 }
