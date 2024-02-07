@@ -15,7 +15,7 @@
     "@googlemaps/js-api-loader": "^1.16.2",
     "@react-google-maps/api": "^2.19.2",
     "@stripe/stripe-js": "^2.4.0",
-    "@vis.gl/react-google-maps": "^0.5.0",
+    "@vis.gl/react-google-maps": "^0.5.4",
     "animate.css": "^4.1.1",
     "flatpickr": "^4.6.13",
     "google-map-react": "^2.2.1",
