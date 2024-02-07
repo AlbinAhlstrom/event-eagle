@@ -22,8 +22,8 @@ builder.Services.AddScoped<IEventRepo, EventRepo>();
 
 builder.Services.Configure<StripeSettings>(options =>
 {
-    options.PublicKey = Env.GetString("STRIPE_PUBLIC_KEY");
-    options.SecretKey = Env.GetString("STRIPE_SECRET_KEY");
+    options.PublicKey = "pk_test_51OdthoBtLyUDk5IywgHBe06AJYc1cuidNqi1FqAX6aUg9aZKfzkmYn3XodjGpeeP5eKvY1zexOJoSh8FFAisLG5i00cGFmfZJL";
+    options.SecretKey = "sk_test_51OdthoBtLyUDk5IyFKwMhz9JWfKWeqot7iX5m5lKT163nxvqf2ZF0oQhTPaWVoPrIvsYmm7NCkJSqV3EP0Y5NBVx00zznLXx8K";
 });
 
 var app = builder.Build();
