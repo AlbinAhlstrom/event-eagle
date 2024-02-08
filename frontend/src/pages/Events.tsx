@@ -99,23 +99,14 @@ const Events: React.FC = () => {
     return (
       events?.filter((event) => {
         if (!userLocation) return false;
-        const eventLat = event.latitude;
-        const eventLng = event.longitude;
-        const distance = getDistanceFromLatLonInKm(
-          userLocation.lat,
-          userLocation.lng,
-          eventLat,
-          eventLng
-        );
-        return distance <= distanceFilter;
-      }) || []
-    );
+        const eventLocation = {lat:event.latitude, lng:event.longitude}
+        const distance = getDistanceFromLatLonInKm(userLocation, eventLocation);
+        return (distance <= distanceFilter)}) || []
+    )
   }, [events, userLocation, distanceFilter]);
 
   const filteredEvents = useMemo(() => {
-    return (
-      eventsNearby.filter((event) => !type || event.category === type) || []
-    );
+    return (eventsNearby.filter((event) => !type || event.category === type) || [])
   }, [eventsNearby, type]);
 
   const handleUpdateSaveEvent = () => {
