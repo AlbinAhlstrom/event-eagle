@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Data;
 using DotNetEnv;
 using Models;
+using Azure.Storage.Blobs;
 
 DotNetEnv.Env.Load();
 
@@ -26,9 +27,9 @@ builder.Services.Configure<StripeSettings>(options =>
     options.SecretKey = Env.GetString("STRIPE_SECRET_KEY");
 });
 
-
-
-
+string azureBlobConnectionString = builder.Configuration.GetConnectionString("eeticketsblob");
+builder.Services.AddScoped<BlobServiceClient>(x => new BlobServiceClient(azureBlobConnectionString));
+builder.Services.AddScoped<BlobStorageService>();
 
 var app = builder.Build();
 
