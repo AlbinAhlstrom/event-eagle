@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Models
@@ -12,7 +13,8 @@ namespace Models
         public string SellerId { get; set; }
         public string SellerName { get; set; }
         public bool Available { get; set; } = true;
-        public string PurchasedBy {get; set;} = "";
+        public string PurchasedBy { get; set; }
+        public string PdfFilePath { get; set; } 
 
         public Ticket()
         {

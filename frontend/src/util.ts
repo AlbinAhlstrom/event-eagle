@@ -196,7 +196,7 @@ export interface TicketCardProps {
 
 
 
-export const setUnavailable = (ticketId: number, userId : string) => {
+export const setUnavailable = (ticketId: number) => {
   fetch(`https://event-eagle.azurewebsites.net/Events/Tickets/Update?ticketId=${ticketId}`, {
    method: 'PUT',
    headers: {
@@ -204,10 +204,9 @@ export const setUnavailable = (ticketId: number, userId : string) => {
    },
    body: JSON.stringify({
      ticketId : ticketId,
-     available : false,
-     purchasedBy : userId
+     available : false
    }),
  });
 
- setUnavailable(ticketId, userId);
+ setUnavailable(ticketId);
 }
