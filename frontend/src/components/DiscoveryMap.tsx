@@ -31,6 +31,9 @@ const DiscoveryMap = ({ center, circleRadius, zoom }: MapWindowProps) => {
           mapId={mapId}
           gestureHandling={"greedy"}
           onClick={handleMapClick}
+          disableDefaultUI={true}
+          disableDoubleClickZoom={true}
+          draggable={false}
         >
           <Circle center={center} radius={circleRadius} />
           <Markers selectedEventId={selectedEventId} setSelectedEventId={setSelectedEventId} />
