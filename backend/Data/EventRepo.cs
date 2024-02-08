@@ -307,6 +307,7 @@ namespace Data
             var ticket = _context.Tickets.Where(ti => ti.TicketId == req.TicketId).Include(e => e.Event).FirstOrDefault();
 
             ticket.Available = req.Available;
+            ticket.PurchasedBy = req.PurchasedBy;
 
             var finished = _context.Tickets.Update(ticket);
             await _context.SaveChangesAsync();
