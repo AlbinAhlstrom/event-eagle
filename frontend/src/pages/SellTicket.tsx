@@ -53,7 +53,7 @@ const SellTicket = () => {
 
   return (
     <div
-      className="hero min-h-screen"
+      className="hero min-h-screen-h"
       style={{
         backgroundImage: `url(${image})`,
       }}
