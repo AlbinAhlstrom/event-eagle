@@ -104,7 +104,7 @@ const EventMarker: React.FC<Props> = ({event, updateSavedEvents }) => {
 
   const iconSrc = getIcon[event.category] || "";
   return (
-    <div className="card w-72 h-72 bg-base-100 shadow-xl image-full animate__animated animate__bounceInDown">
+    <div className="card w-72 h-72 bg-base-100 z-50 shadow-xl image-full animate__animated animate__bounceInDown">
       <figure>
         <img src={iconSrc} alt={event.category} />
       </figure>
