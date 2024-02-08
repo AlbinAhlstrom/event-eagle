@@ -54,14 +54,14 @@ export type Event = {
 
 export const defaultEventListing: Event = {
   id: 0,
-  title: "default",
-  description: "desc",
+  title: "",
+  description: "",
   startTime: toDateTimeString(new Date()),
   endTime: toDateTimeString(new Date()),
   venue: "",
   address: "",
-  latitude: 0,
-  longitude: 0,
+  latitude: 59.33534129164961, 
+  longitude: 18.084843751865773,
   price: 10,
   category: categories.sports,
 };
