@@ -193,9 +193,6 @@ export interface TicketCardProps {
   ticket: Ticket | undefined;
 }
 
-
-
-
 export const setUnavailable = (ticketId: number) => {
   fetch(`https://event-eagle.azurewebsites.net/Events/Tickets/Update?ticketId=${ticketId}`, {
    method: 'PUT',
