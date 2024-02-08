@@ -6,39 +6,20 @@ const DistanceSlider = ({
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
   return (
-    <>
-      <div className="mx-10 mt-4">
+    <div className="card card-compact mt-0">
+      <div className="card-body bg-neutral rounded-lg flex justify-center">
         <input
           type="range"
           min={0.2}
           max={10}
           step={0.01}
           value={value}
-          className="range range-primary"
+          className="range range-primary flex-0"
           onChange={onChange}
-        />
-        <div className=" flex justify-between text-xs">
-          <span className="slider-marking" id="0">
-            0 km
-          </span>
-          <span className="slider-marking" id="2">
-            2
-          </span>
-          <span className="slider-marking" id="4">
-            4
-          </span>
-          <span className="slider-marking" id="6">
-            6
-          </span>
-          <span className="slider-marking" id="8">
-            8
-          </span>
-          <span className="slider-marking" id="10">
-            10 km
-          </span>
-        </div>
+        ></input>
+        <span>Events within {}</span>
       </div>
-    </>
+    </div>
   );
 };
 
