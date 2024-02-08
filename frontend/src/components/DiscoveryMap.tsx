@@ -35,7 +35,7 @@ const DiscoveryMap = ({ center, distanceFilter, zoom }: MapWindowProps) => {
           disableDoubleClickZoom={true}
           draggable={false}
         >
-          <Circle center={center} radius={distanceFilter*1000} clickable={false}/>
+          <Circle center={center} radius={distanceFilter*1000} clickable={false} strokeOpacity={0.75} strokeWeight={0.5}/>
           <Markers userLocation={center} distanceFilter={distanceFilter} selectedEventId={selectedEventId} setSelectedEventId={setSelectedEventId} />
         </Map>
       </APIProvider>
