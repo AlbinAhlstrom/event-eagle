@@ -15,9 +15,9 @@ function Categories() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col justify-between items-center h-screen-h max-sm:h-auto">
-    <div className="flex flex-col h-full">
-        <section className="grid max-sm:grid-cols-1 grid-cols-2 gap-3 lg:mx-nav">
+    <div className="flex flex-col items-center h-screen-h max-sm:h-auto">
+    <div className="flex flex-col h-full max-sm:w-full justify-center max-sm:items-center my-0">
+        <section className="grid gap-y-3 max-sm:grid-cols-1 grid-cols-2 gap-3 lg:mx-nav">
           {eventCategories.map((category, index) => {
             return (
               <CategoryCard
