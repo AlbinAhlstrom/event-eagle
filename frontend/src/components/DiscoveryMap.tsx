@@ -51,14 +51,16 @@ const Markers = () => {
   return (
   <>
     {events && events.map((event) => <AdvancedMarker position={{lat: event.latitude, lng: event.longitude}} key={event.title}>
-          {(event.category === categories.sports) && <span>⚽</span>}
-          {(event.category === categories.sports) && <span>🎸</span>}
+          {(event.category == categories.sports) && <span className="text-5xl">⚽</span>}
+          {(event.category == categories.music) && <span className="text-5xl">🎸</span>}
+          {(event.category == categories.arts) && <span className="text-5xl">🎭</span>}
+          {(event.category == categories.family) && <span className="text-5xl">🧸</span>}
           
-          <EventMarker
+          {/* <EventMarker
             key={event.id}
             event={event}
             updateSavedEvents={() => {}}
-          />
+          /> */}
       </AdvancedMarker>)}
   </>
   )
