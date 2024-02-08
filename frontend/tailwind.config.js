@@ -51,6 +51,8 @@ export default {
         '40vw': '40vw',
         'max-card-w': '38vh',
         'default-my': '2rem'
+      },
+      fontSize: {
       }
     }
   },
