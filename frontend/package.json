@@ -12,6 +12,7 @@
   "dependencies": {
     "@clerk/clerk-react": "^4.30.3",
     "@clerk/themes": "^1.7.9",
+    "@googlemaps/markerclusterer": "^2.5.3",
     "@stripe/stripe-js": "^2.4.0",
     "@vis.gl/react-google-maps": "^0.5.4",
     "animate.css": "^4.1.1",
