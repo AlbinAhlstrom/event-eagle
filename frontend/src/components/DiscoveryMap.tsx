@@ -66,6 +66,7 @@ const Markers = ({ selectedEventId, setSelectedEventId }: MarkersProps) => {
           position={{ lat: event.latitude, lng: event.longitude }}
           key={event.title}
           onClick={() => setSelectedEventId(selectedEventId !== event.id ? event.id : 0)}
+          zIndex={selectedEventId === event.id ? 100 : 1}
         >
           {selectedEventId === event.id ? (
             <EventMarker
