@@ -3,6 +3,7 @@ import CountdownTimer from "./CountDown";
 import { Event, EventTicket, getDefaultEventData, setUnavailable } from "../util";
 import { loadStripe } from "@stripe/stripe-js";
 import TicketCard from "./TicketCard";
+import { useClerk } from "@clerk/clerk-react";
 
 interface props {
   event: Event;
@@ -10,6 +11,8 @@ interface props {
 
 const EventDetailsCard: React.FC<props> = ({ event }) => {
   const [eventTickets, setEventTickets] = useState<EventTicket>(getDefaultEventData);
+  const {user} = useClerk();
+
   useEffect(() => {
     const fetchEventTicketsData = async () => {
       const res = await fetch(
@@ -27,7 +30,7 @@ const EventDetailsCard: React.FC<props> = ({ event }) => {
   }, []);
 
   console.log(eventTickets);
-  const handlePayment = async (ticketId) => {
+  const handlePayment = async (ticketId, userId) => {
     try {
       const stripe = await loadStripe(
         "pk_test_51OdthoBtLyUDk5IywgHBe06AJYc1cuidNqi1FqAX6aUg9aZKfzkmYn3XodjGpeeP5eKvY1zexOJoSh8FFAisLG5i00cGFmfZJL"
@@ -62,12 +65,10 @@ const EventDetailsCard: React.FC<props> = ({ event }) => {
       console.error("Error creating checkout session:", error);
     }
 
-  setUnavailable(ticketId);
+    if(user) setUnavailable(ticketId, userId);
   };
 
     const availableTickets = eventTickets.eventTickets.filter( t => t.available == true);
-    console.log(availableTickets);
-    console.log(eventTickets.eventTickets);
 
   return (
     <div className="hero-content text-center drop-shadow-2xl text-neutral-content bg-base-100 justify-center items-center rounded-2xl p-10">
@@ -86,7 +87,7 @@ const EventDetailsCard: React.FC<props> = ({ event }) => {
             return (
               <div key={index} className="m-2 p-4 bg-white border text-black border-white rounded-xl">
                 <TicketCard ticket={ticket} />
-                <button onClick={() => handlePayment(ticket.ticketId)} className="btn shadow-2xl btn-base">
+                <button onClick={() => handlePayment(ticket.ticketId, user.id)} className="btn shadow-2xl btn-base">
                   Purchase Ticket
                 </button>
               </div>
