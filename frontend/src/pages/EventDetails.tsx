@@ -2,6 +2,7 @@ import { useLocation } from 'react-router-dom';
 import image from '../images/nature.jpg';
 import EventDetailsCard from '../components/EventDetailsCard';
 import TicketCard from '../components/TicketCard';
+import EventMiniMap from '../components/EventMiniMap';
 
 const EventDetails = () => {
   const location = useLocation();
@@ -14,13 +15,13 @@ console.log(event.id);
   return (
     <>
       <div
-        className="hero min-h-screen"
+        className="hero min-h-screen-h"
         style={{
           backgroundImage: `url(${image})`
         }}
       >
         <span className="h-2/6 w-2/6 absolute top-20">
-          {/* <EventMiniMap position={position} /> */}
+          <EventMiniMap position={{lat:event.latitude, lng:event.longitude}} />
         </span>
         <div className="hero-overlay bg-opacity-60"></div>
         <div className='flex flex-col'>
