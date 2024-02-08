@@ -7,6 +7,7 @@ public class TicketRequest
         public string SellerName { get; set; }
         public bool Available { get; set; }
         public string PurchasedBy { get; set; }
-        public IFormFile PdfFile { get; set; }
         public string TicketId { get; set; } 
+        public IFormFile? file {get; set;}
+        public string? fileUrl {get; set;}
 }

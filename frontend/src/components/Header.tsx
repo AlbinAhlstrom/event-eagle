@@ -53,6 +53,10 @@ const Header = () => {
           <h1>Event Eagle</h1>
         </Link>
       </div>
+      <div className="gap-5">
+      <div className="m-5">
+          <UserButton />
+       </div>
       <div className="flex-none">
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn m-1">
@@ -62,12 +66,14 @@ const Header = () => {
           <ul
             tabIndex={0}
             className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
-          >
+            >
             <li>{sellTicketButton}</li>
             <li>{savedEventsButton}</li>
             <li>{adminButton}</li>
           </ul>
         </div>
+       </div>
+      
       </div>
     </div>
   );
