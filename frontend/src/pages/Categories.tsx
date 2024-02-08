@@ -37,7 +37,7 @@ function Categories() {
           >
             Browse all categories
           </button>
-          <div className="max-sm:h-nav-h"></div>
+          <div className="max-sm:h-20"></div>
       </div>
       
   );
