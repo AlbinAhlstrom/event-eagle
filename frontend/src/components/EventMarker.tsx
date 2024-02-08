@@ -20,7 +20,7 @@ type Props = {
   updateSavedEvents: () => void;
 };
 
-const EventCard: React.FC<Props> = ({event, updateSavedEvents }) => {
+const EventMarker: React.FC<Props> = ({event, updateSavedEvents }) => {
   const navigate = useNavigate();
   const { user } = useClerk();
 
@@ -138,4 +138,4 @@ const EventCard: React.FC<Props> = ({event, updateSavedEvents }) => {
   );
 };
 
-export default EventCard;
+export default EventMarker;

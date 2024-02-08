@@ -1,8 +1,8 @@
 import { Circle } from "./Circle";
 import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
 import { useState, useEffect } from "react";
-import { Event } from "../util";
-import EventCard from "./EventMarker";
+import { Event, categories } from "../util";
+import EventMarker from "./EventMarker";
 
 export type Point = google.maps.LatLngLiteral & {key: string};
 
@@ -51,7 +51,10 @@ const Markers = () => {
   return (
   <>
     {events && events.map((event) => <AdvancedMarker position={{lat: event.latitude, lng: event.longitude}} key={event.title}>
-          <EventCard
+          {(event.category === categories.sports) && <span>⚽</span>}
+          {(event.category === categories.sports) && <span>🎸</span>}
+          
+          <EventMarker
             key={event.id}
             event={event}
             updateSavedEvents={() => {}}
