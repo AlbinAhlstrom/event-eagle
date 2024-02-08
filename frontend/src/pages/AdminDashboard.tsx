@@ -48,7 +48,8 @@ const AdminDashboard = () => {
           </li>
         ))}
       </ul>
-      <BottomButton onClick={handleCreateEvent} text="Create new event" />
+      
+      <button onClick={handleCreateEvent} className="btn btn-primary self-center fixed bottom-4 mt-auto w-40 z-50 max-md:w-2/3">Create event</button>
     </div>
   );
 };
