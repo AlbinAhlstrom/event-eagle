@@ -132,10 +132,10 @@ const Events: React.FC = () => {
         ))}
       </div>
       <button
-        className="btn btn-primary self-center fixed bottom-2 mt-auto w-40 z-50 max-md:w-5/6"
+        className="btn btn-primary self-center fixed bottom-4 mt-auto w-40 z-50 max-md:w-2/3"
         onClick={() => navigate("/categories")}
       >
-        Back to Categories
+        Go back
       </button>
     </div>
   );
