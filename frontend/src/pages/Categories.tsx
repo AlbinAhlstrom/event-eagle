@@ -15,7 +15,7 @@ function Categories() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col items-center h-screen-h">
+    <div className="flex flex-col justify-between items-center h-screen-h max-sm:h-auto">
     <div className="flex flex-col h-full">
         <section className="grid max-sm:grid-cols-1 grid-cols-2 gap-3 lg:mx-nav">
           {eventCategories.map((category, index) => {
@@ -29,6 +29,7 @@ function Categories() {
           })}
           
         </section>
+        
         </div>
         <button
             className="btn btn-primary my-2 max-sm:w-48 bottom-0"
@@ -36,8 +37,8 @@ function Categories() {
           >
             Show all Categories
           </button>
-
       </div>
+      
   );
 }
 
