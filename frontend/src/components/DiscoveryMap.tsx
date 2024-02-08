@@ -1,7 +1,7 @@
 import { Circle } from "./Circle";
 import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
 import { useState, useEffect, useRef, SetStateAction } from "react";
-import { Event, categories } from "../util";
+import { Event, categories, getDistanceFromLatLonInKm } from "../util";
 import EventMarker from "./EventMarker";
 import { Coordinate } from "../util";
 
@@ -9,11 +9,11 @@ export type Point = google.maps.LatLngLiteral & { key: string };
 
 type MapWindowProps = {
   center: Coordinate;
-  circleRadius: number;
+  distanceFilter: number;
   zoom: number;
 };
 
-const DiscoveryMap = ({ center, circleRadius, zoom }: MapWindowProps) => {
+const DiscoveryMap = ({ center, distanceFilter, zoom }: MapWindowProps) => {
   const [selectedEventId, setSelectedEventId] = useState<number>(0);
 
   const handleMapClick = () => {
@@ -35,8 +35,8 @@ const DiscoveryMap = ({ center, circleRadius, zoom }: MapWindowProps) => {
           disableDoubleClickZoom={true}
           draggable={false}
         >
-          <Circle center={center} radius={circleRadius} />
-          <Markers selectedEventId={selectedEventId} setSelectedEventId={setSelectedEventId} />
+          <Circle center={center} radius={distanceFilter*1000} />
+          <Markers userLocation={center} distanceFilter={distanceFilter} selectedEventId={selectedEventId} setSelectedEventId={setSelectedEventId} />
         </Map>
       </APIProvider>
     </div>
@@ -44,12 +44,21 @@ const DiscoveryMap = ({ center, circleRadius, zoom }: MapWindowProps) => {
 };
 
 type MarkersProps = {
+  userLocation: Coordinate,
+  distanceFilter: number,
   selectedEventId: number,
   setSelectedEventId: React.Dispatch<SetStateAction<number>>,
 }
 
-const Markers = ({ selectedEventId, setSelectedEventId }: MarkersProps) => {
+const Markers = ({ userLocation, distanceFilter, selectedEventId, setSelectedEventId }: MarkersProps) => {
   const [events, setEvents] = useState<Event[]>([]);
+  const [visibleEvents, setVisibleEvents] = useState<Event[]>([]);
+
+  useEffect(() => {setVisibleEvents(events?.filter((event) => {
+    const eventLocation = {lat:event.latitude, lng:event.longitude}
+    const distance = getDistanceFromLatLonInKm(userLocation, eventLocation);
+    return distance <= distanceFilter;
+  }) || [])}, [events, distanceFilter, userLocation])
 
   useEffect(() => {
     const BASE_URL = "https://event-eagle.azurewebsites.net/";
@@ -64,7 +73,7 @@ const Markers = ({ selectedEventId, setSelectedEventId }: MarkersProps) => {
 
   return (
     <div ref={markersRef}>
-      {events.map((event) => (
+      {visibleEvents.map((event) => (
         <AdvancedMarker
           position={{ lat: event.latitude, lng: event.longitude }}
           key={event.title}
