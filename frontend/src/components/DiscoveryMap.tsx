@@ -1,9 +1,8 @@
 import { Circle } from "./Circle";
-import { APIProvider, Map, AdvancedMarker, Marker } from "@vis.gl/react-google-maps";
+import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
 import { useState, useEffect } from "react";
-import { defaultEventListing } from "../util";
-import { Coordinate } from "../util";
 import { Event } from "../util";
+import EventCard from "./EventMarker";
 
 export type Point = google.maps.LatLngLiteral & {key: string};
 
@@ -22,7 +21,7 @@ const DiscoveryMap = ({ center, circleRadius, zoom }: MapWindowProps) => {
   const points = [{lat: 59.39758577087886, lng: 18.035769033715795, key: "point"}]
 
   return (
-    <div className="h-60vh w-60vh">
+    <div className="h-70vh w-full">
       <APIProvider apiKey={apiUrl}>
         <Map
           zoom={zoom}
@@ -52,7 +51,11 @@ const Markers = () => {
   return (
   <>
     {events && events.map((event) => <AdvancedMarker position={{lat: event.latitude, lng: event.longitude}} key={event.title}>
-        <div className="card card-neutral"><span className="text-5xl bg-red">🎵</span></div>
+          <EventCard
+            key={event.id}
+            event={event}
+            updateSavedEvents={() => {}}
+          />
       </AdvancedMarker>)}
   </>
   )
