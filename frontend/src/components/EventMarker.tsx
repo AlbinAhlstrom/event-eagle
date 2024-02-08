@@ -4,7 +4,7 @@ import sports from "../images/sports-icon.webp";
 import family from "../images/family-icon.webp";
 import arts from "../images/arts-icon.webp";
 import music from "../images/music-icon.webp";
-import CountdownTimer from "./CountDown";
+import CountdownTimer from "./MiniCountdown";
 import { IconMap, Event } from "../util";
 import { useClerk } from "@clerk/clerk-react";
 
@@ -104,7 +104,7 @@ const EventCard: React.FC<Props> = ({event, updateSavedEvents }) => {
 
   const iconSrc = getIcon[event.category] || "";
   return (
-    <div className="card w-96 bg-base-100 shadow-xl image-full animate__animated animate__bounceInDown">
+    <div className="card w-72 h-72 bg-base-100 shadow-xl image-full animate__animated animate__bounceInDown">
       <figure>
         <img src={iconSrc} alt={event.category} />
       </figure>
