@@ -32,11 +32,12 @@ function Categories() {
         
         </div>
         <button
-            className="btn btn-primary self-center fixed bottom-4 mt-auto w-40 z-50 max-md:w-2/3"
+            className="btn btn-primary my-4 px-8 bottom-0 max-md:w-2/3 max-sm:self-center max-sm:fixed shadow-2xl"
             onClick={() => navigate("/events")}
           >
             Browse all categories
           </button>
+          <div className="max-sm:h-nav-h"></div>
       </div>
       
   );
