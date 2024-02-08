@@ -62,20 +62,20 @@ const SellTicket = () => {
       <div className="flex flex-col">
 
         {success && <h2 className="bg-primary p-5 text-3xl rounded-xl text-center font-bold animate-bounce"> Success!</h2>}
-      <div className="hero-content flex flex-col text-center drop-shadow-2xl text-neutral-content bg-base-100 rounded-2xl p-10">
-        <h1 className="mb-5 text-5xl font-bold">Sell Your Ticket</h1>
+      <div className="hero-content flex flex-col text-center drop-shadow-2xl text-neutral-content bg-neutral-800 rounded-2xl p-10">
+        <h1 className="mb-5 text-5xl font-bold">Sell your ticket</h1>
 
         <form className="flex flex-col w-full" onSubmit={handleSubmit}>
         <div className="m-5 flex flex-col">
 
-          <label htmlFor="eventSelect" className="text-xl font-bold" >Select event for ticket</label>
+          <label htmlFor="eventSelect" className="text-xl font-bold" >Select event</label>
           <select
           className="h-10 rounded-lg p-2"
           id="eventSelect"
           value={selectedEventId}
           onChange={(e) => setSelectedEventId(parseInt(e.target.value))}
           >
-            <option value={0}>Select an event</option>
+            <option value={0} disabled={true}></option>
             {events.map((ev) => (
                 <option key={ev.id} value={ev.id}>
                 {ev.title}
