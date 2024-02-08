@@ -136,6 +136,14 @@ namespace EventFider.Controllers
             var ticket = await _repo.GetTicketById(id);
 
             return Ok(ticket);
+        
+        }
+        [HttpGet("Tickets/purchased/{id}")]
+        public async Task<ActionResult<IEnumerable<Ticket>>> GetPurchasedTicketsById(string userId)
+        {
+            var ticket = await _repo.GetPurchasedTickets(userId);
+
+            return Ok(ticket);
         }
 
         [HttpPost("Tickets/add")]

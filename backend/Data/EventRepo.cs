@@ -336,7 +336,8 @@ namespace Data
             EventId = t.EventId,
             SellerId = t.SellerId,
             SellerName = t.SellerName,
-            Available = t.Available
+            Available = t.Available,
+            PurchasedBy = t.PurchasedBy
         })
         .ToListAsync();
 
@@ -359,5 +360,12 @@ namespace Data
                 return eventTicketResponse;
         }
 
+        public async Task<IEnumerable<Ticket>> GetPurchasedTickets(string userId)
+        {
+            var purchasedTickets = await _context.Tickets.Where(t => t.PurchasedBy == userId).ToListAsync();
+
+            return purchasedTickets;
+            
+        }
     }
 }
