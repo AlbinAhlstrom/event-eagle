@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import logo from "../images/event-eagle-logo-nobg.webp";
+import cogIcon from "../images/eagleCog.png";
 import { useNavigate } from "react-router-dom";
 import { UserButton, useClerk } from "@clerk/clerk-react";
 
@@ -35,29 +36,17 @@ const Header = () => {
     if (user.publicMetadata.role === "admin") {
       adminButton = (
         <button
-          className="btn btn-square btn-ghost"
+          className="btn btn-ghost text-xl h-nav-icon-h"
           onClick={() => navigate("/admin")}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            className="inline-block w-5 h-5 stroke-current"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
-            ></path>
-          </svg>
+          Admin
         </button>
       );
     }
   }
 
   return (
-    <div className="navbar bg-ghost shadow-lg h-nav z-50 sticky top-0 h-nav-h">
+    <div className="navbar bg-base-100 shadow-lg h-nav z-50 sticky top-0 h-nav-h">
       <div className="flex-1">
         <Link to="/home" className="btn btn-ghost text-xl h-nav-icon-h">
           <img src={logo} className="h-full" alt="Event Eagle Logo" />
@@ -65,11 +54,21 @@ const Header = () => {
         </Link>
       </div>
       <div className="flex-none">
-        <div>{sellTicketButton}</div>
-        <div>{savedEventsButton}</div>
-        <div>{adminButton}</div>
+        <div className="dropdown dropdown-end">
+          <div tabIndex={0} role="button" className="btn m-1">
+          <img src={cogIcon} className="h-14" alt="Event Eagle Logo" />
+
+          </div>
+          <ul
+            tabIndex={0}
+            className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            <li>{sellTicketButton}</li>
+            <li>{savedEventsButton}</li>
+            <li>{adminButton}</li>
+          </ul>
+        </div>
       </div>
-      <UserButton afterSignOutUrl="/" />
     </div>
   );
 };
