@@ -50,6 +50,12 @@ const SavedEvents: React.FC = () => {
           );
         })}
       </div>
+      <button
+        className="btn btn-primary self-center fixed bottom-4 mt-auto w-40 z-50 max-md:w-2/3"
+        onClick={handleBackToListClick}
+      >
+        go back
+      </button>
     </div>
   );
 };
