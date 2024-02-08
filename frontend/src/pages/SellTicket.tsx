@@ -19,7 +19,7 @@ const SellTicket = () => {
     fetchEvents();
   }, []);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: Event) => {
     event.preventDefault();
 
     const ticketData = {
