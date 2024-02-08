@@ -88,10 +88,10 @@ const Markers = ({ userLocation, distanceFilter, selectedEventId, setSelectedEve
             />
           ) : (
             <>
-              {event.category === categories.sports && <span className="text-5xl">⚽</span>}
+              {event.category === categories.sports && <span className="text-4xl">⚽</span>}
               {event.category === categories.music && <span className="text-5xl">🎸</span>}
-              {event.category === categories.arts && <span className="text-5xl">🎭</span>}
-              {event.category === categories.family && <span className="text-5xl">🧸</span>}
+              {event.category === categories.arts && <span className="text-4xl">🎭</span>}
+              {event.category === categories.family && <span className="text-4xl">🧸</span>}
             </>
           )}
         </AdvancedMarker>
