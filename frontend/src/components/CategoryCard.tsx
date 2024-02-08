@@ -16,7 +16,7 @@ const CategoryCard: React.FC<CategoryCardProps> = (props) => {
   <figure><img src={props.image} alt={props.category} className='h-full w-full'/></figure>
   <div className="card-body flex flex-row py-2">
     <h2 className="card-title flex-1">{props.category}</h2>
-      <button className="btn btn-primary align-center" onClick={() => navigate("/events/" + props.category)}>Browse</button>
+      <button className="btn btn-primary align-center shadow hover:shadow-sm" onClick={() => navigate("/events/" + props.category)}>Browse</button>
   </div>
 </div>
   )
