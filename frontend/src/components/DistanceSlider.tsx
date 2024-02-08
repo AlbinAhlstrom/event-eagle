@@ -10,7 +10,7 @@ const DistanceSlider = ({
       <div className="mx-10 mt-4">
         <input
           type="range"
-          min={0}
+          min={0.2}
           max={10}
           step={0.01}
           value={value}
