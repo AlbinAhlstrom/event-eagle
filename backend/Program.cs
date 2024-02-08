@@ -26,6 +26,10 @@ builder.Services.Configure<StripeSettings>(options =>
     options.SecretKey = Env.GetString("STRIPE_SECRET_KEY");
 });
 
+
+
+
+
 var app = builder.Build();
 
 app.UseSwagger();
