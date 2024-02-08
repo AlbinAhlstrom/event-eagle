@@ -3,6 +3,7 @@ import { APIProvider, Map, AdvancedMarker, Marker } from "@vis.gl/react-google-m
 import { useState, useEffect } from "react";
 import { defaultEventListing } from "../util";
 import { Coordinate } from "../util";
+import { Event } from "../util";
 
 export type Point = google.maps.LatLngLiteral & {key: string};
 
@@ -30,7 +31,7 @@ const DiscoveryMap = ({ center, circleRadius, zoom }: MapWindowProps) => {
           gestureHandling={"greedy"}
         >
           <Circle center={center} radius={circleRadius} />
-          <Markers points={points}/>
+          <Markers />
         </Map>
       </APIProvider>
     </div>
@@ -39,11 +40,20 @@ const DiscoveryMap = ({ center, circleRadius, zoom }: MapWindowProps) => {
 
 const Markers = () => {
 
+  const [events, setEvents] = useState<Event[]>([]);
+
+  useEffect(() => {
+    const BASE_URL = "https://event-eagle.azurewebsites.net/";
+    const EVENTS_ENDPOINT = `${BASE_URL}Events`;
+    fetch(EVENTS_ENDPOINT).then(async (res) => setEvents(await res.json()));
+  }, [])
+
+
   return (
   <>
-      <AdvancedMarker position={{lat: 59.39758577087886, lng: 18.035769033715795}} key={"sf"}>
+    {events && events.map((event) => <AdvancedMarker position={{lat: event.latitude, lng: event.longitude}} key={event.title}>
         <div className="card card-neutral"><span className="text-5xl bg-red">🎵</span></div>
-      </AdvancedMarker>
+      </AdvancedMarker>)}
   </>
   )
 }
