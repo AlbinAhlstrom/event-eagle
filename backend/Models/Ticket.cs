@@ -14,7 +14,6 @@ namespace Models
         public string SellerName { get; set; }
         public bool Available { get; set; } = true;
         public string PurchasedBy { get; set; }
-        public string PdfFilePath { get; set; } 
 
         public Ticket()
         {

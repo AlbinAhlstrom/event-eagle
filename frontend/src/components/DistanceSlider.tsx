@@ -1,5 +1,3 @@
-import { distanceString } from "../util";
-
 const DistanceSlider = ({
   value,
   onChange,
