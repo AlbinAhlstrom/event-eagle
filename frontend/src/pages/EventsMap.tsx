@@ -5,7 +5,7 @@ import DiscoveryMap from "../components/DiscoveryMap"
 
 const EventsMap: React.FC = () => {
   const [userLocation, setUserLocation] = React.useState({ lat: 53.54992, lng: 10.00678 });
-  const [distanceFilter, setDistanceFilter] = useState(2);
+  const [distanceFilter, setDistanceFilter] = useState(0.1);
   const navigate = useNavigate();
 
 
