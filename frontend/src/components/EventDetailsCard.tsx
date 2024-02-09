@@ -85,7 +85,7 @@ const EventDetailsCard: React.FC<props> = ({ event }) => {
           <div className="flex flex-wrap items-center justify-center">
           {availableTickets.map((ticket, index) => {
             return (
-              <div key={index} className="m-2 p-4 bg-white border text-black border-white rounded-xl">
+              <div key={index} className="m-2 p-4 bg-neutral text-black rounded-xl">
                 <TicketCard ticket={ticket} />
                 <button onClick={() => handlePayment(ticket.ticketId, user.id)} className="btn shadow-2xl btn-base">
                   Purchase Ticket
