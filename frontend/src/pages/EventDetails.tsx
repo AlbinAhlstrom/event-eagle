@@ -20,9 +20,6 @@ console.log(event.id);
           backgroundImage: `url(${image})`
         }}
       >
-        <span className="h-2/6 w-2/6 absolute top-20">
-          <EventMiniMap position={{lat:event.latitude, lng:event.longitude}} />
-        </span>
         <div className="hero-overlay bg-opacity-60"></div>
         <div className='flex flex-col'>
 
