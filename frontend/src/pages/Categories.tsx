@@ -16,7 +16,7 @@ function Categories() {
 
   return (
     <div className="flex flex-col items-center h-screen-h max-sm:h-auto">
-    <div className="mt-8 max-sm:w-full max-sm:pb-20">
+    <div className="mt-4 max-sm:w-full max-sm:pb-20">
         <section className="grid gap-y-3 max-sm:grid-cols-1 grid-cols-2 gap-3 lg:mx-nav">
           {eventCategories.map((category, index) => {
             return (
@@ -31,9 +31,9 @@ function Categories() {
         </section>
         
         </div>
-       <div className="flex flex-col justify-center items-center max-sm:my-4 md:h-full w-full">
+       <div className="flex flex-col justify-center items-center max-sm:my-0 md:h-full w-full">
         <button
-            className="btn  btn-primary shadow-2xl max-sm:fixed max-sm:bottom-8 max-sm:w-2/3"
+            className="btn  btn-primary shadow-2xl max-sm:fixed max-sm:bottom-4 max-sm:w-2/3"
             onClick={() => navigate("/events")}
           >
             Browse all categories
