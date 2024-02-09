@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Convert the slider input (0-20) to the actual value (0.1-10)
-const sliderToValue = (sliderValue) => {
+const sliderToValue = (sliderValue: number) => {
   if (sliderValue <= 10) {
     return 0.1 + 0.9 * (sliderValue / 10);
   } else {
@@ -9,7 +9,7 @@ const sliderToValue = (sliderValue) => {
   }
 };
 
-const valueToSlider = (value) => {
+const valueToSlider = (value: number) => {
   if (value <= 1) {
     return ((value - 0.1) / 0.9) * 10;
   } else {
@@ -17,8 +17,13 @@ const valueToSlider = (value) => {
   }
 };
 
-const DistanceSlider = ({ value, onChange }) => {
-  const handleSliderChange = (event) => {
+type Props = {
+  value: number,
+  onChange: (event, target) => void
+}
+
+const DistanceSlider = ({ value, onChange }: Props) => {
+  const handleSliderChange = (event: React.ChangeEvent) => {
     onChange({ ...event, target: { ...event.target, value: sliderToValue(parseFloat(event.target.value)) } });
   };
 
