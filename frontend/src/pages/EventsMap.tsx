@@ -31,7 +31,7 @@ const EventsMap: React.FC = () => {
   }, []);
   
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col sm:mx-8">
       <DistanceSlider
         value={distanceFilter}
         onChange={handleSliderChange}
@@ -47,7 +47,7 @@ const EventsMap: React.FC = () => {
       </button>
       <button
         className="btn flex-0 btn-primary fixed bottom-4 mt-auto w-12 z-50 "
-        onClick={() => navigate("/eventsmap")}
+        onClick={() => navigate("/events")}
       >List</button>
     </div>
   );
