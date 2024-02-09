@@ -15,13 +15,9 @@ const SuccessPage: React.FC = () => {
         <div className="max-w-md">
           <CheckCircleIcon className="mx-auto mb-4 h-20 w-20 text-green-500" />
           <h1 className="mb-5 text-5xl font-bold">Congratulations!</h1>
+          <p className="mb-5 text-xl">Payment successfull!</p>
           <p className="mb-5 text-xl">
-            Your payment was successful, and your adventure awaits! Visit your
-            profile to view your tickets and start planning your journey into
-            the unknown.
-          </p>
-          <p className="mb-5 text-xl">
-            Get ready to create unforgettable memories!
+            Check your e-mail inbox for confirmation and tickets.
           </p>
 
           <button
