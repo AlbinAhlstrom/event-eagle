@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import logo from "../images/event-eagle-logo-nobg.webp";
-import cogIcon from "../images/eagleCog.png";
+import cogIcon from "../images/cog.png";
 import { useNavigate } from "react-router-dom";
 import { UserButton, useClerk } from "@clerk/clerk-react";
 
@@ -60,7 +60,7 @@ const Header = () => {
       <div className="flex-none">
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn m-1">
-          <img src={cogIcon} className="h-14" alt="Event Eagle Logo" />
+          <img src={cogIcon} className="h-8" alt="Event Eagle Logo" />
 
           </div>
           <ul
