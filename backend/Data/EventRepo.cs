@@ -294,6 +294,7 @@ namespace Data
                 SellerId = request.SellerId,
                 SellerName = request.SellerName,
                 Available = request.Available,
+                PurchasedBy = null
             };
 
             _context.Tickets.Add(ticketToAdd);
