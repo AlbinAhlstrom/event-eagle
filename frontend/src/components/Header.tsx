@@ -53,8 +53,8 @@ const Header = () => {
           <h1>Event Eagle</h1>
         </Link>
       </div>
-      <div className="gap-5">
-      <div className="m-5">
+      <div className="gap-1">
+      <div className="">
           <UserButton />
        </div>
       <div className="flex-none">
