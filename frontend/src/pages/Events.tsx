@@ -135,8 +135,13 @@ const Events: React.FC = () => {
         className="btn btn-primary self-center fixed bottom-4 mt-auto w-40 z-50 max-md:w-2/3"
         onClick={() => navigate("/categories")}
       >
+        
         Go back
       </button>
+      <button
+        className="btn flex-0 btn-primary fixed bottom-4 mt-auto w-12 z-50 max-md:w-2/3"
+        onClick={() => navigate("/eventsmap")}
+      >Map</button>
     </div>
   );
 };

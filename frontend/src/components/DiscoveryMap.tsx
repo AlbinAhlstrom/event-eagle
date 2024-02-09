@@ -23,7 +23,7 @@ const DiscoveryMap = ({ center, distanceFilter, zoom }: MapWindowProps) => {
   const mapId = import.meta.env.VITE_GMAPS_MAPID;
 
   return (
-    <div className="h-70vh w-full">
+    <div className="h-70vh  w-full sm:w-70vh">
       <APIProvider apiKey={apiUrl}>
         <Map
           zoom={zoom}

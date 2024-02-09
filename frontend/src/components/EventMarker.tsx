@@ -104,7 +104,7 @@ const EventMarker: React.FC<Props> = ({event, updateSavedEvents }) => {
 
   const iconSrc = getIcon[event.category] || "";
   return (
-    <div className="card w-72 h-72 bg-base-100 z-50 shadow-xl image-full animate__animated animate__bounceInDown">
+    <div className="card w-64 h-64 bg-neutral z-50  animate__animated animate__bounceInDown">
       <figure>
         <img src={iconSrc} alt={event.category} />
       </figure>
@@ -120,18 +120,19 @@ const EventMarker: React.FC<Props> = ({event, updateSavedEvents }) => {
             </button>
           )}
         </div>
-        <p>{event.description}</p>
         <p>{event.price} SEK</p>
         <CountdownTimer targetDate={event.startTime} />
-        <div className="card-actions justify-center mt-10">
+        <div className="flex flex-row">
+        <div className="flex flex-row card-actions justify-center mt-10">
           <button className="btn btn-primary" onClick={handleSeeDetailsClick}>
             See Details
           </button>
           {isSaveEventButtonVisible && !isFromTicketmaster && (
-            <button className="btn btn-primary" onClick={handleSaveEventClick}>
+            <button className="btn btn-primary w-12" onClick={handleSaveEventClick}>
               Pin Event
             </button>
           )}
+        </div>
         </div>
       </div>
     </div>

@@ -36,7 +36,8 @@ function CountdownTimer({ targetDate: targetDateString }: CountdownTimerProps) {
   }, [targetDateString]);
 
   return (
-    <div className="grid grid-flow-col gap-2 text-center justify-center auto-cols-max">
+    <div className="bg-accent rounded-xl ">
+    <div className="grid grid-flow-col gap-2 py-1 text-center justify-center auto-cols-max">
       <div className="flex flex-col p-1 bg-neutral rounded-box text-neutral-content">
         <span className="countdown font-mono text-3xl">
           <span style={{ "--value": timeLeft.hours } as React.CSSProperties}/>
@@ -55,6 +56,7 @@ function CountdownTimer({ targetDate: targetDateString }: CountdownTimerProps) {
         </span>
         sec
       </div>
+    </div>
     </div>
   );
 }
