@@ -5,5 +5,6 @@ public class PaymentRequest
   public string ProductName { get; set; }
   public string ProductCategory { get; set; }
 
+  public string CustomerEmail { get; set; }
 
 }

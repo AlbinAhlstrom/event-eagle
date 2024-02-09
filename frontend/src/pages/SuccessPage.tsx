@@ -17,17 +17,9 @@ const SuccessPage: React.FC = () => {
           <h1 className="mb-5 text-5xl font-bold">Congratulations!</h1>
           <p className="mb-5 text-xl">Payment successfull!</p>
           <p className="mb-5 text-xl">
-            Check your e-mail inbox for confirmation and tickets.
+            Check your <strong>e-mail</strong> inbox for confirmation and
+            tickets.
           </p>
-
-          <button
-            className="btn btn-secondary"
-            onClick={() => {
-              /* Logic to navigate to user profile */
-            }}
-          >
-            Visit your profile
-          </button>
         </div>
       </div>
     </div>
