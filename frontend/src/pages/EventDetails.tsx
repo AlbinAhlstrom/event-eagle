@@ -1,8 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import image from '../images/nature.jpg';
 import EventDetailsCard from '../components/EventDetailsCard';
-import TicketCard from '../components/TicketCard';
-import EventMiniMap from '../components/EventMiniMap';
 
 const EventDetails = () => {
   const location = useLocation();

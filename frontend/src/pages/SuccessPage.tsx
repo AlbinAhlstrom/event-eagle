@@ -15,23 +15,11 @@ const SuccessPage: React.FC = () => {
         <div className="max-w-md">
           <CheckCircleIcon className="mx-auto mb-4 h-20 w-20 text-green-500" />
           <h1 className="mb-5 text-5xl font-bold">Congratulations!</h1>
+          <p className="mb-5 text-xl">Payment successfull!</p>
           <p className="mb-5 text-xl">
-            Your payment was successful, and your adventure awaits! Visit your
-            profile to view your tickets and start planning your journey into
-            the unknown.
+            Check your <strong>e-mail</strong> inbox for confirmation and
+            tickets.
           </p>
-          <p className="mb-5 text-xl">
-            Get ready to create unforgettable memories!
-          </p>
-
-          <button
-            className="btn btn-secondary"
-            onClick={() => {
-              /* Logic to navigate to user profile */
-            }}
-          >
-            Visit your profile
-          </button>
         </div>
       </div>
     </div>

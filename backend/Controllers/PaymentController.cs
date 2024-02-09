@@ -56,7 +56,12 @@ namespace Controllers
                     },
           Mode = "payment",
           SuccessUrl = successUrl,
-          CancelUrl = cancelUrl
+          CancelUrl = cancelUrl,
+          PaymentIntentData = new SessionPaymentIntentDataOptions
+          {
+            ReceiptEmail = "sulqi1994@gmail.com",
+
+          }
         };
 
         var service = new SessionService();
