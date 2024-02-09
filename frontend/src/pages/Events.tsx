@@ -21,7 +21,7 @@ const Events: React.FC = () => {
     lat: number;
     lng: number;
   } | null>(null);
-  const [distanceFilter, setDistanceFilter] = useState(2);
+  const [distanceFilter, setDistanceFilter] = useState(0.1);
   const { type } = useParams<"type">();
   const navigate = useNavigate();
 
