@@ -62,8 +62,8 @@ export const defaultEventListing: Event = {
   address: "",
   latitude: 59.33534129164961, 
   longitude: 18.084843751865773,
-  price: 10,
-  category: categories.sports,
+  price: 0,
+  category: categories.music,
 };
 
 export interface CountdownTimerProps {
