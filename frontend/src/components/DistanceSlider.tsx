@@ -19,7 +19,7 @@ const valueToSlider = (value: number) => {
 
 type Props = {
   value: number,
-  onChange: (event, target) => void
+  onChange: (event: React.ChangeEvent) => void
 }
 
 const DistanceSlider = ({ value, onChange }: Props) => {
