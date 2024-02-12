@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <>
       <div
-        className="hero h-screen-h"
+        className="hero h-screen-h flex-initial"
         style={{
           backgroundImage:
             "url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)",
