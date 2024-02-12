@@ -26,6 +26,7 @@ const DiscoveryMap = ({ center, distanceFilter, zoom }: MapWindowProps) => {
     <div className="h-70vh max-w-70vh max-sm:h-screen-h w-screen-w flex-initial">
       <APIProvider apiKey={apiUrl}>
         <Map
+          className="h-full w-full rounded-t-2xl"
           zoom={zoom}
           center={center}
           mapId={mapId}
