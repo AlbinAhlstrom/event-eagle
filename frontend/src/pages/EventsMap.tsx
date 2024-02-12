@@ -31,7 +31,7 @@ const EventsMap: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col  items-center h-screen-h">
+    <div className="flex flex-col justify-end items-center h-screen-h">
       <DiscoveryMap
         center={userLocation}
         distanceFilter={distanceFilter}
