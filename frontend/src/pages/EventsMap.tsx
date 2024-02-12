@@ -31,12 +31,8 @@ const EventsMap: React.FC = () => {
   }, []);
   
   return (
-    <div className="flex flex-col sm:mx-8 max-sm:flex-col-reverse">
-      <DistanceSlider
-        value={distanceFilter}
-        onChange={handleSliderChange}
-      />
-      <div className="flex justify-center items-center flex-wrap gap-10 mt-4 rounded-xl w-full">
+    <div className="grid ">
+      <div className="flex justify-center items-center flex-wrap gap-10 rounded-xl w-full">
         <DiscoveryMap center={userLocation} distanceFilter={distanceFilter} zoom={Math.min(14, 14 - 1.5 * Math.log(distanceFilter))} />
       </div>
       <div className="flex gap-2 mx-2">
@@ -53,7 +49,10 @@ const EventsMap: React.FC = () => {
         onClick={() => navigate("/events")}
       >List</button>
       </div>
-      
+      <DistanceSlider
+        value={distanceFilter}
+        onChange={handleSliderChange}
+      />
     </div>
   );
 };
