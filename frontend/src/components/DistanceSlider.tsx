@@ -44,7 +44,7 @@ const DistanceSlider = ({ value, onChange }: Props) => {
           onChange={handleSliderChange}
         ></input>
         <span className="text-md">
-          events within <span className="font-bold text-lg">{distanceValue()}</span> {distanceUnit()}:
+          events within <span className="font-bold text-lg">{distanceValue()}</span> {distanceUnit()}
         </span>
       </div>
     </div>
