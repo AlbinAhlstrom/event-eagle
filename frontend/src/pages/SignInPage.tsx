@@ -15,10 +15,10 @@ const SignInPage = () => {
             <h1 className="text-5xl font-bold mb-5 ">Welcome!</h1>
             <p className="mb-5 text-xl">Sign in or sign up to continue</p>
             <div className="flex gap-2">
-              <button className="btn text-xl font-bold btn-primary ">
+              <button className="btn text-xl font-bold btn-primary w-28">
                 <SignInButton redirectUrl="/home">Log in</SignInButton>
               </button>
-              <button className="btn text-xl font-bold btn-primary">
+              <button className="btn text-xl font-bold btn-primary w-28">
                 <SignUpButton />
               </button>
             </div>
