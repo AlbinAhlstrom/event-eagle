@@ -3,7 +3,7 @@ import { SignedOut, SignUpButton, SignInButton } from "@clerk/clerk-react";
 const SignInPage = () => {
   return (
     <div
-      className="hero h-screen flex flex-col justify-center items-center"
+      className="hero h-screen-h flex flex-col justify-center items-center"
       style={{
         backgroundImage:
           "url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)",
