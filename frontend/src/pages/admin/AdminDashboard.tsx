@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Event } from "../util";
+import { Event } from "../../util";
 import BottomButton from "../components/BottomButton";
 import { useClerk } from "@clerk/clerk-react";
-import EditEventCard from "../components/card/EditEventCard";
+import EditEventCard from "../../components/card/EditEventCard";
 import { useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {
