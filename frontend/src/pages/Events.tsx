@@ -120,8 +120,12 @@ const Events: React.FC = () => {
       <DistanceSlider value={distanceFilter} onChange={handleSliderChange} />
       <div className="flex justify-center items-center flex-wrap gap-10 mt-10 mb-32">
         {error && <h1>Failed to load</h1>}
-        {!events && (
-          <span className="loading loading-lg big-spinner h-16 text-primary text-xl"></span>
+        {!filteredEvents.length && (
+          <div className="flex flex-col items-center gap-6">
+          <span className="loading h-20 w-20 text-primary text-xl"></span>
+          <span className="text-2xl font-bold">Loading Events...</span>
+          <span>Move the distance slider to find events further away.</span>
+          </div>
         )}
         {filteredEvents.map((event) => (
           <EventCard
