@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import image from "../images/background/nature.jpg";
+import image from "../../images/background/nature.jpg";
 import { useClerk } from "@clerk/clerk-react";
 
 const SellTicket = () => {
