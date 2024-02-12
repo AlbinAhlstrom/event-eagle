@@ -1,5 +1,5 @@
 import React from "react";
-import image from "../images/background/nature.jpg";
+import image from "../../images/background/nature.jpg";
 import { CheckCircleIcon } from "@heroicons/react/solid";
 
 const SuccessPage: React.FC = () => {

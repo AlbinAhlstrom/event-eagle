@@ -1,14 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
 import useSWR from "swr";
 import { useParams, useNavigate } from "react-router-dom";
-import EventCard from "../components/card/EventCard";
-import DistanceSlider from "../components/DistanceSlider";
+import EventCard from "../../components/card/EventCard";
+import DistanceSlider from "../../components/DistanceSlider";
 import {
   getDistanceFromLatLonInKm,
   Event,
   TicketmasterEvent,
   updateSavedEvents,
-} from "../util";
+} from "../../util";
 
 const BASE_URL = "https://event-eagle.azurewebsites.net/";
 const EVENTS_ENDPOINT = `${BASE_URL}Events`;

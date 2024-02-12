@@ -3,17 +3,17 @@ import { Routes, Route } from "react-router-dom";
 import { SignedOut, SignedIn } from "@clerk/clerk-react";
 import Home from "./pages/Home";
 import Categories from "./pages/Categories";
-import Events from "./pages/Events";
-import EventsMap from "./pages/EventsMap";
+import Events from "./pages/discovery/Events";
+import EventsMap from "./pages/discovery/EventsMap";
 import NoPage from "./pages/NoPage";
 import EventDetails from "./pages/EventDetails";
-import AdminDashboard from "./pages/AdminDashboard";
+import AdminDashboard from "./pages/admin/AdminDashboard";
 import SignInPage from "./pages/SignInPage";
-import EditEvent from "./pages/EditEvent";
-import Create from "./pages/Create";
+import EditEvent from "./pages/admin/EditEvent";
+import Create from "./pages/admin/Create";
 import SavedEvents from "./pages/SavedEvents";
-import SuccessPage from "./pages/SuccessPage";
-import SellTicket from "./pages/SellTicket";
+import SuccessPage from "./pages/tickets/SuccessPage";
+import SellTicket from "./pages/tickets/SellTicket";
 
 
 function App() {
