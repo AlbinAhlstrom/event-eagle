@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import sports from "../../images/sports-icon.webp";
-import family from "../../images/family-icon.webp";
-import arts from "../../images/arts-icon.webp";
-import music from "../../images/music-icon.webp";
+import sports from "../../images/icon/sports-icon.webp";
+import family from "../../images/icon/family-icon.webp";
+import arts from "../../images/icon/arts-icon.webp";
+import music from "../../images/icon/music-icon.webp";
 import CountdownTimer from "../countdown/MiniCountdown";
 import { IconMap, Event } from "../../util";
 import { useClerk } from "@clerk/clerk-react";

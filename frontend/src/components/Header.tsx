@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import logo from "../images/event-eagle-logo-nobg.webp";
-import cogIcon from "../images/cog.png";
+import logo from "../images/icon/event-eagle-logo-nobg.webp";
+import cogIcon from "../images/icon/cog.png";
 import { useNavigate } from "react-router-dom";
 import { UserButton, useClerk } from "@clerk/clerk-react";
 

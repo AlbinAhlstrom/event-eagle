@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import image from "../images/nature.jpg";
+import image from "../images/icon/sports-icon.webp";
 import EventDetailsCard from "../components/card/EventDetailsCard";
 
 const EventDetails = () => {
