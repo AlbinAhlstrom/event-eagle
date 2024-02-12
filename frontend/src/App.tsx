@@ -12,8 +12,8 @@ import SignInPage from "./pages/SignInPage";
 import EditEvent from "./pages/admin/EditEvent";
 import Create from "./pages/admin/Create";
 import SavedEvents from "./pages/SavedEvents";
-import SuccessPage from "./pages/tickets/SuccessPage";
-import SellTicket from "./pages/tickets/SellTicket";
+import SuccessPage from "./pages/ticket/SuccessPage";
+import SellTicket from "./pages/ticket/SellTicket";
 
 
 function App() {
