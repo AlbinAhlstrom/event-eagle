@@ -14,6 +14,7 @@ namespace Models
         public string SellerName { get; set; }
         public bool Available { get; set; } = true;
         public string? PurchasedBy { get; set; }
+        public IFormFile? TicketPdf {get; set;}
 
         public Ticket()
         {
