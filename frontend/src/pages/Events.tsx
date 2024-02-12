@@ -131,7 +131,7 @@ const Events: React.FC = () => {
           />
         ))}
       </div>
-      <div className="fixed bottom-2 flex justify-center w-full">
+      <div className="fixed bottom-2 flex justify-center w-full gap-2">
       <button
         className="btn btn-primary"
         onClick={() => navigate("/categories")}
