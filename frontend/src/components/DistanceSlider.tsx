@@ -32,8 +32,8 @@ const DistanceSlider = ({ value, onChange }: Props) => {
   const distanceValue = () => (value < 1 ? Math.floor(value * 10) * 100 : Math.floor(value));
 
   return (
-    <div className="card card-compact mt-0 w-full">
-      <div className="card-body bg-neutral rounded-b-lg flex justify-center">
+    <div className="card card-compact mt-0 w-full flex-initial">
+      <div className="card-body bg-neutral flex justify-center">
         <input
           type="range"
           min="0.9"
