@@ -9,7 +9,7 @@ useEffect(()=>{
 }, [])
   
   return (
-    <div className='p-2 rounded-xl flex flex-col'>
+    <div className='p-2 rounded-xl flex flex-col text-white'>
       <p>Sold by:</p>
       <p>{ticket?.sellerName}</p>
     </div>
