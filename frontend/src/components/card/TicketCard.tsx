@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { TicketCardProps } from "../../util";
 
-const TicketCard: React.FC<TicketCardProps> = ({ ticket, ticketId }) => {
+const TicketCard: React.FC<TicketCardProps> = ({ ticket }) => {
   useEffect(() => {}, []);
 
   return (
