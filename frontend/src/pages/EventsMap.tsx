@@ -35,7 +35,7 @@ const EventsMap: React.FC = () => {
       <DiscoveryMap
         center={userLocation}
         distanceFilter={distanceFilter}
-        zoom={Math.min(14, 14 - 1.5 * Math.log(distanceFilter))}
+        zoom={Math.min(14, 13.8 - 1.5 * Math.log(distanceFilter))}
       />
       <DistanceSlider value={distanceFilter} onChange={handleSliderChange} />
 
