@@ -8,7 +8,7 @@ const EventsMap: React.FC = () => {
     lat: 53.54992,
     lng: 10.00678,
   });
-  const [distanceFilter, setDistanceFilter] = useState(0.1);
+  const [distanceFilter, setDistanceFilter] = useState(0.2);
   const navigate = useNavigate();
 
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
