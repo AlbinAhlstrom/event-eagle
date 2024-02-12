@@ -33,7 +33,7 @@ function Categories() {
         </div>
        <div className="flex flex-col justify-center items-center max-sm:my-0 md:h-full w-full">
         <button
-            className="btn  btn-primary shadow-2xl max-sm:fixed max-sm:bottom-4 max-sm:w-2/3"
+            className="btn btn-primary shadow-2xl max-sm:fixed max-sm:bottom-2 max-sm:w-2/3"
             onClick={() => navigate("/events")}
           >
             Browse all categories
