@@ -39,7 +39,7 @@ const EventsMap: React.FC = () => {
       />
       <DistanceSlider value={distanceFilter} onChange={handleSliderChange} />
 
-      <div className="flex gap-2 mx-2 flex-initial">
+      <div className="flex gap-2 mx-2 flex-initial my-2">
         <div className="flex flex-grow justify-center">
           <button
             className="btn btn-primary"
