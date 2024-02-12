@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import sports from "../images/sports-icon.webp";
-import family from "../images/family-icon.webp";
-import arts from "../images/arts-icon.webp";
-import music from "../images/music-icon.webp";
-import CountdownTimer from "./MiniCountdown";
-import { IconMap, Event } from "../util";
+import sports from "../../images/sports-icon.webp";
+import family from "../../images/family-icon.webp";
+import arts from "../../images/arts-icon.webp";
+import music from "../../images/music-icon.webp";
+import CountdownTimer from "../countdown/MiniCountdown";
+import { IconMap, Event } from "../../util";
 import { useClerk } from "@clerk/clerk-react";
 
 const getIcon: IconMap = {
@@ -20,7 +20,7 @@ type Props = {
   updateSavedEvents: () => void;
 };
 
-const EventMarker: React.FC<Props> = ({event, updateSavedEvents }) => {
+const EventMarker: React.FC<Props> = ({ event, updateSavedEvents }) => {
   const navigate = useNavigate();
   const { user } = useClerk();
 
@@ -57,24 +57,24 @@ const EventMarker: React.FC<Props> = ({event, updateSavedEvents }) => {
         throw error;
       });
   };
-  
+
   const handleDeleteEvent = async () => {
     try {
       const response = await fetch(
         `  https://event-eagle.azurewebsites.net/Events/userEvents/delete?userId=${user?.id}&eventId=${event.id}`,
         {
-          method: 'DELETE',
+          method: "DELETE",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
-      console.log('Event deleted successfully');
+      console.log("Event deleted successfully");
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
@@ -96,7 +96,6 @@ const EventMarker: React.FC<Props> = ({event, updateSavedEvents }) => {
       console.error("Error:", error);
     }
   };
-
 
   const isSaveEventButtonVisible = location.pathname !== "/savedEvents";
 
@@ -123,16 +122,19 @@ const EventMarker: React.FC<Props> = ({event, updateSavedEvents }) => {
         <p>{event.price} SEK</p>
         <CountdownTimer targetDate={event.startTime} />
         <div className="flex flex-row">
-        <div className="flex flex-row card-actions justify-center mt-10">
-          <button className="btn btn-primary" onClick={handleSeeDetailsClick}>
-            See Details
-          </button>
-          {isSaveEventButtonVisible && !isFromTicketmaster && (
-            <button className="btn btn-primary w-12" onClick={handleSaveEventClick}>
-              Pin Event
+          <div className="flex flex-row card-actions justify-center mt-10">
+            <button className="btn btn-primary" onClick={handleSeeDetailsClick}>
+              See Details
             </button>
-          )}
-        </div>
+            {isSaveEventButtonVisible && !isFromTicketmaster && (
+              <button
+                className="btn btn-primary w-12"
+                onClick={handleSaveEventClick}
+              >
+                Pin Event
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>

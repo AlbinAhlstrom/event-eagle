@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DistanceSlider from "../components/DistanceSlider";
-import DiscoveryMap from "../components/DiscoveryMap";
+import DiscoveryMap from "../components/map/DiscoveryMap";
 
 const EventsMap: React.FC = () => {
   const [userLocation, setUserLocation] = React.useState({

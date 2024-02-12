@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import EventCard from "../components/EventCard";
+import EventCard from "../components/card/EventCard";
 import { useClerk } from "@clerk/clerk-react";
 import { UserEvent, fetchUserEvents, updateSavedEvents } from "../util";
 import { useNavigate } from "react-router-dom";
@@ -20,7 +20,6 @@ const SavedEvents: React.FC = () => {
 
     fetcher();
   }, []);
-
 
   const handleBackToListClick = () => {
     navigate(-1);

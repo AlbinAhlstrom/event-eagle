@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
-import CountdownTimer from "./CountDown";
-import { Event, EventTicket, getDefaultEventData, setUnavailable } from "../util";
+import CountdownTimer from "../countdown/CountDown";
+import {
+  Event,
+  EventTicket,
+  getDefaultEventData,
+  setUnavailable,
+} from "../../util";
 import { loadStripe } from "@stripe/stripe-js";
 import TicketCard from "./TicketCard";
 import { useClerk } from "@clerk/clerk-react";
@@ -10,8 +15,9 @@ interface props {
 }
 
 const EventDetailsCard: React.FC<props> = ({ event }) => {
-  const [eventTickets, setEventTickets] = useState<EventTicket>(getDefaultEventData);
-  const {user} = useClerk();
+  const [eventTickets, setEventTickets] =
+    useState<EventTicket>(getDefaultEventData);
+  const { user } = useClerk();
 
   useEffect(() => {
     const fetchEventTicketsData = async () => {
@@ -65,10 +71,12 @@ const EventDetailsCard: React.FC<props> = ({ event }) => {
       console.error("Error creating checkout session:", error);
     }
 
-    if(user) setUnavailable(ticketId, userId);
+    if (user) setUnavailable(ticketId, userId);
   };
 
-    const availableTickets = eventTickets.eventTickets.filter( t => t.available == true);
+  const availableTickets = eventTickets.eventTickets.filter(
+    (t) => t.available == true
+  );
 
   return (
     <div className="hero-content text-center drop-shadow-2xl text-neutral-content bg-base-100 justify-center items-center rounded-2xl p-10">
@@ -83,16 +91,22 @@ const EventDetailsCard: React.FC<props> = ({ event }) => {
         <div className="flex flex-col w-full">
           <p>Available tickets:</p>
           <div className="flex flex-wrap items-center justify-center">
-          {availableTickets.map((ticket, index) => {
-            return (
-              <div key={index} className="m-2 p-4 bg-neutral text-black rounded-xl">
-                <TicketCard ticket={ticket} />
-                <button onClick={() => handlePayment(ticket.ticketId, user.id)} className="btn shadow-2xl btn-base">
-                  Purchase Ticket
-                </button>
-              </div>
-            );
-          })}
+            {availableTickets.map((ticket, index) => {
+              return (
+                <div
+                  key={index}
+                  className="m-2 p-4 bg-neutral text-black rounded-xl"
+                >
+                  <TicketCard ticket={ticket} />
+                  <button
+                    onClick={() => handlePayment(ticket.ticketId, user.id)}
+                    className="btn shadow-2xl btn-base"
+                  >
+                    Purchase Ticket
+                  </button>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

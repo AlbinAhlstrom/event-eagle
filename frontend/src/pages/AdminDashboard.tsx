@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Event } from "../util";
 import BottomButton from "../components/BottomButton";
 import { useClerk } from "@clerk/clerk-react";
-import EditEventCard from "../components/EditEventCard";
+import EditEventCard from "../components/card/EditEventCard";
 import { useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {
@@ -40,7 +40,10 @@ const AdminDashboard = () => {
 
   return (
     <div className="flex flex-col h-screen-h w-full mt-10">
-      <h1 className="text-5xl font-bold mx-auto mb-default-my"> Manage events</h1>
+      <h1 className="text-5xl font-bold mx-auto mb-default-my">
+        {" "}
+        Manage events
+      </h1>
       <ul className="flex justify-center flex-wrap w-full gap-10">
         {events.map((event) => (
           <li key={event.id}>
@@ -48,8 +51,13 @@ const AdminDashboard = () => {
           </li>
         ))}
       </ul>
-      
-      <button onClick={handleCreateEvent} className="btn btn-primary self-center fixed bottom-4 mt-auto w-40 z-50 max-md:w-2/3">Create event</button>
+
+      <button
+        onClick={handleCreateEvent}
+        className="btn btn-primary self-center fixed bottom-4 mt-auto w-40 z-50 max-md:w-2/3"
+      >
+        Create event
+      </button>
     </div>
   );
 };

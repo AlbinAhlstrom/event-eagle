@@ -2,14 +2,9 @@
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { categories } from "../util";
-import MapWindow from "./FormMap";
+import MapWindow from "./map/FormMap";
 import { useEffect, useState } from "react";
-import {
-  Coordinate,
-  Event,
-  formFields,
-  defaultEventListing,
-} from "../util";
+import { Coordinate, Event, formFields, defaultEventListing } from "../util";
 
 type Props = {
   onSave: (formData: formFields) => void;
@@ -19,16 +14,14 @@ type Props = {
 
 const EventForm = ({ onSave, defaultEvent, title = "" }: Props) => {
   // Form
-  const {
-    register,
-    handleSubmit,
-    setValue,
-  } = useForm<formFields>({defaultValues: defaultEvent});
+  const { register, handleSubmit, setValue } = useForm<formFields>({
+    defaultValues: defaultEvent,
+  });
 
   const onSubmit: SubmitHandler<formFields> = (data) => {
-    console.log("default event:", defaultEvent)
-    console.log("updated event:", data)
-    onSave(data)
+    console.log("default event:", defaultEvent);
+    console.log("updated event:", data);
+    onSave(data);
   };
 
   // Position
@@ -51,8 +44,8 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: Props) => {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         });
-        setValue("title", defaultEvent.title)
-        setValue("category", defaultEvent.category)
+        setValue("title", defaultEvent.title);
+        setValue("category", defaultEvent.category);
         return;
       });
     }
@@ -70,7 +63,7 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: Props) => {
           <label>
             <p className="label-text">{"title"}</p>
             <input
-            type="text"
+              type="text"
               className="input input-bordered w-3/4"
               {...register("title")}
             />

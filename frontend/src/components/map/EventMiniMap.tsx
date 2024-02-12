@@ -4,7 +4,7 @@ import {
   AdvancedMarker,
   Pin,
 } from "@vis.gl/react-google-maps";
-import { Coordinate } from "../util";
+import { Coordinate } from "../../util";
 
 type EventMiniMapProps = {
   position: Coordinate;

@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import useSWR from "swr";
 import { useParams, useNavigate } from "react-router-dom";
-import EventCard from "../components/EventCard";
+import EventCard from "../components/card/EventCard";
 import DistanceSlider from "../components/DistanceSlider";
 import {
   getDistanceFromLatLonInKm,
@@ -29,8 +29,7 @@ const Events: React.FC = () => {
 
   const endTime = new Date();
   endTime.setHours(23, 59, 59);
-  const endTimeISOString =
-    endTime.toISOString().slice(0, -5) + "Z";
+  const endTimeISOString = endTime.toISOString().slice(0, -5) + "Z";
   const ticketMasterAPI = `https://app.ticketmaster.com/discovery/v2/events.json?size=50&unit=km&geoPoint=u6scd&radius=10&endDateTime=${endTimeISOString}&sort=date,asc&apikey=${ticketmasterKey}`;
 
   useEffect(() => {
@@ -99,14 +98,17 @@ const Events: React.FC = () => {
     return (
       events?.filter((event) => {
         if (!userLocation) return false;
-        const eventLocation = {lat:event.latitude, lng:event.longitude}
+        const eventLocation = { lat: event.latitude, lng: event.longitude };
         const distance = getDistanceFromLatLonInKm(userLocation, eventLocation);
-        return (distance <= distanceFilter)}) || []
-    )
+        return distance <= distanceFilter;
+      }) || []
+    );
   }, [events, userLocation, distanceFilter]);
 
   const filteredEvents = useMemo(() => {
-    return (eventsNearby.filter((event) => !type || event.category === type) || [])
+    return (
+      eventsNearby.filter((event) => !type || event.category === type) || []
+    );
   }, [eventsNearby, type]);
 
   const handleUpdateSaveEvent = () => {
@@ -122,9 +124,9 @@ const Events: React.FC = () => {
         {error && <h1>Failed to load</h1>}
         {!filteredEvents.length && (
           <div className="flex flex-col items-center gap-6">
-          <span className="loading h-20 w-20 text-primary text-xl"></span>
-          <span className="text-2xl font-bold">Loading Events...</span>
-          <span>Move the distance slider to find events further away.</span>
+            <span className="loading h-20 w-20 text-primary text-xl"></span>
+            <span className="text-2xl font-bold">Loading Events...</span>
+            <span>Move the distance slider to find events further away.</span>
           </div>
         )}
         {filteredEvents.map((event) => (
@@ -136,16 +138,18 @@ const Events: React.FC = () => {
         ))}
       </div>
       <div className="fixed bottom-2 flex justify-center w-full gap-2">
-      <button
-        className="btn btn-primary"
-        onClick={() => navigate("/categories")}
-      >
-        Back to Categories
-      </button>
-      <button
-        className="btn flex-0 btn-primary w-12 z-50"
-        onClick={() => navigate("/eventsmap")}
-      >Map</button>
+        <button
+          className="btn btn-primary"
+          onClick={() => navigate("/categories")}
+        >
+          Back to Categories
+        </button>
+        <button
+          className="btn flex-0 btn-primary w-12 z-50"
+          onClick={() => navigate("/eventsmap")}
+        >
+          Map
+        </button>
       </div>
     </div>
   );
