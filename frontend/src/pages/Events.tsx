@@ -136,8 +136,7 @@ const Events: React.FC = () => {
         className="btn btn-primary"
         onClick={() => navigate("/categories")}
       >
-        
-        Go back
+        Back to Categories
       </button>
       <button
         className="btn flex-0 btn-primary w-12 z-50"
