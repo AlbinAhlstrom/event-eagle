@@ -14,14 +14,13 @@ const SignInPage = () => {
           <div className="flex flex-col w-2/3 items-center justify-center">
             <h1 className="text-5xl font-bold mb-5 ">Welcome!</h1>
             <p className="mb-5 text-xl">Sign in or sign up to continue</p>
-            <div className="flex">
-              <div className=" p-4 m-2 rounded-xl text-xl font-bold btn-primary bg-primary w-28 text-center hover:animate-pulse">
-                <SignInButton redirectUrl="/home" >Log in </SignInButton>
-                <br />
-              </div>
-              <div className=" p-4 m-2 rounded-xl text-xl font-bold btn-primary bg-primary w-28 text-center">
+            <div className="flex gap-2">
+              <button className="btn text-xl font-bold btn-primary ">
+                <SignInButton redirectUrl="/home">Log in</SignInButton>
+              </button>
+              <button className="btn text-xl font-bold btn-primary">
                 <SignUpButton />
-              </div>
+              </button>
             </div>
           </div>
         </div>
