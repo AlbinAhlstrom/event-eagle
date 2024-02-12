@@ -47,6 +47,7 @@ export default {
         'vh': '100vh',
         'nav-h': '10vh',
         'nav-icon-h': '8vh',
+        'screen-w': '100vw',
         'screen-h': '90vh',
         '40vw': '40vw',
         'max-card-w': '38vh',
