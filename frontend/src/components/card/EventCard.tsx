@@ -66,7 +66,7 @@ const EventCard: React.FC<Props> = ({ event, updateSavedEvents }) => {
   const handleDeleteEvent = async () => {
     try {
       const response = await fetch(
-        `  https://event-eagle.azurewebsites.net/Events/userEvents/delete?userId=${user?.id}&eventId=${event.id}`,
+        `https://event-eagle.azurewebsites.net/Events/userEvents/delete?userId=${user?.id}&eventId=${event.id}`,
         {
           method: "DELETE",
           headers: {
