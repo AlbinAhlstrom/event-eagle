@@ -37,7 +37,7 @@ const DistanceSlider = ({ value, onChange }: Props) => {
         <input
           type="range"
           min="0.9"
-          max="19"
+          max="14"
           step="0.01"
           value={valueToSlider(value)}
           className="range range-primary flex-0"
