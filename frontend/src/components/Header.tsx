@@ -60,7 +60,7 @@ const Header = () => {
       <div className="flex-none">
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn m-1">
-          <img src={cogIcon} className="h-8" alt="Event Eagle Logo" />
+          <img src={cogIcon} className="h-8" alt="settings" />
 
           </div>
           <ul
