@@ -11,7 +11,9 @@ const SellTicket = () => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      const response = await fetch("https://event-eagle.azurewebsites.net/Events");
+      const response = await fetch(
+        "https://event-eagle.azurewebsites.net/Events"
+      );
       const result = await response.json();
       setEvents(result);
     };
@@ -26,29 +28,31 @@ const SellTicket = () => {
       eventId: selectedEventId,
       sellerId: user.id,
       sellerName: sellerName,
-      available: true, 
+      available: true,
     };
 
     try {
-      const response = await fetch("https://event-eagle.azurewebsites.net/Events/Tickets/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(ticketData),
-      });
+      const response = await fetch(
+        "https://event-eagle.azurewebsites.net/Events/Tickets/add",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(ticketData),
+        }
+      );
 
       if (response.ok) {
         console.log("Ticket added successfully");
-    setSuccess(true);
-    setSellerName("");
+        setSuccess(true);
+        setSellerName("");
       } else {
         console.error("Failed to add ticket");
       }
     } catch (error) {
       console.error("Error adding ticket:", error);
     }
-
   };
 
   return (
@@ -60,48 +64,60 @@ const SellTicket = () => {
     >
       <div className="hero-overlay bg-opacity-60"></div>
       <div className="flex flex-col">
+        {success && (
+          <h2 className="bg-primary p-5 text-3xl rounded-xl text-center font-bold animate-bounce">
+            {" "}
+            Success!
+          </h2>
+        )}
+        <div className="hero-content flex flex-col text-center drop-shadow-2xl text-neutral-content bg-neutral-800 rounded-2xl p-10">
+          <h1 className="mb-5 text-5xl font-bold">Sell your ticket</h1>
 
-        {success && <h2 className="bg-primary p-5 text-3xl rounded-xl text-center font-bold animate-bounce"> Success!</h2>}
-      <div className="hero-content flex flex-col text-center drop-shadow-2xl text-neutral-content bg-neutral-800 rounded-2xl p-10">
-        <h1 className="mb-5 text-5xl font-bold">Sell your ticket</h1>
-
-        <form className="flex flex-col w-full" onSubmit={handleSubmit}>
-        <div className="m-5 flex flex-col">
-
-          <label htmlFor="eventSelect" className="text-xl font-bold" >Select event</label>
-          <select
-          className="h-10 rounded-lg p-2"
-          id="eventSelect"
-          value={selectedEventId}
-          onChange={(e) => setSelectedEventId(parseInt(e.target.value))}
-          >
-            <option value={0} disabled={true}></option>
-            {events.map((ev) => (
-                <option key={ev.id} value={ev.id}>
-                {ev.title}
-              </option>
-            ))}
-          </select>
+          <form className="flex flex-col w-full" onSubmit={handleSubmit}>
+            <div className="m-5 flex flex-col">
+              <div className="flex flex-col justify-center text-center">
+                <label htmlFor="ticketfile" className="text-xl font-bold">
+                  Upload your ticket
+                </label>
+                <input type="file" id="ticketfile" />
+              </div>
+              <label htmlFor="eventSelect" className="text-xl font-bold">
+                Select event
+              </label>
+              <select
+                className="h-10 rounded-lg p-2"
+                id="eventSelect"
+                value={selectedEventId}
+                onChange={(e) => setSelectedEventId(parseInt(e.target.value))}
+              >
+                <option value={0} disabled={true}></option>
+                {events.map((ev) => (
+                  <option key={ev.id} value={ev.id}>
+                    {ev.title}
+                  </option>
+                ))}
+              </select>
             </div>
-<div className="flex flex-col m-5">
+            <div className="flex flex-col m-5">
+              <label className="text-xl font-bold" htmlFor="sellerName">
+                Your Name
+              </label>
+              <input
+                className="rounded-lg h-10 p-2"
+                type="text"
+                id="sellerName"
+                value={sellerName}
+                onChange={(e) => setSellerName(e.target.value)}
+              />
+            </div>
 
-          <label className="text-xl font-bold" htmlFor="sellerName">Your Name</label>
-          <input
-          className="rounded-lg h-10 p-2"
-          type="text"
-          id="sellerName"
-          value={sellerName}
-          onChange={(e) => setSellerName(e.target.value)}
-          />
-          </div>
-
-          <button type="submit" className="btn shadow-2xl btn-primary mt-4">
-            Sell Ticket
-          </button>
-        </form>
+            <button type="submit" className="btn shadow-2xl btn-primary mt-4">
+              Sell Ticket
+            </button>
+          </form>
+        </div>
       </div>
     </div>
-          </div>
   );
 };
 
