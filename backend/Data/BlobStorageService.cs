@@ -12,7 +12,12 @@ public class BlobStorageService : IBlobStorageService
     }
     public async Task<byte[]> GetBlob(string key)
     {
-        throw new NotImplementedException();
+         var blobContainer = _client.GetBlobContainerClient("eeticketsblob");
+        await blobContainer.CreateIfNotExistsAsync();
+        var blobClient = blobContainer.GetBlobClient(key);
+        await using var stream = await blobClient.OpenReadAsync();
+        using var br = new BinaryReader(stream);
+        return br.ReadBytes((int)stream.Length);
     }
 
     public async Task UploadToBlobStorage(MemoryStream stream, string fileName)
