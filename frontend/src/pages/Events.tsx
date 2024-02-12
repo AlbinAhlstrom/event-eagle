@@ -116,7 +116,7 @@ const Events: React.FC = () => {
   console.log(filteredEvents);
 
   return (
-    <div className="flex flex-col sm:mx-8">
+    <div className="flex flex-col sm:mx-8 justify-center items-center">
       <DistanceSlider value={distanceFilter} onChange={handleSliderChange} />
       <div className="flex justify-center items-center flex-wrap gap-10 mt-10 mb-32">
         {error && <h1>Failed to load</h1>}
