@@ -8,10 +8,10 @@ const Home = () => {
         className="hero h-screen-h"
         style={{
           backgroundImage:
-            "url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)",
+            "url(https://cdn.sanity.io/images/fvrrd1kn/production/94eaa6cb42a17d86fc66906bd19ec6d548e22a7a-8192x5464.jpg)",
         }}
       >
-        <div className="hero-overlay bg-opacity-60"></div>
+        <div className="hero-overlay bg-opacity-30"></div>
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-md">
             <h1 className="mb-5 text-5xl font-bold">Welcome</h1>
