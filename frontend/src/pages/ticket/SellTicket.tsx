@@ -55,10 +55,10 @@ const SellTicket = () => {
     <div
       className="hero min-h-screen-h"
       style={{
-        backgroundImage: `url(${image})`,
+        backgroundImage: `url(https://cdn.sanity.io/images/fvrrd1kn/production/91e6a763aad712e4e8f101974492c94bf03b1c31-2400x1600.jpg?q=75&fit=clip&auto=format)`,
       }}
     >
-      <div className="hero-overlay bg-opacity-60"></div>
+      <div className="hero-overlay bg-opacity-10"></div>
       <div className="flex flex-col">
 
         {success && <h2 className="bg-primary p-5 text-3xl rounded-xl text-center font-bold animate-bounce"> Success!</h2>}
