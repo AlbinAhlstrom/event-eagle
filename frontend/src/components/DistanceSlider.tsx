@@ -2,18 +2,18 @@ import React from 'react';
 
 // Convert the slider input (0-20) to the actual value (0.1-10)
 const sliderToValue = (sliderValue: number) => {
-  if (sliderValue <= 10) {
-    return 0.1 + 0.9 * (sliderValue / 10);
+  if (sliderValue <= 5) {
+    return 0.1 + 0.9 * (sliderValue / 5);
   } else {
-    return 1 + (sliderValue - 10);
+    return 1 + (sliderValue - 5);
   }
 };
 
 const valueToSlider = (value: number) => {
   if (value <= 1) {
-    return ((value - 0.1) / 0.9) * 10;
+    return ((value - 0.1) / 0.9) * 5;
   } else {
-    return 10 + (value - 1);
+    return 5 + (value - 1);
   }
 };
 
@@ -37,7 +37,7 @@ const DistanceSlider = ({ value, onChange }: Props) => {
         <input
           type="range"
           min="0.9"
-          max="19"
+          max="14"
           step="0.01"
           value={valueToSlider(value)}
           className="range range-primary flex-0"

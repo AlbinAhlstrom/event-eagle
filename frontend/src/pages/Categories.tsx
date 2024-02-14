@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import CategoryCard from "../components/CategoryCard";
-import musicImage from "../images/alt-images/music.jpg";
-import sportsImage from "../images/alt-images/sports.jpg";
-import theatreImage from "../images/alt-images/arts.jpg";
-import familyImage from "../images/alt-images/family.jpg";
+import CategoryCard from "../components/card/CategoryCard";
+import musicImage from "../images/alt/music.jpg";
+import sportsImage from "../images/alt/sports.jpg";
+import theatreImage from "../images/alt/arts.jpg";
+import familyImage from "../images/alt/family.jpg";
 
 function Categories() {
   const eventCategories = [
@@ -16,7 +16,7 @@ function Categories() {
 
   return (
     <div className="flex flex-col items-center h-screen-h max-sm:h-auto">
-    <div className="mt-4 max-sm:w-full max-sm:pb-20">
+      <div className="mt-4 max-sm:w-full max-sm:pb-20">
         <section className="grid gap-y-3 max-sm:grid-cols-1 grid-cols-2 gap-3 lg:mx-nav">
           {eventCategories.map((category, index) => {
             return (
@@ -27,22 +27,18 @@ function Categories() {
               />
             );
           })}
-          
         </section>
-        
-        </div>
-       <div className="flex flex-col justify-center items-center max-sm:my-0 md:h-full w-full">
-        <button
-            className="btn btn-primary shadow-2xl max-sm:fixed max-sm:bottom-2 max-sm:w-2/3"
-            onClick={() => navigate("/events")}
-          >
-            Browse all categories
-          </button>
-          </div>
       </div>
-      
+      <div className="flex flex-col justify-center items-center max-sm:my-0 md:h-full w-full">
+        <button
+          className="btn btn-primary shadow-2xl max-sm:fixed max-sm:bottom-2 max-sm:w-2/3"
+          onClick={() => navigate("/events")}
+        >
+          Browse all categories
+        </button>
+      </div>
+    </div>
   );
 }
 
 export default Categories;
-

@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <>
       <div
-        className="hero h-screen-h"
+        className="hero h-screen-h flex-initial"
         style={{
           backgroundImage:
             "url(https://cdn.sanity.io/images/fvrrd1kn/production/94eaa6cb42a17d86fc66906bd19ec6d548e22a7a-8192x5464.jpg)",
