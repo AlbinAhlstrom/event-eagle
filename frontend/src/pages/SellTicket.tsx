@@ -7,6 +7,7 @@ const SellTicket = () => {
   const [selectedEventId, setSelectedEventId] = useState(0);
   const [sellerName, setSellerName] = useState("");
   const [success, setSuccess] = useState(false);
+  const [ticketPdf, setTicketPdf] = useState(null);
   const { user } = useClerk();
 
   useEffect(() => {
@@ -29,6 +30,7 @@ const SellTicket = () => {
       sellerId: user.id,
       sellerName: sellerName,
       available: true,
+      ticketPdf: ticketPdf,
     };
 
     try {
@@ -55,6 +57,17 @@ const SellTicket = () => {
     }
   };
 
+  const handleFileUpload = (event) => {
+    const selectedFile = event.target.files[0];
+    if(selectedFile && selectedFile === "application/pdf")
+    {
+      setTicketPdf(selectedFile);
+    } else {
+      alert("Please upload your ticket PDF-file.");
+    }
+
+  }
+
   return (
     <div
       className="hero min-h-screen-h"
@@ -79,7 +92,7 @@ const SellTicket = () => {
                 <label htmlFor="ticketfile" className="text-xl font-bold">
                   Upload your ticket
                 </label>
-                <input type="file" id="ticketfile" />
+                <input type="file" accept=".pdf" id="ticketfile" onChange={handleFileUpload}/>
               </div>
               <label htmlFor="eventSelect" className="text-xl font-bold">
                 Select event
