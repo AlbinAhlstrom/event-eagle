@@ -7,7 +7,7 @@ const SuccessPage: React.FC = () => {
     <div
       className="hero min-h-screen animate-fadeIn"
       style={{
-        backgroundImage: `url(${image})`,
+        backgroundImage: `url(https://cdn.sanity.io/images/fvrrd1kn/production/b7356711b8c60bc9caea5c0c5c5c3a05870ea363-2994x2000.jpg?q=75&fit=clip&auto=format)`,
       }}
     >
       <div className="hero-overlay bg-opacity-60"></div>
