@@ -19,7 +19,6 @@ const EventForm = ({ onSave, defaultEvent, title = "" }: Props) => {
   });
 
   const onSubmit: SubmitHandler<formFields> = (data) => {
-    console.log("default event:", defaultEvent);
     console.log("updated event:", data);
     onSave(data);
   };

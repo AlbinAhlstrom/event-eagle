@@ -51,7 +51,6 @@ const Events: React.FC = () => {
     fetchData();
   }, [ticketMasterAPI]);
 
-  console.log(data);
 
   let ticketEvents: Event[] = [];
   if (data) {
@@ -115,7 +114,6 @@ const Events: React.FC = () => {
     updateSavedEvents("test");
   };
 
-  console.log(filteredEvents);
 
   return (
     <div className="flex flex-col sm:mx-8 justify-center items-center">
